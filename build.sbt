@@ -6,9 +6,12 @@ lazy val root = (project in file(".")).enablePlugins(PlayJava)
 
 scalaVersion := "2.12.2"
 
+libraryDependencies += jdbc
+
 libraryDependencies += guice
 
 // Test Database
+libraryDependencies += "mysql" % "mysql-connector-java" % "5.1.41"
 libraryDependencies += "com.h2database" % "h2" % "1.4.194"
 
 // Testing libraries for dealing with CompletionStage...
