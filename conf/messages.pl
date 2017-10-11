@@ -1,0 +1,2 @@
+firstmessage=Pierwszy komunikat
+secondmessage=Drugi komunikat

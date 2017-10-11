@@ -5,26 +5,31 @@ import javax.inject.*;
 
 import akka.actor.Scheduler;
 import play.*;
+import play.api.i18n.Lang;
+import play.api.i18n.Messages;
+import play.api.i18n.MessagesApi;
 import play.mvc.*;
 import java.util.concurrent.Executor;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.TimeUnit;
 
+import scala.collection.Seq;
+import scala.collection.mutable.ArraySeq;
 import scala.concurrent.ExecutionContext;
 import scala.concurrent.duration.Duration;
 import scala.concurrent.ExecutionContextExecutor;
-
 /**
  * This controller contains an action that demonstrates how to write
  * simple asynchronous code in a controller. It uses a timer to
  * asynchronously delay sending a response for 1 second.
  */
 @Singleton
-public class AsyncController extends Controller {
+public class AsyncController  extends Controller {
 
     private final ActorSystem actorSystem;
     private final ExecutionContextExecutor exec;
+    private final MessagesApi messages;
 
     /**
      * @param actorSystem We need the {@link ActorSystem}'s
@@ -35,9 +40,10 @@ public class AsyncController extends Controller {
      * An {@link ExecutionContextExecutor} implements both interfaces.
      */
     @Inject
-    public AsyncController(ActorSystem actorSystem, ExecutionContextExecutor exec) {
+    public AsyncController(ActorSystem actorSystem, ExecutionContextExecutor exec, MessagesApi messages) {
       this.actorSystem = actorSystem;
       this.exec = exec;
+      this.messages = messages;
     }
 
     /**
@@ -53,10 +59,11 @@ public class AsyncController extends Controller {
     }
 
     private CompletionStage<String> getFutureMessage(long time, TimeUnit timeUnit) {
+        System.out.print(messages.toString());
         CompletableFuture<String> future = new CompletableFuture<>();
         actorSystem.scheduler().scheduleOnce(
             Duration.create(time, timeUnit),
-            () -> future.complete("Hi!"),
+            () -> future.complete("Hi! Additional message:"+ messages.apply("firstmessage", new ArraySeq<>(0), Lang.apply("pl"))),
             exec
         );
         return future;
