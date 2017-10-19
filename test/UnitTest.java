@@ -38,7 +38,7 @@ public class UnitTest {
         final ActorSystem actorSystem = ActorSystem.create("test");
         try {
             final ExecutionContextExecutor ec = actorSystem.dispatcher();
-            final AsyncController controller = new AsyncController(actorSystem, ec);
+            final AsyncController controller = new AsyncController(actorSystem, ec, null);
             final CompletionStage<Result> future = controller.message();
 
             // Block until the result is completed
