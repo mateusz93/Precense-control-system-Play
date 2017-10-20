@@ -1,20 +1,123 @@
-@*
- * This template takes a single argument, a String containing a
- * message to display.
- *@
-@(message: String)
+<html>
+    <head>
+        <title>System zarządzania przedmiotami</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/bootstrap.min.css")">
+        <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/main.css")">
+        <script src="@routes.Assets.versioned("javascripts/jquery.min.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.versioned("javascripts/bootstrap.min.js")" type="text/javascript"></script>
+    </head>
 
-@*
- * Call the `main` template with two arguments. The first
- * argument is a `String` with the title of the page, the second
- * argument is an `Html` object containing the body of the page.
- *@
-@main("Welcome to Play") {
+    <body>
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @*<% if ("".equals(session.getAttribute("username")) || session.getAttribute("username") == null) { %>*@
+                    <a class="navbar-brand" href="/login" action="login">Zaloguj</a>
+                   @* <%} else { %>*@
+                    <a class="navbar-brand" href="/login/logOut" action="logout">Wyloguj</a>
+                    @*<% } %>*@
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav navbar-right">
 
-    @*
-     * Get an `Html` object by calling the built-in Play welcome
-     * template and passing a `String` message.
-     *@
-    @welcome(message, style = "java")
+@*                <% if ("STUDENT".equals(session.getAttribute("userType")) ||
+                        "TEACHER".equals(session.getAttribute("userType"))) { %>*@
 
-}
+                        <li><a href="/profile">Profil</a></li>
+                        <li><a href="/precenses">Obecności</a></li>
+                        <li><a href="/courses">Przedmioty</a></li>
+                        <li><a href="/grades">Oceny</a></li>
+                        <li><a href="/stats">Statystyki</a></li>
+@*                        <%} %>*@
+
+@*                        <% if ("ADMIN".equals(session.getAttribute("userType"))) { %>*@
+                        <li><a href="/profile">Profil</a></li>
+                        <li><a href="/subjects">Przedmioty</a></li>
+                        <li><a href="/courses">Kurs</a></li>
+@*                        <%} %>*@
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="jumbotron text-center">
+            <h5>Język :
+                <a href="?lang=pl">Polski</a> |
+                <a href="?lang=en">Angielski</a></h5>
+            <h1>System zarządzania przedmiotami</h1>
+            <p>Sprawdzaj obecność codziennie w łatwy sposób</p>
+            @*<% if ("".equals(session.getAttribute("username")) || session.getAttribute("username") == null) { %>*@
+            <form class="form-inline" action="/register" method="post">
+                <input type="email" class="form-control" name="newEmail" size="50" placeholder="Email" required>
+                <button type="submit" class="btn btn-danger">Zarejestruj</button>
+            </form>
+            @*<% } %>*@
+        </div>
+
+        <div id="googleMap" style="height:400px;width:100%;"></div>
+
+            <!-- Add Google Maps -->
+        <script src="http://maps.googleapis.com/maps/api/js"></script>
+        <script>
+        var myCenter = new google.maps.LatLng(51.746066, 19.455357);
+
+        function initialize() {
+            var mapProp = {
+                center:myCenter,
+                zoom:14,
+                scrollwheel:false,
+                draggable:false,
+                mapTypeId:google.maps.MapTypeId.ROADMAP
+            };
+
+            var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+
+            var marker = new google.maps.Marker({
+                position:myCenter,
+            });
+
+            marker.setMap(map);
+        }
+
+        google.maps.event.addDomListener(window, 'load', initialize);
+        </script>
+
+
+        <div id="contact" class="container-fluid bg-grey">
+            <div class="row">
+                <div class="col-sm-5">
+                    <p>Skontaktuj się z nami, odpowiemy w przeciągu 24 godzin</p>
+                    <p><span class="glyphicon glyphicon-map-marker"></span> Łódź, PL</p>
+                    <p><span class="glyphicon glyphicon-home"></span> 90-924 Łódź, ul. Żeromskiego 116</p>
+                    <p><span class="glyphicon glyphicon-phone-alt"></span> (48) (42) 636 55 22</p>
+                    <p><span class="glyphicon glyphicon-envelope"></span> dmcs.p.lodz.pl&#64;gmail.com</p>
+                </div>
+                <div class="col-sm-7 slideanim">
+                    <form action="/contact" method="POST">
+                        <div class="row">
+                            <div class="col-sm-6 form-group">
+                                <input class="form-control" id="subject" name="subject" placeholder="Temat" type="text" required>
+                            </div>
+                            <div class="col-sm-6 form-group">
+                                <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
+                            </div>
+                        </div>
+                        <textarea class="form-control" id="content" name="content" placeholder="Treść" rows="5"></textarea><br>
+                        <div class="row">
+                            <div class="col-sm-12 form-group">
+                                <button class="btn btn-default pull-right" type="submit">Wyślij</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>

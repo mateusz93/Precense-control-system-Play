@@ -20,13 +20,13 @@ public class HomeController extends Controller {
      * <code>GET</code> request with a path of <code>/</code>.
      */
     public Result index() {
-        Task task = new Task();
+        /*Task task = new Task();
         task.id = 123L;
         task.done = true;
         task.dueDate = new Date();
         task.name = "Mateusz";
-        task.save();
-        return ok(index.render("Your new application is ready."));
+        task.save();*/
+        return ok(index.render());
     }
 
 }
