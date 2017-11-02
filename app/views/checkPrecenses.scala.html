@@ -1,0 +1,84 @@
+@(datesList: List[models.CourseDateView])
+<html>
+    <head>
+        <title>Sprawdź obecność</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/bootstrap.min.css")">
+        <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets.menu.css")">
+        <script src="@routes.Assets.versioned("javascripts/jquery.1.11.3.min.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.versioned("javascripts/bootstrap.min.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.versioned("javascripts/pagination.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.versioned("javascripts/filter.js")" type="text/javascript"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @*<% if ("".equals(session.getAttribute("username")) || session.getAttribute("username") == null) { %>*@
+                    <a class="navbar-brand" href="/login" action="login">Zaloguj</a>
+                    @* <%} else { %>*@
+                    <a class="navbar-brand" href="/login/logOut" action="logout">Wyloguj</a>
+                    @*<% } %>*@
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav navbar-right">
+
+                        @*                <% if ("STUDENT".equals(session.getAttribute("userType")) ||
+                        "TEACHER".equals(session.getAttribute("userType"))) { %>*@
+
+                        <li><a href="/profile">Profil</a></li>
+                        <li><a href="/precenses">Obecności</a></li>
+                        <li><a href="/courses">Przedmioty</a></li>
+                        <li><a href="/grades">Oceny</a></li>
+                        <li><a href="/stats">Statystyki</a></li>
+                        @*                        <%} %>*@
+
+                        @*                        <% if ("ADMIN".equals(session.getAttribute("userType"))) { %>*@
+                        <li><a href="/profile">Profil</a></li>
+                        <li><a href="/subjects">Przedmioty</a></li>
+                        <li><a href="/courses">Kurs</a></li>
+                        @*                        <%} %>*@
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container">
+            <br><br>
+            <hr>
+            <div class="input-group input-group-lg add-on">
+                <div class="input-group"> <span class="input-group-addon"><spring:message code='view.filter'/></span>
+                    <input id="filter" type="text" class="form-control" >
+                </div>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Dzień</th>
+                        <th>Czas rozpoczęcia</th>
+                        <th>Czas zakończenia</th>>
+                    </tr>
+                </thead>
+                <tbody id="paginationTable" class="searchable">
+                    @for(dates <- datesList) {
+                        <tr>
+                            <td>@dates.date</td>
+                            <td>@dates.startTime</td>
+                            <td>@dates.finishTime</td>_
+                            @helper.form(helper.CSRF(routes.PrecenseController.check(dates.courseDateID))) {
+                                    <td><button value="${dates.courseDateID}" type="submit" class="btn btn-info">Sprawdź obecność</button></td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-12 text-center">
+            <ul class="pagination" id="pager"></ul>
+        </div>
+    </body>
+</html>
