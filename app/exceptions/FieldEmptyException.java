@@ -1,11 +1,9 @@
 package exceptions;
 
-import lombok.Getter;
 
 /**
  * @author Mateusz Wieczorek
  */
-@Getter
 public class FieldEmptyException extends ValidationException {
 
     private String fieldName;

@@ -1,7 +1,7 @@
-@(datesList: List[models.CourseDateView])
 <html>
     <head>
-        <title>Szczegóły obecności</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Sprawdź obecność</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/bootstrap.min.css")">
         <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets.menu.css")">
@@ -55,60 +55,17 @@
                     <input id="filter" type="text" class="form-control" >
                 </div>
             </div>
+            <br>
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Dzień</th>
-                        <th>Czas rozpoczęcia</th>
-                        <th>Czas zakończenia</th>
+                        <th>Imię</th>
+                        <th>Nazwisko</th>
                         <th>Obecność</th>
                     </tr>
                 </thead>
                 <tbody id="paginationTable" class="searchable">
-                    @for(dates <- datesList) {
-                        <tr>
-                            <td>@dates.date</td>
-                            <td>@dates.startTime</td>
-                            <td>@dates.finishTime</td>
-                            <td>
-                                <form role="form">
-                                    @if(dates.status == "Obecny") {
-                                        <label class="radio-inline">
-                                            <input checked disabled type="radio" name="optionRadio">Obecny
-                                        </label>
-                                        <label class="radio-inline">
-                                            <input disabled type="radio" name="optionRadio">Nieobecny
-                                        </label>
-                                        <label class="radio-inline">
-                                            <input disabled type="radio" name="optionRadio">Spóźniony
-                                        </label>
-                                    }
-                                    @if(dates.status == "Nieobecny") {
-                                        <label class="radio-inline">
-                                            <input disabled type="radio" name="optionRadio">Obecny
-                                        </label>
-                                        <label class="radio-inline">
-                                            <input checked disabled type="radio" name="optionRadio">Nieobecny
-                                        </label>
-                                        <label class="radio-inline">
-                                            <input disabled type="radio" name="optionRadio">Spóźniony
-                                        </label>
-                                    }
-                                    @if(dates.status == "Spozniony") {
-                                        <label class="radio-inline">
-                                            <input disabled type="radio" name="optionRadio">Obecny
-                                        </label>
-                                        <label class="radio-inline">
-                                            <input disabled type="radio" name="optionRadio">Nieobecny
-                                        </label>
-                                        <label class="radio-inline">
-                                            <input checked disabled type="radio" name="optionRadio">Spóźniony
-                                        </label>
-                                    }
-                                </form>
-                            </td>
-                        </tr>
-                    }
+                ...
                 </tbody>
             </table>
         </div>
