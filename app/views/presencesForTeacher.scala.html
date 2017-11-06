@@ -1,8 +1,7 @@
-@import dto.course.CourseDateView
-@(datesList: List[CourseDateView])
+@(coursesList: List[dto.course.TeacherCourseView])
 <html>
     <head>
-        <title>Szczegóły obecności</title>
+        <title>Kursy</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/bootstrap.min.css")">
         <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets.menu.css")">
@@ -47,6 +46,7 @@
         </nav>
         <div class="container">
             <br><br>
+            @*<jsp:include page="../alert/allAlerts.jsp"/>*@
             <hr>
             <div class="input-group input-group-lg add-on">
                 <div class="input-group"> <span class="input-group-addon">Filter</span>
@@ -56,55 +56,18 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Dzień</th>
-                        <th>Czas rozpoczęcia</th>
-                        <th>Czas zakończenia</th>
-                        <th>Obecność</th>
+                        <th>Nazwa</th>
+                        <th>Liczba zajęć</th>
                     </tr>
                 </thead>
                 <tbody id="paginationTable" class="searchable">
-                    @for(dates <- datesList) {
+                    @for(courses <- coursesList) {
                         <tr>
-                            <td>@dates.date</td>
-                            <td>@dates.startTime</td>
-                            <td>@dates.finishTime</td>
-                            <td>
-                                <form role="form">
-                                    @if(dates.status == "Obecny") {
-                                        <label class="radio-inline">
-                                            <input checked disabled type="radio" name="optionRadio">Obecny
-                                        </label>
-                                        <label class="radio-inline">
-                                            <input disabled type="radio" name="optionRadio">Nieobecny
-                                        </label>
-                                        <label class="radio-inline">
-                                            <input disabled type="radio" name="optionRadio">Spóźniony
-                                        </label>
-                                    }
-                                    @if(dates.status == "Nieobecny") {
-                                        <label class="radio-inline">
-                                            <input disabled type="radio" name="optionRadio">Obecny
-                                        </label>
-                                        <label class="radio-inline">
-                                            <input checked disabled type="radio" name="optionRadio">Nieobecny
-                                        </label>
-                                        <label class="radio-inline">
-                                            <input disabled type="radio" name="optionRadio">Spóźniony
-                                        </label>
-                                    }
-                                    @if(dates.status == "Spozniony") {
-                                        <label class="radio-inline">
-                                            <input disabled type="radio" name="optionRadio">Obecny
-                                        </label>
-                                        <label class="radio-inline">
-                                            <input disabled type="radio" name="optionRadio">Nieobecny
-                                        </label>
-                                        <label class="radio-inline">
-                                            <input checked disabled type="radio" name="optionRadio">Spóźniony
-                                        </label>
-                                    }
-                                </form>
-                            </td>
+                            <td>@courses.subjectName</td>
+                            <td>@courses.coursesQuantity</td>
+                            @helper.form(helper.CSRF(routes.PresenceController.info(courses.ID))) {
+                                <td><button value="${course.ID}" type="submit" class="btn btn-info">Wyświetl terminy</button></td>
+                            }
                         </tr>
                     }
                 </tbody>

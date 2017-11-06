@@ -1,4 +1,4 @@
-package dto.precense;
+package dto.presence;
 
 import dto.BaseView;
 import lombok.AllArgsConstructor;
@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class StudentPrecenseView extends BaseView {
+public class StudentPresenceView extends BaseView {
 
     public int courseId;
     public String subjectName;

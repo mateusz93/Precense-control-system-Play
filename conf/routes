@@ -5,11 +5,11 @@
 # An example controller showing a sample home page
 GET     /                                       controllers.HomeController.index
 
-POST    /precenses/info/:id                     controllers.PrecenseController.info(id: Integer)
-
-POST    /precenses/check/:id                    controllers.PrecenseController.check(id: Integer)
-
-GET     /precenses                              controllers.PrecenseController.index
+# PresenceController mapping
+GET     /presences                              controllers.PresenceController.index
+POST    /presences/info/:id                     controllers.PresenceController.info(id: Integer)
+POST    /presences/check/:id                    controllers.PresenceController.check(id: Integer)
+POST    /presences/update/:id                   controllers.PresenceController.update(id: Long)
 
 # LoginController mapping
 GET     /login                                  controllers.LoginController.logIn

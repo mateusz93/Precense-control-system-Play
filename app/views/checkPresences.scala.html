@@ -1,5 +1,4 @@
-@import dto.course.CourseDateView
-@(datesList: List[CourseDateView])
+@(datesList: List[dto.course.CourseDateView])
 <html>
     <head>
         <title>Sprawdź obecność</title>
@@ -62,13 +61,13 @@
                     </tr>
                 </thead>
                 <tbody id="paginationTable" class="searchable">
-                    @for(dates <- datesList) {
+                    @for(date <- datesList) {
                         <tr>
-                            <td>@dates.date</td>
-                            <td>@dates.startTime</td>
-                            <td>@dates.finishTime</td>_
-                            @helper.form(helper.CSRF(routes.PrecenseController.check(dates.courseDateID))) {
-                                    <td><button value="${dates.courseDateID}" type="submit" class="btn btn-info">Sprawdź obecność</button></td>
+                            <td>@date.date</td>
+                            <td>@date.startTime</td>
+                            <td>@date.finishTime</td>_
+                            @helper.form(helper.CSRF(routes.PresenceController.check(date.courseDateID))) {
+                                    <td><button value="${date.courseDateID}" type="submit" class="btn btn-info">Sprawdź obecność</button></td>
                             }
                         </tr>
                     }

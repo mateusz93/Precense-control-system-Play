@@ -1,7 +1,8 @@
+@(coursesList: List[dto.presence.StudentPresenceView])
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Sprawdź obecność</title>
+        <title>Obecności</title>
+        <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/bootstrap.min.css")">
         <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets.menu.css")">
@@ -52,17 +53,25 @@
                     <input id="filter" type="text" class="form-control" >
                 </div>
             </div>
-            <br>
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Imię</th>
-                        <th>Nazwisko</th>
-                        <th>Obecność</th>
+                        <th>Nazwa</th>
+                        <th>Liczba zajęć</th>
+                        <th>Nauczyciel</th>
                     </tr>
                 </thead>
                 <tbody id="paginationTable" class="searchable">
-                ...
+                    @for(course <- coursesList) {
+                        <tr>
+                            <td>@course.subjectName</td>
+                            <td>@course.quantity</td>
+                            <td>@course.teacherName</td>
+                            @*<form action="/precenses/info/${courses.courseId}" method="get">
+                            <td><button name="info" value="${courses.courseId}" type="submit" class="btn btn-info">Pokaż obecności</button></td>
+                            </form>*@
+                        </tr>
+                    }
                 </tbody>
             </table>
         </div>
