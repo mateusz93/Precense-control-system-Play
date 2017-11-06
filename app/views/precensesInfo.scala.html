@@ -1,4 +1,5 @@
-@(datesList: List[models.CourseDateView])
+@import dto.course.CourseDateView
+@(datesList: List[CourseDateView])
 <html>
     <head>
         <title>Szczegóły obecności</title>
@@ -19,30 +20,27 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    @*<% if ("".equals(session.getAttribute("username")) || session.getAttribute("username") == null) { %>*@
-                    <a class="navbar-brand" href="/login" action="login">Zaloguj</a>
-                    @* <%} else { %>*@
-                    <a class="navbar-brand" href="/login/logOut" action="logout">Wyloguj</a>
-                    @*<% } %>*@
+                    @if("".equals(Http.Context.current().session().get("username")) ||
+                            Http.Context.current().session().get("username") == null) {
+                        <a class="navbar-brand" href="/login" action="login">Zaloguj</a>
+                    } else {
+                        <a class="navbar-brand" href="/login/logOut" action="logout">Wyloguj</a>
+                    }
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav navbar-right">
-
-                        @*                <% if ("STUDENT".equals(session.getAttribute("userType")) ||
-                        "TEACHER".equals(session.getAttribute("userType"))) { %>*@
-
-                    <li><a href="/profile">Profil</a></li>
-                    <li><a href="/precenses">Obecności</a></li>
-                    <li><a href="/courses">Przedmioty</a></li>
-                    <li><a href="/grades">Oceny</a></li>
-                    <li><a href="/stats">Statystyki</a></li>
-                        @*                        <%} %>*@
-
-                        @*                        <% if ("ADMIN".equals(session.getAttribute("userType"))) { %>*@
-                    <li><a href="/profile">Profil</a></li>
-                    <li><a href="/subjects">Przedmioty</a></li>
-                    <li><a href="/courses">Kurs</a></li>
-                        @*                        <%} %>*@
+                        @if("STUDENT".equals(Http.Context.current().session().get("userType")) ||
+                                "TEACHER".equals(Http.Context.current().session().get("userType"))) {
+                            <li><a href="/profile">Profil</a></li>
+                            <li><a href="/precenses">Obecności</a></li>
+                            <li><a href="/courses">Przedmioty</a></li>
+                            <li><a href="/grades">Oceny</a></li>
+                        }
+                        @if("ADMIN".equals(Http.Context.current().session().get("userType"))) {
+                            <li><a href="/profile">Profil</a></li>
+                            <li><a href="/subjects">Przedmioty</a></li>
+                            <li><a href="/courses">Kurs</a></li>
+                        }
                     </ul>
                 </div>
             </div>

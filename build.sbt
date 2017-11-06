@@ -24,5 +24,10 @@ libraryDependencies += "javax.servlet" % "javax.servlet-api" % "3.1.0"
 
 libraryDependencies += "org.projectlombok" % "lombok" % "1.16.16"
 
+libraryDependencies += "javax.mail" % "mail" % "1.4.7"
+
+libraryDependencies += "org.apache.commons" % "commons-collections4" % "4.1"
+libraryDependencies += "org.apache.commons" % "commons-lang3" % "3.6"
+
 // Make verbose tests
 testOptions in Test := Seq(Tests.Argument(TestFrameworks.JUnit, "-a", "-v"))

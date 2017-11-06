@@ -3,19 +3,23 @@
 # ~~~~
 
 # An example controller showing a sample home page
-GET     /                           controllers.HomeController.index
+GET     /                                       controllers.HomeController.index
 
-POST    /precenses/info/:id         controllers.PrecenseController.info(id: Long)
+POST    /precenses/info/:id                     controllers.PrecenseController.info(id: Integer)
 
-POST    /precenses/check/:id        controllers.PrecenseController.check(id: Long)
+POST    /precenses/check/:id                    controllers.PrecenseController.check(id: Integer)
 
-POST    /precenses/update/:id       controllers.PrecenseController.update(id: Long)
+GET     /precenses                              controllers.PrecenseController.index
 
-GET     /precenses                  controllers.PrecenseController.index
-# An example controller showing how to use dependency injection
-GET     /count                      controllers.CountController.count
-# An example controller showing how to write asynchronous code
-GET     /message                    controllers.AsyncController.message
+# LoginController mapping
+GET     /login                                  controllers.LoginController.logIn
+POST    /login/logIn                            controllers.LoginController.loginSubmit
+GET     /login/logOut                           controllers.LoginController.logout
+
+# RegisterController mapping
+GET     /register                               controllers.RegisterController.register
+GET     /register/registrationConfirm/:token    controllers.RegisterController.confirmRegistration(token: String)
+POST    /register/signUp                        controllers.RegisterController.registerSubmit
 
 # Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+GET     /assets/*file                           controllers.Assets.versioned(path="/public", file: Asset)

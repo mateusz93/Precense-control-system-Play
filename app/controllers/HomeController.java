@@ -1,11 +1,8 @@
 package controllers;
 
-import models.Task;
-import play.mvc.*;
-
-import views.html.*;
-
-import java.util.Date;
+import play.mvc.Controller;
+import play.mvc.Result;
+import views.html.index;
 
 /**
  * This controller contains an action to handle HTTP requests
@@ -20,12 +17,6 @@ public class HomeController extends Controller {
      * <code>GET</code> request with a path of <code>/</code>.
      */
     public Result index() {
-        /*Task task = new Task();
-        task.id = 123L;
-        task.done = true;
-        task.dueDate = new Date();
-        task.name = "Mateusz";
-        task.save();*/
         return ok(index.render());
     }
 

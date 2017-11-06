@@ -4,8 +4,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/bootstrap.min.css")">
         <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/main.css")">
-        <script src="@routes.Assets.versioned("javascripts/jquery.min.js")" type="text/javascript"></script>
-        <script src="@routes.Assets.versioned("javascripts/bootstrap.min.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.versioned("javascripts/jquery.1.11.3.min.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.versioned("javascripts/bootstrap.3.3.7.min.js")" type="text/javascript"></script>
     </head>
 
     <body>
@@ -17,30 +17,27 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    @*<% if ("".equals(session.getAttribute("username")) || session.getAttribute("username") == null) { %>*@
-                    <a class="navbar-brand" href="/login" action="login">Zaloguj</a>
-                   @* <%} else { %>*@
-                    <a class="navbar-brand" href="/login/logOut" action="logout">Wyloguj</a>
-                    @*<% } %>*@
+                    @if("".equals(Http.Context.current().session().get("username"))
+                            || Http.Context.current().session().get("username") == null) {
+                        <a class="navbar-brand" href="@routes.LoginController.logIn()">Zaloguj</a>
+                    } else {
+                        <a class="navbar-brand" href="/loginSubmit/logOut" action="logout">Wyloguj</a>
+                    }
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav navbar-right">
-
-@*                <% if ("STUDENT".equals(session.getAttribute("userType")) ||
-                        "TEACHER".equals(session.getAttribute("userType"))) { %>*@
-
+                    @if("STUDENT".equals(Http.Context.current().session().get("userType")) ||
+                        "TEACHER".equals(Http.Context.current().session().get("userType"))) {
                         <li><a href="/profile">Profil</a></li>
                         <li><a href="/precenses">Obecności</a></li>
                         <li><a href="/courses">Przedmioty</a></li>
                         <li><a href="/grades">Oceny</a></li>
-                        <li><a href="/stats">Statystyki</a></li>
-@*                        <%} %>*@
-
-@*                        <% if ("ADMIN".equals(session.getAttribute("userType"))) { %>*@
+                    }
+                    @if("ADMIN".equals(Http.Context.current().session().get("userType"))) {
                         <li><a href="/profile">Profil</a></li>
                         <li><a href="/subjects">Przedmioty</a></li>
                         <li><a href="/courses">Kurs</a></li>
-@*                        <%} %>*@
+                    }
                     </ul>
                 </div>
             </div>
@@ -52,12 +49,13 @@
                 <a href="?lang=en">Angielski</a></h5>
             <h1>System zarządzania przedmiotami</h1>
             <p>Sprawdzaj obecność codziennie w łatwy sposób</p>
-            @*<% if ("".equals(session.getAttribute("username")) || session.getAttribute("username") == null) { %>*@
+            @if("".equals(Http.Context.current().session().get("username"))
+                    || Http.Context.current().session().get("username") == null) {
             <form class="form-inline" action="/register" method="post">
                 <input type="email" class="form-control" name="newEmail" size="50" placeholder="Email" required>
                 <button type="submit" class="btn btn-danger">Zarejestruj</button>
             </form>
-            @*<% } %>*@
+            }
         </div>
 
         <div id="googleMap" style="height:400px;width:100%;"></div>

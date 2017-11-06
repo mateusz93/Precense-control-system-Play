@@ -1,15 +1,19 @@
 package controllers;
 
-import models.CourseDateView;
-import models.TeacherCourseView;
+import dto.course.CourseDateView;
+import dto.course.TeacherCourseView;
 import play.mvc.Result;
-import views.html.checkPrecenses;
-import views.html.checkPresence;
 import views.html.precensesForTeacher;
+import views.html.precensesInfo;
 
-import static play.mvc.Results.ok;
+import javax.inject.Singleton;
+import java.sql.Time;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
-public class PrecenseController {
+@Singleton
+public class PrecenseController extends BaseController {
     /**
      * An action that renders an HTML page with a welcome message.
      * The configuration in the <code>routes</code> file means that
@@ -27,27 +31,36 @@ public class PrecenseController {
         Logic checking if logged user is student
          */
         // if Yes
-        //return ok(precensesForStudent.render(StudentPrecenseView.findAll());
+        /*List<StudentPrecenseView> list = new ArrayList<>();
+        list.add(new StudentPrecenseView(0,"subjectName",1, "teacherName1"));
+        list.add(new StudentPrecenseView(1,"subjectName2",2, "teacherName2"));
+        list.add(new StudentPrecenseView(2,"subjectName3",3, "teacherName3"));
+        list.add(new StudentPrecenseView(3,"subjectName4",4, "teacherName4"));
+        list.add(new StudentPrecenseView(4,"subjectName5",5, "teacherName5"));*/
+        //return ok(precensesForStudent.render());
         // if No
-        return ok(precensesForTeacher.render(TeacherCourseView.findAll()));
+        List<TeacherCourseView> list = new ArrayList<>();
+        list.add(new TeacherCourseView(0,"subjectName",1));
+        list.add(new TeacherCourseView(1,"subjectName2",2));
+        list.add(new TeacherCourseView(2,"subjectName3",3));
+        list.add(new TeacherCourseView(3,"subjectName4",4));
+        list.add(new TeacherCourseView(4,"subjectName5",5));
+        return ok(precensesForTeacher.render(list));
     }
 
-    public Result info(Long id) {
+    public Result info(Integer id) {
         //STUDENT precense/precensesInfo
-        //return ok(precensesInfo.render(CourseDateView.findAll()));
+        List<CourseDateView> list = new ArrayList<>();
+        list.add(new CourseDateView("obecny",new Date(), new Time(0l), new Time(1000l), 0, "no", "0"));
+        return ok(precensesInfo.render(list));
         //NIESTUDENT precense/checkPrecenses"
-        return ok(checkPrecenses.render(CourseDateView.findAll()));
     }
 
-    public Result check(Long id) {
+    public Result check(Integer id) {
         //TODO change view template to proper
-        return ok(checkPrecenses.render(CourseDateView.findAll()));
-    }
-
-    public Result update(Long id) {
-
-        //TODO change view template to proper
-        return ok(checkPrecenses.render(CourseDateView.findAll()));
+        List<CourseDateView> list = new ArrayList<>();
+        list.add(new CourseDateView("obecny",new Date(), new Time(0l), new Time(1000l), 0, "no", "0"));
+        return ok(precensesInfo.render(list));
     }
 
 }

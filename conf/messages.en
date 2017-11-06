@@ -1,2 +1,129 @@
 firstmessage=First message
 secondmessage=Second message
+
+view.index.title=Presence Control System
+view.index.subtitle=Check presences every day in easy way
+view.index.register=Register
+view.index.register.now=Register now
+view.page.main=Main page
+view.filter=Filter
+view.name=Name
+view.language=Language
+view.language.polish=Polish
+view.language.english=English
+view.changes.save=Save changes
+
+view.menu.login=Login
+view.menu.logout=Logout
+view.menu.profile=Profile
+view.menu.presences=Presences
+view.menu.subjects=Subjects
+view.menu.grades=Grades
+view.menu.stats=Stats
+view.menu.courses=Courses
+
+view.contact.info=Contact us, we answer in 24h
+view.contact.send=Send
+
+view.profile.overview=Overview
+view.profile.notifications=Notifications
+view.profile.password=Password
+view.profile.password.confirme=Confirme password
+view.profile.firstname=First Name
+view.profile.lastname=Last Name
+view.profile.index=Index
+view.profile.email=Email
+view.profile.sms=SMS
+view.profile.group=Group
+view.profile.type=Type
+view.profile.telephone=Telephone
+view.profile.notificationSystem=Notification system
+view.profile.notification.canceledCourse=Course canceled
+view.profile.notification.changeCourseDate=Change of course schedule
+view.profile.notification.coursePresence=Absence from class
+view.profile.notification.criticalPresenceLevel=Critical absence level
+view.profile.notification.badGrade=Insufficient grade
+view.profile.password.change=Change password
+view.profile.password.actual=Actual password
+view.profile.password.new=New password
+view.profile.password.repeatNew=Repeat new password
+
+view.subject.title=Subjects
+view.subject.add.title=Add subject
+view.subject.add=Add new subject
+view.subject.new=New subject
+view.subject.name=Subject name
+view.subject.year=Year of study
+view.subject.field=Field
+view.subject.quantity=Quantity of subject classes
+view.subject.minQuantity=Critical presences level
+view.subject.description=Description
+view.subject.apply=Apply
+view.subject.delete=Delete
+
+view.stats.title=Stats
+view.stats.presences=Presences
+view.stats.grades=Grades
+view.stats.presencesStats=Presences stats
+view.stats.grades.finalStats=Final grades stats
+view.stats.grades.allStats=All grades stats
+
+view.student=Student
+view.admin=Admin
+view.teacher=Teacher
+
+view.register.confirmed=Account activated
+view.register.title=Register
+view.login.title=Login
+view.login=Login
+
+view.presence.title=Check presences
+view.presence=Presence
+view.presence.absence=Absence
+view.presence.present=Present
+view.presence.late=Late
+view.presence.day=Day
+view.presence.time.start=Start time
+view.presence.time.end=Finish time
+view.presence.details=Presences details
+view.presence.show=Show presences
+
+view.save.title=Saves
+view.save.save=Save
+
+view.course.title=Courses
+view.course.date.title=Course dates
+view.course.time.start=Start ime
+view.course.time.end=Finish time
+view.course.cancel=Cancel
+view.course.dates.show=Show dates
+
+error=Unknown error occurred
+emptyField=Filed {} can not be empty!
+register.userCreated=Account created! Activating link was sent
+register.differentPasswords=Different passwords!
+register.incorrectPassword=Password must be consist 8-20 characters, upper and lower letter, number and special character [!@#$%^&+=]
+register.emailUsed=Email is just use by other user!
+register.token.incorrect=Token incorrect
+register.token.expiry=Token expired
+login.incorrectEmail=User with passed email not exists!
+login.incorrectUserType=User with passed email and type not exists!
+login.userNotActive=User not active!
+course.added=New course added!
+course.deleted=Course deleted!
+course.courseDateAdded=New course date added correctly
+course.courseDateEdited=Course date edited
+course.unSubscribed=You has been delete from course list!
+course.subscribed=You has been saved to course!
+precense.updated=Precenses correctly updated
+profile.upload.success=You successfully uploaded photo
+profile.upload.fail=You failed to upload photo
+profile.upload.empty=You failed to upload because the file was empty
+profile.updated=Profile updated
+profile.password.updated=Password updated
+subject.added=Added new subject!
+subject.deleted=Subject deleted
+grade.add=Grade added
+recaptcha.incorrect=You missed the Captcha
+
+error.required=Field {0} is required
