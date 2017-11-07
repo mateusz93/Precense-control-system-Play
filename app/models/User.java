@@ -20,7 +20,7 @@ public class User extends Model {
     @Column(name = "ID")
     private long id;
 
-    @Column(name = "loginSubmit")
+    @Column(name = "username")
     private String login;
 
     @Column(name = "firstName")
