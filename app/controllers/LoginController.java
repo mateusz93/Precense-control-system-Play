@@ -42,6 +42,6 @@ public class LoginController extends BaseController {
 
     public Result logout() {
         service.logout();
-        return redirect("/index");
+        return redirect("/");
     }
 }

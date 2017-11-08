@@ -30,8 +30,7 @@ public class User extends Model {
     private String lastName;
 
     @Column(name = "type")
-    @Enumerated(EnumType.STRING)
-    private Role type;
+    private String type;
 
     @Column(name = "password")
     private String password;

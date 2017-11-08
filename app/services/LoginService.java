@@ -58,7 +58,7 @@ public class LoginService {
                     .type(MessageType.WARNING.name())
                     .build());
         }
-        if (!user.getType().name().equalsIgnoreCase(form.getType())) {
+        if (!user.getType().equalsIgnoreCase(form.getType())) {
             form.getMessages().add(Message.builder()
                     .text(messages.at("login.incorrectUserType"))
                     .type(MessageType.WARNING.name())
@@ -86,8 +86,8 @@ public class LoginService {
             validate(dto);
             val user = User.findByEmail(dto.getEmail());
             Http.Context.current().session().put("username", user.getLogin());
-            Http.Context.current().session().put("userType", user.getType().name());
-            return redirect("/index");
+            Http.Context.current().session().put("userType", user.getType());
+            return redirect("/");
         } catch (ValidationException e) {
             dto.getMessages().add(Message.builder()
                     .text(messages.at(e.getMessage()))

@@ -29,14 +29,14 @@
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav navbar-right">
-                        @if("STUDENT".equals(Http.Context.current().session().get("userType")) ||
-                                "TEACHER".equals(Http.Context.current().session().get("userType"))) {
+                        @if("STUDENT".equalsIgnoreCase(Http.Context.current().session().get("userType")) ||
+                                "TEACHER".equalsIgnoreCase(Http.Context.current().session().get("userType"))) {
                             <li><a href="/profile">Profil</a></li>
                             <li><a href="/precenses">Obecności</a></li>
                             <li><a href="/courses">Przedmioty</a></li>
                             <li><a href="/grades">Oceny</a></li>
                         }
-                        @if("ADMIN".equals(Http.Context.current().session().get("userType"))) {
+                        @if("ADMIN".equalsIgnoreCase(Http.Context.current().session().get("userType"))) {
                             <li><a href="/profile">Profil</a></li>
                             <li><a href="/subjects">Przedmioty</a></li>
                             <li><a href="/courses">Kurs</a></li>

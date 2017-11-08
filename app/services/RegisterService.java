@@ -72,7 +72,7 @@ public class RegisterService {
                 .email(form.getEmail())
                 .firstName(form.getFirstName())
                 .lastName(form.getLastName())
-                .type(UserType.STUDENT.toString().equalsIgnoreCase(form.getType()) ? Role.STUDENT : Role.TEACHER)
+                .type(UserType.STUDENT.toString().equalsIgnoreCase(form.getType()) ? Role.STUDENT.name() : Role.TEACHER.name())
                 .login(username)
                 .password(Encryptor.encryption(form.getPassword()))
                 .status(UserStatus.INACTIVE.name())
