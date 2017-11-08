@@ -22,24 +22,6 @@ public class PresenceController extends BaseController {
      * <code>GET</code> request with a path of <code>/</code>.
      */
     public Result index() {
-        /*Task task = new Task();
-        task.id = 123L;
-        task.done = true;
-        task.dueDate = new Date();
-        task.name = "Mateusz";
-        task.save();*/
-        /*
-        Logic checking if logged user is student
-         */
-        // if Yes
-        /*List<StudentPresenceView> list = new ArrayList<>();
-        list.add(new StudentPresenceView(0,"subjectName",1, "teacherName1"));
-        list.add(new StudentPresenceView(1,"subjectName2",2, "teacherName2"));
-        list.add(new StudentPresenceView(2,"subjectName3",3, "teacherName3"));
-        list.add(new StudentPresenceView(3,"subjectName4",4, "teacherName4"));
-        list.add(new StudentPresenceView(4,"subjectName5",5, "teacherName5"));*/
-        //return ok(presencesForStudent.render());
-        // if No
         List<TeacherCourseView> list = new ArrayList<>();
         list.add(new TeacherCourseView(0,"subjectName",1));
         list.add(new TeacherCourseView(1,"subjectName2",2));
