@@ -73,7 +73,7 @@ public class User extends Model {
     public static User findByLogin(String login) {
         return find.query()
                 .where()
-                .like("loginSubmit", login)
+                .like("username", login)
                 .findOne();
     }
 

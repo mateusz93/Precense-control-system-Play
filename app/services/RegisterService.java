@@ -32,7 +32,7 @@ import static play.mvc.Results.ok;
 public class RegisterService {
 
     private final EmailService emailService;
-    private static final String APPLICATION_ADDRESS = "http://localhost:8080";
+    private static final String APPLICATION_ADDRESS = "http://localhost:9000";
 
     @Inject
     public RegisterService(EmailService emailService) {
