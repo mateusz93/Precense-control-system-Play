@@ -3,13 +3,18 @@
 # ~~~~
 
 # An example controller showing a sample home page
-GET     /                                       controllers.HomeController.index
+GET     /                           controllers.HomeController.index
 
-# PresenceController mapping
-GET     /presences                              controllers.PresenceController.index
-POST    /presences/info/:id                     controllers.PresenceController.info(id: Integer)
-POST    /presences/check/:id                    controllers.PresenceController.check(id: Integer)
-POST    /presences/update/:id                   controllers.PresenceController.update(id: Long)
+GET     /presences                  controllers.PresenceController.index
+
+POST    /presences/courseDates/:id  controllers.PresenceController.courseDates(id: Integer)
+
+POST    /presences/check/:id        controllers.PresenceController.check(id: Integer)
+
+POST    /presences/cancel/:id       controllers.PresenceController.cancel(id: Integer)
+
+POST    /presences/update/:id       controllers.PresenceController.update(id: Integer)
+
 
 # LoginController mapping
 GET     /login                                  controllers.LoginController.logIn
@@ -22,4 +27,4 @@ GET     /register/registrationConfirm/:token    controllers.RegisterController.c
 POST    /register/signUp                        controllers.RegisterController.registerSubmit
 
 # Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file                           controllers.Assets.versioned(path="/public", file: Asset)
+GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

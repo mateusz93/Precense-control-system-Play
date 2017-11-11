@@ -1,4 +1,4 @@
-@helper.form(helper.CSRF(routes.PrecenseController.update(courses.ID))) {
+@helper.form(helper.CSRF(routes.PresenceController.update(courses.ID))) {
                     @for(student <- studentWrapper.students) {
                         <tr>
                             <input type="hidden" name="ID" value="student.ID"/>
@@ -7,9 +7,9 @@
                             <td>@student.lastName</td>
                             <input type="hidden" name="lastName" value="student.lastName"/>
                             <td>
-                                @if(student.precenseStatus != "Obecny" && student.precenseStatus != "Nieobecny" &&
-                                        student.precenseStatus != "Spozniony") {
-                                    <select class="form-control" name="precenseStatus" value="${precenseStatus}">
+                                @if(student.presenceStatus != "Obecny" && student.presenceStatus != "Nieobecny" &&
+                                        student.presenceStatus != "Spozniony") {
+                                    <select class="form-control" name="presenceStatus" value="${presenceStatus}">
                                         <option value="" selected></option>
                                         <option value="Obecny">Obecny</option>
                                         <option value="Nieobecny">Nieobecny</option>
@@ -17,8 +17,8 @@
                                     </select>
                                 }
 
-                                @if(student.precenseStatus == "Spozniony") {
-                                    <select class="form-control" name="precenseStatus" value="${precenseStatus}">
+                                @if(student.presenceStatus == "Spozniony") {
+                                    <select class="form-control" name="presenceStatus" value="${presenceStatus}">
                                         <option value=""></option>
                                         <option value="Obecny">Obecny</option>
                                         <option value="Nieobecny">Nieobecny</option>
@@ -26,8 +26,8 @@
                                     </select>
                                 }
 
-                                @if(student.precenseStatus == "Nieobecny") {
-                                    <select class="form-control" name="precenseStatus" value="${precenseStatus}">
+                                @if(student.presenceStatus == "Nieobecny") {
+                                    <select class="form-control" name="presenceStatus" value="${presenceStatus}">
                                         <option value=""></option>
                                         <option value="Obecny">Obecny</option>
                                         <option value="Nieobecny" selected>Nieobecny</option>
@@ -35,8 +35,8 @@
                                     </select>
                                 }
 
-                                @if(student.precenseStatus == "Obecny") {
-                                    <select class="form-control" name="precenseStatus" value="${precenseStatus}">
+                                @if(student.presenceStatus == "Obecny") {
+                                    <select class="form-control" name="presenceStatus" value="${presenceStatus}">
                                         <option value=""></option>
                                         <option value="Obecny" selected>Obecny</option>
                                         <option value="Nieobecny">Nieobecny</option>

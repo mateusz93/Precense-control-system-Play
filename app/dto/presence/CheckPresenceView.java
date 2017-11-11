@@ -17,11 +17,10 @@ public class CheckPresenceView extends BaseView {
     public String ID;
     public String firstName;
     public String lastName;
-    public String precenseStatus;
+    public String presenceStatus;
 
-    public static final Finder<Long, CheckPresenceView> find = new Finder<>(CheckPresenceView.class);
-
-    public static List<CheckPresenceView> findAllFakeData() {
+    //mock data
+    public static List<CheckPresenceView> findAll() {
         List<CheckPresenceView> list = new ArrayList<>();
         list.add(new CheckPresenceView("0", "Adam", "Kowalski", "Obecny"));
         return list;

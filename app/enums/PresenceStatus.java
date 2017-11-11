@@ -3,7 +3,7 @@ package enums;
 /**
  * @author Mateusz Wieczorek
  */
-public enum PrecenseStatus {
+public enum PresenceStatus {
 
     Obecny, Nieobecny, Spozniony
 

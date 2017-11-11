@@ -31,7 +31,7 @@
                         @if("STUDENT".equalsIgnoreCase(Http.Context.current().session().get("userType")) ||
                                 "TEACHER".equalsIgnoreCase(Http.Context.current().session().get("userType"))) {
                             <li><a href="/profile">Profil</a></li>
-                            <li><a href="/precenses">Obecności</a></li>
+                            <li><a href="/presences">Obecności</a></li>
                             <li><a href="/courses">Przedmioty</a></li>
                             <li><a href="/grades">Oceny</a></li>
                         }
@@ -68,6 +68,9 @@
                             <td>@date.finishTime</td>_
                             @helper.form(helper.CSRF(routes.PresenceController.check(date.courseDateID))) {
                                     <td><button value="${date.courseDateID}" type="submit" class="btn btn-info">Sprawdź obecność</button></td>
+                            }
+                            @helper.form(helper.CSRF(routes.PresenceController.cancel(date.courseDateID))) {
+                                <td><button value="${dates.courseDateID}" type="submit" class="btn btn-info">Odwołaj</button></td>
                             }
                         </tr>
                     }
