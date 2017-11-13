@@ -4,12 +4,22 @@ import dto.course.CourseDateView;
 import dto.course.TeacherCourseView;
 import dto.presence.CheckPresenceView;
 import dto.presence.CheckPresenceViewWrapper;
+import dto.presence.StudentPresencesView;
+import models.StudentCourse;
+import models.Subject;
+import models.TeacherCourse;
+import models.User;
 import play.mvc.Result;
+import play.mvc.Security;
+import services.CourseService;
 import views.html.checkPresence;
+import views.html.studentPresences;
 import views.html.teacherCourseDates;
 import views.html.teacherCoursesList;
 
+import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.util.ArrayList;
 import java.util.List;
 
 @Singleton
@@ -20,17 +30,50 @@ public class PresenceController extends BaseController {
      * this method will be called when the application receives a
      * <code>GET</code> request with a path of <code>/</code>.
      */
+    @Inject
+    CourseService courseService;
+
+    @Security.Authenticated
     public Result index() {
-        /*
-        Logic checking if logged user is student
-         */
-        // if Yes
-        //getting from database and convert from MODEL TO DTO
-        //return ok(presencesForStudent.render(StudentPresenceView.findAll());
-        // if No
-        //getting from database and convert from MODEL TO DTO
-        List<TeacherCourseView> coursesList = TeacherCourseView.findAll();
+        User user = User.findByLogin(request().attrs().get(Security.USERNAME));
+        if("Student".equals(user.getType()))
+        {
+            return prepareStudentView(user);
+        } else {
+            return prepareTeacherView(user);
+        }
+    }
+
+    private Result prepareStudentView(User user) {
+        List<StudentPresencesView> coursesList = getStudentPresences(user);
+        return ok(studentPresences.render(coursesList));
+    }
+
+    private Result prepareTeacherView(User user) {
+        List<TeacherCourseView> coursesList = courseService.getTeacherCoursesList(user);
         return ok(teacherCoursesList.render(coursesList));
+    }
+
+
+    private List<StudentPresencesView> getStudentPresences(User user) {
+        List<StudentPresencesView> studentPresencesViews = new ArrayList<>();
+        List<StudentCourse> studentCourses = StudentCourse.findByStudent(user);
+        for (StudentCourse studentCourse : studentCourses) {
+            Subject subject = studentCourse.getTeacherCourse().getSubject();
+            TeacherCourse teacherCourse = TeacherCourse.findBySubjectAndStudentGroup(subject, user.getGroup());
+            StudentPresencesView studentPresencesView = getStudentPresencesView(subject, teacherCourse);
+            studentPresencesViews.add(studentPresencesView);
+        }
+        return studentPresencesViews;
+    }
+
+    private StudentPresencesView getStudentPresencesView(Subject subject, TeacherCourse teacherCourse) {
+        StudentPresencesView studentPresencesView = new StudentPresencesView();
+        studentPresencesView.setSubjectName(subject.getName());
+        studentPresencesView.setTeacherName(teacherCourse.getTeacher().getFirstName() + " " + teacherCourse.getTeacher().getLastName());
+        studentPresencesView.setCourseId(teacherCourse.getId());
+        studentPresencesView.setQuantity(subject.getQuantity());
+        return studentPresencesView;
     }
 
     public Result courseDates(Integer id) {

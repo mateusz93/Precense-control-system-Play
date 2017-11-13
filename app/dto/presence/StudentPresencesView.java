@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class StudentPresenceView extends BaseView {
+public class StudentPresencesView extends BaseView {
 
     public int courseId;
     public String subjectName;
