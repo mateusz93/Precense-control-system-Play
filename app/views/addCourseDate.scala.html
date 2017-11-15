@@ -1,14 +1,15 @@
-@(coursesList: List[dto.course.TeacherCourseView])
+@import models.Subject
+@import models.User
+@(subjects: List[Subject], users: List[User])
+
 <html>
     <head>
-        <title>Kursy</title>
+        <title>Dodanie terminu zajęć</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/bootstrap.min.css")">
         <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets.menu.css")">
         <script src="@routes.Assets.versioned("javascripts/jquery.1.11.3.min.js")" type="text/javascript"></script>
         <script src="@routes.Assets.versioned("javascripts/bootstrap.min.js")" type="text/javascript"></script>
-        <script src="@routes.Assets.versioned("javascripts/pagination.js")" type="text/javascript"></script>
-        <script src="@routes.Assets.versioned("javascripts/filter.js")" type="text/javascript"></script>
     </head>
     <body>
         <nav class="navbar navbar-default navbar-fixed-top">
@@ -46,35 +47,34 @@
         </nav>
         <div class="container">
             <br><br>
-            @*<jsp:include page="../alert/allAlerts.jsp"/>*@
-            <hr>
-            <div class="input-group input-group-lg add-on">
-                <div class="input-group"> <span class="input-group-addon">Filtr</span>
-                    <input id="filter" type="text" class="form-control" >
+            <h3>Nowy kurs</h3>
+            @helper.form(helper.CSRF(routes.CourseController.save())) {
+                <div class="form-group">
+                    <label>Nazwa przedmiotu</label>
+                    <select class="form-control" name="subjectName">
+                        @for(s <- subjects) {
+                            <option type="text" name="subjectName" value="@s.name">@s.name</option>
+                        }
+                    </select>
                 </div>
-            </div>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Nazwa</th>
-                        <th>Liczba zajęć</th>
-                    </tr>
-                </thead>
-                <tbody id="paginationTable" class="searchable">
-                    @for(courses <- coursesList) {
-                        <tr>
-                            <td>@courses.subjectName</td>
-                            <td>@courses.coursesQuantity</td>
-                            @helper.form(helper.CSRF(routes.PresenceController.courseDates(courses.ID))) {
-                                <td><button value="${course.ID}" type="submit" class="btn btn-info">Wyświetl terminy</button></td>
-                            }
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-        <div class="col-md-12 text-center">
-            <ul class="pagination" id="pager"></ul>
+                <div class="form-group">
+                    <label>Nauczyciel</label>
+                    <select class="form-control" name="teacherLogin">
+                        @for(t <- users) {
+                            <option type="text" name="teacherLogin" value="@t.login">@t.firstName @t.lastName</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Grupa studencka</label>
+                    <input type="text" id="studentGroup" name="studentGroup" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Opis</label>
+                    <input type="text" id="description" name="description" class="form-control">
+                </div>
+                <td><button type="submit" class="btn btn-success">Zatwierdź</button></td>
+            }
         </div>
     </body>
 </html>

@@ -44,4 +44,8 @@ public class TeacherCourse extends Model {
             .eq("teacher", user)
             .findList();
     }
+
+    public static List<TeacherCourse> findAll() {
+        return find.query().findList();
+    }
 }

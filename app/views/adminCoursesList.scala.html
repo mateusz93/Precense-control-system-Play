@@ -1,4 +1,5 @@
-@(coursesList: List[dto.course.TeacherCourseView])
+@import dto.course.TeacherCourseView
+@(coursesList: List[TeacherCourseView])
 <html>
     <head>
         <title>Kursy</title>
@@ -25,7 +26,7 @@
                     } else {
                         <a class="navbar-brand" href="/login/logOut" action="logout">Wyloguj</a>
                     }
-                </div>
+                    </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav navbar-right">
                         @if("STUDENT".equalsIgnoreCase(Http.Context.current().session().get("userType")) ||
@@ -46,27 +47,34 @@
         </nav>
         <div class="container">
             <br><br>
-            @*<jsp:include page="../alert/allAlerts.jsp"/>*@
             <hr>
+            @helper.form(helper.CSRF(routes.CourseController.newCourse())) {
+                <td><button type="submit" class="btn btn-success">Dodaj nowy kurs</button></td>
+            }
+            <br>
             <div class="input-group input-group-lg add-on">
-                <div class="input-group"> <span class="input-group-addon">Filtr</span>
+                <div class="input-group"> <span class="input-group-addon">Filter</span>
                     <input id="filter" type="text" class="form-control" >
                 </div>
             </div>
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Nazwa</th>
-                        <th>Liczba zajęć</th>
+                        <th>Nazwa przedmiotu</th>
+                        @*<th>Nauczyciel</th>
+                        <th>Grupa</th>
+                        <th>Opis</th>*@
                     </tr>
                 </thead>
                 <tbody id="paginationTable" class="searchable">
-                    @for(courses <- coursesList) {
+                    @for(course <- coursesList) {
                         <tr>
-                            <td>@courses.subjectName</td>
-                            <td>@courses.coursesQuantity</td>
-                            @helper.form(helper.CSRF(routes.PresenceController.courseDates(courses.ID))) {
-                                <td><button value="${course.ID}" type="submit" class="btn btn-info">Wyświetl terminy</button></td>
+                            <td>@course.subjectName</td>
+                            @*<td>@course.teacher.firstName @course.teacher.lastName</td>*@
+                            @*<td>@course.studentGroup</td>*@
+                            @*<td>@course.description</td>*@
+                            @helper.form(helper.CSRF(routes.CourseController.deleteCourse(course.ID))) {
+                                <td><button value="@course.ID" type="submit" class="btn btn-info">Usuń</button></td>
                             }
                         </tr>
                     }

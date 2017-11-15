@@ -12,10 +12,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class StudentCourseView {
 
-    private int courseId;
-    private String name;
-    private String description;
-    private int coursesQuantity;
-    private String teacherName;
+    public int courseId;
+    public String name;
+    public String description;
+    public int coursesQuantity;
+    public String teacherName;
 
 }

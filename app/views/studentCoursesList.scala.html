@@ -1,6 +1,8 @@
-@(coursesList: List[dto.course.TeacherCourseView])
+@import dto.course.StudentCourseView
+@(coursesList: List[StudentCourseView])
 <html>
     <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Kursy</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/bootstrap.min.css")">
@@ -46,7 +48,6 @@
         </nav>
         <div class="container">
             <br><br>
-            @*<jsp:include page="../alert/allAlerts.jsp"/>*@
             <hr>
             <div class="input-group input-group-lg add-on">
                 <div class="input-group"> <span class="input-group-addon">Filtr</span>
@@ -58,15 +59,19 @@
                     <tr>
                         <th>Nazwa</th>
                         <th>Liczba zajęć</th>
+                        <th>Prowadzący</th>
+                        <th>Opis</th>
                     </tr>
                 </thead>
                 <tbody id="paginationTable" class="searchable">
-                    @for(courses <- coursesList) {
+                    @for(course <- coursesList) {
                         <tr>
-                            <td>@courses.subjectName</td>
-                            <td>@courses.coursesQuantity</td>
-                            @helper.form(helper.CSRF(routes.PresenceController.courseDates(courses.ID))) {
-                                <td><button value="${course.ID}" type="submit" class="btn btn-info">Wyświetl terminy</button></td>
+                            <td>@course.name</td>
+                            <td>@course.coursesQuantity</td>
+                            <td>@course.teacherName</td>
+                            <td>@course.description</td>
+                            @helper.form(helper.CSRF(routes.CourseController.info(course.courseId))) {
+                                <td><button type="submit" class="btn btn-info">Pokaż terminy</button></td>
                             }
                         </tr>
                     }

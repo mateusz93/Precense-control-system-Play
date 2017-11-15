@@ -18,50 +18,50 @@ public class User extends Model {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name = "ID")
-    private long id;
+    public long id;
 
     @Column(name = "username")
-    private String login;
+    public String login;
 
     @Column(name = "firstName")
-    private String firstName;
+    public String firstName;
 
     @Column(name = "lastName")
-    private String lastName;
+    public String lastName;
 
     @Column(name = "type")
-    private String type;
+    public String type;
 
     @Column(name = "password")
-    private String password;
+    public String password;
 
     @Column(name = "lastLogin")
-    private Timestamp lastLogin;
+    public Timestamp lastLogin;
 
     @Column(name = "status")
-    private String status;
+    public String status;
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "fieldID")
-    private Field field;
+    public Field field;
 
     @Column(name = "`group`")
-    private String group;
+    public String group;
 
     @Column(name = "yearOfStudy")
-    private int yearOfStudy;
+    public int yearOfStudy;
 
     @Column(name = "email")
-    private String email;
+    public String email;
 
     @Column(name = "phone")
-    private String phone;
+    public String phone;
 
     @Column(name = "street")
-    private String street;
+    public String street;
 
     @Column(name = "city")
-    private String city;
+    public String city;
 
     @Transient
     public String getFullName() {
