@@ -1,4 +1,5 @@
 INSERT INTO `play`.`field` (`name`) VALUES ('Informatyka');
+INSERT INTO `play`.`field` (`name`) VALUES ('Muzyka');
 
 INSERT INTO `play`.`ser` (`fieldID`, `username`, `firstName`, `lastName`, `type`, `password`, `yearOfStudy`, `group`, `email`, `Status`)
 VALUES ((select id from `play`.`Field` where name='Informatyka'), 'mateuszek', 'Mateusz', 'Wieczorek', 'Student', '92d7ddd2a010c59511dc2905b7e14f64', 1, 'I_2013', 'mati@edu.p.lodz.pl', 'ACTIVE');

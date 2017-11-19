@@ -1,9 +1,7 @@
-@import dto.course.StudentCourseView
-@(coursesList: List[StudentCourseView])
+@(subjectList: List[dto.course.SubjectView])
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Kursy</title>
+        <title>Przedmioty</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/bootstrap.min.css")">
         <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/menu.css")">
@@ -49,29 +47,37 @@
         <div class="container">
             <br><br>
             <hr>
+            @helper.form(helper.CSRF(routes.SubjectController.newSubject())) {
+                <td><button type="submit" class="btn btn-success">Dodaj nowy przedmiot</button></td>
+            }
+            <br>
             <div class="input-group input-group-lg add-on">
-                <div class="input-group"> <span class="input-group-addon">Filtr</span>
+                <div class="input-group"> <span class="input-group-addon">Filter</span>
                     <input id="filter" type="text" class="form-control" >
                 </div>
             </div>
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Nazwa</th>
+                        <th>Nazwa przedmiotu</th>
+                        <th>Rok studiów</th>
+                        <th>Kierunek</th>
+                        <th>Minimalna liczba obecności</th>
                         <th>Liczba zajęć</th>
-                        <th>Prowadzący</th>
                         <th>Opis</th>
                     </tr>
                 </thead>
                 <tbody id="paginationTable" class="searchable">
-                    @for(course <- coursesList) {
+                    @for(subject <- subjectList) {
                         <tr>
-                            <td>@course.name</td>
-                            <td>@course.coursesQuantity</td>
-                            <td>@course.teacherName</td>
-                            <td>@course.description</td>
-                            @helper.form(helper.CSRF(routes.CourseController.info(course.courseId))) {
-                                <td><button type="submit" class="btn btn-info">Pokaż terminy</button></td>
+                            <td>@subject.name</td>
+                            <td>@subject.yearOfStudy</td>
+                            <td>@subject.field</td>
+                            <td>@subject.minQuantity</td>
+                            <td>@subject.quantity</td>
+                            <td>@subject.description</td>
+                            @helper.form(helper.CSRF(routes.SubjectController.delete(subject.id))) {
+                                <td><button value="${subject.id}" type="submit" class="btn btn-info">Usuń</button></td>
                             }
                         </tr>
                     }

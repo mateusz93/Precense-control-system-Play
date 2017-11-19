@@ -27,6 +27,13 @@ GET     /courses/newCourse          controllers.CourseController.newCourse
 
 POST    /courses/deleteCourse/:id   controllers.CourseController.deleteCourse(id: Integer)
 
+GET     /subjects                   controllers.SubjectController.course
+
+GET     /subjects/new               controllers.SubjectController.newSubject
+
+POST    /subjects/delete/:id        controllers.SubjectController.delete(id: Integer)
+
+POST    /subjects/save              controllers.SubjectController.save
 # LoginController mapping
 GET     /login                                  controllers.LoginController.logIn
 POST    /login/logIn                            controllers.LoginController.loginSubmit
