@@ -48,14 +48,8 @@
                 <a href="?lang=pl">Polski</a> |
                 <a href="?lang=en">Angielski</a></h5>
             <h1>System zarządzania przedmiotami</h1>
+            <br>
             <p>Sprawdzaj obecność codziennie w łatwy sposób</p>
-            @if("".equals(Http.Context.current().session().get("username"))
-                    || Http.Context.current().session().get("username") == null) {
-            <form class="form-inline" action="/register" method="post">
-                <input type="email" class="form-control" name="newEmail" size="50" placeholder="Email" required>
-                <button type="submit" class="btn btn-danger">Zarejestruj</button>
-            </form>
-            }
         </div>
 
         <div id="googleMap" style="height:400px;width:100%;"></div>
