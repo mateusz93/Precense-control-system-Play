@@ -24,7 +24,7 @@ libraryDependencies += "javax.servlet" % "javax.servlet-api" % "3.1.0"
 
 libraryDependencies += "org.projectlombok" % "lombok" % "1.16.16"
 
-libraryDependencies += "javax.mail" % "mail" % "1.4.7"
+libraryDependencies += "org.apache.commons" % "commons-email" % "1.5"
 
 libraryDependencies += "org.apache.commons" % "commons-collections4" % "4.1"
 libraryDependencies += "org.apache.commons" % "commons-lang3" % "3.6"

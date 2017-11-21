@@ -12,6 +12,7 @@ import models.User;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import play.data.Form;
+import play.data.FormFactory;
 import play.db.ebean.Transactional;
 import play.mvc.Http;
 import play.mvc.Result;
@@ -31,11 +32,13 @@ import static play.mvc.Results.ok;
 @Singleton
 public class RegisterService {
 
+    private final FormFactory formFactory;
     private final EmailService emailService;
     private static final String APPLICATION_ADDRESS = "http://localhost:9000";
 
     @Inject
-    public RegisterService(EmailService emailService) {
+    public RegisterService(FormFactory formFactory, EmailService emailService) {
+        this.formFactory = formFactory;
         this.emailService = emailService;
     }
 
@@ -56,7 +59,7 @@ public class RegisterService {
     }
 
     private String generateActivationLink(String token) {
-        return APPLICATION_ADDRESS + "/register/registrationConfirm.html?token=" + token;
+        return APPLICATION_ADDRESS + "/register/registrationConfirm/" + token;
     }
 
     private User accept(RegisterView form) {
@@ -137,7 +140,7 @@ public class RegisterService {
     }
 
     public Result confirmRegistration(String tokenAsString) {
-        Form<RegisterView> wrappedDto = new Form<>(RegisterView.class, null, null, null);
+        Form<RegisterView> wrappedDto = formFactory.form(RegisterView.class).fill(new RegisterView());
         Token token = Token.findByToken(tokenAsString);
         validateToken(token, wrappedDto.get());
 
