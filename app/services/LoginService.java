@@ -9,7 +9,7 @@ import exceptions.ValidationException;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import models.User;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.collections4.CollectionUtils;
 import play.data.Form;
 import play.data.FormFactory;
 import play.db.ebean.Transactional;
@@ -70,8 +70,10 @@ public class LoginService {
                     .type(MessageType.WARNING.name())
                     .build());
         }
-        user.setLastLogin(new Timestamp((new Date()).getTime()));
-        user.save();
+        if (CollectionUtils.isEmpty(form.getMessages())) {
+            user.setLastLogin(new Timestamp((new Date()).getTime()));
+            user.save();
+        }
     }
 
     public void logout() {
@@ -84,10 +86,13 @@ public class LoginService {
         try {
             captchaService.verify();
             validate(dto);
-            val user = User.findByEmail(dto.getEmail());
-            Http.Context.current().session().put("username", user.getLogin());
-            Http.Context.current().session().put("userType", user.getType());
-            return redirect("/");
+            if (CollectionUtils.isEmpty(dto.getMessages())) {
+                val user = User.findByEmail(dto.getEmail());
+                Http.Context.current().session().put("username", user.getLogin());
+                Http.Context.current().session().put("userType", user.getType());
+                return redirect("/");
+            }
+            return badRequest(login.render(form, formFactory.form(RegisterView.class)));
         } catch (ValidationException e) {
             dto.getMessages().add(Message.builder()
                     .text(messages.at(e.getMessage()))
