@@ -29,5 +29,7 @@ libraryDependencies += "javax.mail" % "mail" % "1.4.7"
 libraryDependencies += "org.apache.commons" % "commons-collections4" % "4.1"
 libraryDependencies += "org.apache.commons" % "commons-lang3" % "3.6"
 
+libraryDependencies += "commons-fileupload" % "commons-fileupload" % "1.3.3"
+
 // Make verbose tests
 testOptions in Test := Seq(Tests.Argument(TestFrameworks.JUnit, "-a", "-v"))

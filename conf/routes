@@ -5,35 +5,33 @@
 # An example controller showing a sample home page
 GET     /                           controllers.HomeController.index
 
+# PresenceController mapping
 GET     /presences                  controllers.PresenceController.index
-
 POST    /presences/courseDates/:id  controllers.PresenceController.courseDates(id: Integer)
-
 POST    /presences/check/:id        controllers.PresenceController.check(id: Integer)
-
 POST    /presences/cancel/:id       controllers.PresenceController.cancel(id: Integer)
-
 POST    /presences/update/:id       controllers.PresenceController.update(id: Integer)
 
-GET     /courses                    controllers.CourseController.index
-
+# CourseController mapping
 POST    /save                       controllers.CourseController.save
-
+GET     /courses                    controllers.CourseController.index
 GET     /courses/info/:id           controllers.CourseController.info(id: Integer)
-
 POST    /courses/addCourseDate/:id  controllers.CourseController.addCourseDate(id: Integer)
-
 GET     /courses/newCourse          controllers.CourseController.newCourse
-
 POST    /courses/deleteCourse/:id   controllers.CourseController.deleteCourse(id: Integer)
 
+# SubjectController mapping
 GET     /subjects                   controllers.SubjectController.course
-
 GET     /subjects/new               controllers.SubjectController.newSubject
-
 POST    /subjects/delete/:id        controllers.SubjectController.delete(id: Integer)
-
 POST    /subjects/save              controllers.SubjectController.save
+
+# ProfileController mapping
+GET     /profile                                controllers.ProfileController.profile
+POST    /profile/password                       controllers.ProfileController.password
+POST    /profile/general                        controllers.ProfileController.general
+POST    /profile/upload                         controllers.ProfileController.upload
+
 # LoginController mapping
 GET     /login                                  controllers.LoginController.logIn
 POST    /login/logIn                            controllers.LoginController.loginSubmit
