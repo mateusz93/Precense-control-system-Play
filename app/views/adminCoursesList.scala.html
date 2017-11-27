@@ -2,7 +2,7 @@
 @(coursesList: List[TeacherCourseView])
 <html>
     <head>
-        <title>Kursy</title>
+        <title>@Messages("view.course.title")</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/bootstrap.min.css")">
         <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/menu.css")">
@@ -20,26 +20,26 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    @if("".equals(Http.Context.current().session().get("username")) ||
-                            Http.Context.current().session().get("username") == null) {
-                        <a class="navbar-brand" href="/login" action="login">Zaloguj</a>
+                    @if("".equals(Http.Context.current().session().get("username"))
+                            || Http.Context.current().session().get("username") == null) {
+                        <a class="navbar-brand" href="@routes.LoginController.logIn()">@Messages("view.menu.login")</a>
                     } else {
-                        <a class="navbar-brand" href="/login/logOut" action="logout">Wyloguj</a>
+                        <a class="navbar-brand" href="/login/logOut" action="logout">@Messages("view.menu.logout")</a>
                     }
-                    </div>
+                </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav navbar-right">
                         @if("STUDENT".equalsIgnoreCase(Http.Context.current().session().get("userType")) ||
                                 "TEACHER".equalsIgnoreCase(Http.Context.current().session().get("userType"))) {
-                            <li><a href="/profile">Profil</a></li>
-                            <li><a href="/presences">Obecności</a></li>
-                            <li><a href="/courses">Przedmioty</a></li>
-                            <li><a href="/grades">Oceny</a></li>
+                            <li><a href="/profile">@Messages("view.menu.profile")</a></li>
+                            <li><a href="/presences">@Messages("view.menu.presences")</a></li>
+                            <li><a href="/courses">@Messages("view.menu.subjects")</a></li>
+                            <li><a href="/grades">@Messages("view.menu.grades")</a></li>
                         }
                         @if("ADMIN".equalsIgnoreCase(Http.Context.current().session().get("userType"))) {
-                            <li><a href="/profile">Profil</a></li>
-                            <li><a href="/subjects">Przedmioty</a></li>
-                            <li><a href="/courses">Kurs</a></li>
+                            <li><a href="/profile">@Messages("view.menu.profile")</a></li>
+                            <li><a href="/subjects">@Messages("view.menu.subjects")</a></li>
+                            <li><a href="/courses">@Messages("view.menu.courses")</a></li>
                         }
                     </ul>
                 </div>
@@ -49,18 +49,18 @@
             <br><br>
             <hr>
             @helper.form(helper.CSRF(routes.CourseController.newCourse())) {
-                <td><button type="submit" class="btn btn-success">Dodaj nowy kurs</button></td>
+                <td><button type="submit" class="btn btn-success">@Messages("view.course.add")</button></td>
             }
             <br>
             <div class="input-group input-group-lg add-on">
-                <div class="input-group"> <span class="input-group-addon">Filter</span>
+                <div class="input-group"> <span class="input-group-addon">@Messages("view.filter")</span>
                     <input id="filter" type="text" class="form-control" >
                 </div>
             </div>
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Nazwa przedmiotu</th>
+                        <th>@Messages("view.subject.name")</th>
                         @*<th>Nauczyciel</th>
                         <th>Grupa</th>
                         <th>Opis</th>*@
@@ -74,7 +74,7 @@
                             @*<td>@course.studentGroup</td>*@
                             @*<td>@course.description</td>*@
                             @helper.form(helper.CSRF(routes.CourseController.deleteCourse(course.ID))) {
-                                <td><button value="@course.ID" type="submit" class="btn btn-info">Usuń</button></td>
+                                <td><button value="@course.ID" type="submit" class="btn btn-info">@Messages("view.subject.delete")</button></td>
                             }
                         </tr>
                     }

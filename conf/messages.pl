@@ -1,6 +1,3 @@
-firstmessage=Pierwszy komunikat
-secondmessage=Drugi komunikat
-
 view.index.title=System zarządzania przedmiotami
 view.index.subtitle=Sprawdzaj obecność codziennie w łatwy sposób
 view.index.register=Zarejestruj
@@ -22,11 +19,8 @@ view.menu.grades=Oceny
 view.menu.stats=Statystyki
 view.menu.courses=Kurs
 
-view.contact.info=Skontaktuj się z nami, odpowiemy w przeciągu 24 godzin
-view.contact.send=Wyślij
-
 view.profile.overview=Ogólne
-view.profile.notifications=Powiadomienia
+view.profile.data=Dane osobiste
 view.profile.password=Hasło
 view.profile.password.confirme=Potwierdz hasło
 view.profile.firstname=Imię
@@ -47,20 +41,14 @@ view.subject.add.title=Dodawanie przedmiotu
 view.subject.add=Dodaj nowy przedmiot
 view.subject.new=Nowy przedmiot
 view.subject.name=Nazwa przedmiotu
+view.subject.teacher.name=Prowadzący
 view.subject.year=Rok studiów
 view.subject.field=Kierunek
 view.subject.quantity=Liczba zajęć
 view.subject.minQuantity=Minimalna liczba obecności
 view.subject.description=Opis
-view.subject.apply=Zatwierdz
+view.subject.apply=Zatwierdź
 view.subject.delete=Usuń
-
-view.stats.title=Statystyki
-view.stats.presences=Obecności
-view.stats.grades=Oceny
-view.stats.presencesStats=Statystyki obecności
-view.stats.grades.finalStats=Statystyki ocen końcowych
-view.stats.grades.allStats=Statystyki wszystkich ocen
 
 view.student=Student
 view.admin=Admin
@@ -71,7 +59,8 @@ view.register.title=Rejestracja
 view.login.title=Logowanie
 view.login=Zaloguj
 
-view.presence.title=Sprawdz obecność
+view.presence.info.title=Szczegóły obecności
+view.presence.title=Sprawdź obecność
 view.presence=Obecność
 view.presence.absence=Nieobecny
 view.presence.present=Obecny
@@ -85,6 +74,8 @@ view.presence.show=Pokaż obecności
 view.save.title=Zapisy
 view.save.save=Zapisz się
 
+view.course.add=Dodaj nowy kurs
+view.course.date.add=Dodanie terminu zajęć
 view.course.title=Kursy
 view.course.date.title=Terminy kursów
 view.course.time.start=Czas rozpoczęcia
@@ -103,6 +94,7 @@ register.token.expiry=Token wygasł
 login.incorrectEmail=Użytkownik o podanym emailu nie istnieje!
 login.incorrectUserType=Użytkownik o podanym emailu i typie nie istnieje!
 login.userNotActive=Użytkownik nie jest aktywowany!
+course.new=Nowy kurs
 course.added=Dodano nowy kurs!
 course.deleted=Usunięto kurs!
 course.courseDateAdded=Nowy termin kursu dodany poprawnie

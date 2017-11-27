@@ -4,7 +4,7 @@
 
 <html>
     <head>
-        <title>Dodanie terminu zajęć</title>
+        <title>@Messages("view.course.date.add")</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/bootstrap.min.css")">
         <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/menu.css")">
@@ -20,26 +20,26 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    @if("".equals(Http.Context.current().session().get("username")) ||
-                            Http.Context.current().session().get("username") == null) {
-                        <a class="navbar-brand" href="/login" action="login">Zaloguj</a>
+                    @if("".equals(Http.Context.current().session().get("username"))
+                            || Http.Context.current().session().get("username") == null) {
+                        <a class="navbar-brand" href="@routes.LoginController.logIn()">@Messages("view.menu.login")</a>
                     } else {
-                        <a class="navbar-brand" href="/login/logOut" action="logout">Wyloguj</a>
+                        <a class="navbar-brand" href="/login/logOut" action="logout">@Messages("view.menu.logout")</a>
                     }
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav navbar-right">
                         @if("STUDENT".equalsIgnoreCase(Http.Context.current().session().get("userType")) ||
                                 "TEACHER".equalsIgnoreCase(Http.Context.current().session().get("userType"))) {
-                            <li><a href="/profile">Profil</a></li>
-                            <li><a href="/presences">Obecności</a></li>
-                            <li><a href="/courses">Przedmioty</a></li>
-                            <li><a href="/grades">Oceny</a></li>
+                            <li><a href="/profile">@Messages("view.menu.profile")</a></li>
+                            <li><a href="/presences">@Messages("view.menu.presences")</a></li>
+                            <li><a href="/courses">@Messages("view.menu.subjects")</a></li>
+                            <li><a href="/grades">@Messages("view.menu.grades")</a></li>
                         }
                         @if("ADMIN".equalsIgnoreCase(Http.Context.current().session().get("userType"))) {
-                            <li><a href="/profile">Profil</a></li>
-                            <li><a href="/subjects">Przedmioty</a></li>
-                            <li><a href="/courses">Kurs</a></li>
+                            <li><a href="/profile">@Messages("view.menu.profile")</a></li>
+                            <li><a href="/subjects">@Messages("view.menu.subjects")</a></li>
+                            <li><a href="/courses">@Messages("view.menu.courses")</a></li>
                         }
                     </ul>
                 </div>
@@ -47,10 +47,10 @@
         </nav>
         <div class="container">
             <br><br>
-            <h3>Nowy kurs</h3>
+            <h3>@Messages("course.new")</h3>
             @helper.form(helper.CSRF(routes.CourseController.save())) {
                 <div class="form-group">
-                    <label>Nazwa przedmiotu</label>
+                    <label>@Messages("view.subject.name")</label>
                     <select class="form-control" name="subjectName">
                         @for(s <- subjects) {
                             <option type="text" name="subjectName" value="@s.name">@s.name</option>
@@ -58,7 +58,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Nauczyciel</label>
+                    <label>@Messages("view.teacher")</label>
                     <select class="form-control" name="teacherLogin">
                         @for(t <- users) {
                             <option type="text" name="teacherLogin" value="@t.login">@t.firstName @t.lastName</option>
@@ -66,14 +66,14 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Grupa studencka</label>
+                    <label>@Messages("view.profile.group")</label>
                     <input type="text" id="studentGroup" name="studentGroup" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label>Opis</label>
+                    <label>@Messages("view.subject.description")</label>
                     <input type="text" id="description" name="description" class="form-control">
                 </div>
-                <td><button type="submit" class="btn btn-success">Zatwierdź</button></td>
+                <td><button type="submit" class="btn btn-success">@Messages("view.subject.apply")</button></td>
             }
         </div>
     </body>

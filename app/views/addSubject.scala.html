@@ -1,7 +1,7 @@
 @(fieldList: List[dto.course.FieldView], subjectForm: play.data.Form[Subject])
 <html>
     <head>
-        <title><spring:message code='view.subject.add.title'/></title>
+        <title>@Messages("view.subject.add.title")/></title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/bootstrap.min.css")">
         <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/menu.css")">
@@ -24,26 +24,26 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    @if("".equals(Http.Context.current().session().get("username")) ||
-                            Http.Context.current().session().get("username") == null) {
-                        <a class="navbar-brand" href="/login" action="login">Zaloguj</a>
+                    @if("".equals(Http.Context.current().session().get("username"))
+                            || Http.Context.current().session().get("username") == null) {
+                        <a class="navbar-brand" href="@routes.LoginController.logIn()">@Messages("view.menu.login")</a>
                     } else {
-                        <a class="navbar-brand" href="/login/logOut" action="logout">Wyloguj</a>
+                        <a class="navbar-brand" href="/login/logOut" action="logout">@Messages("view.menu.logout")</a>
                     }
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav navbar-right">
                         @if("STUDENT".equalsIgnoreCase(Http.Context.current().session().get("userType")) ||
                                 "TEACHER".equalsIgnoreCase(Http.Context.current().session().get("userType"))) {
-                            <li><a href="/profile">Profil</a></li>
-                            <li><a href="/presences">Obecności</a></li>
-                            <li><a href="/courses">Przedmioty</a></li>
-                            <li><a href="/grades">Oceny</a></li>
+                            <li><a href="/profile">@Messages("view.menu.profile")</a></li>
+                            <li><a href="/presences">@Messages("view.menu.presences")</a></li>
+                            <li><a href="/courses">@Messages("view.menu.subjects")</a></li>
+                            <li><a href="/grades">@Messages("view.menu.grades")</a></li>
                         }
                         @if("ADMIN".equalsIgnoreCase(Http.Context.current().session().get("userType"))) {
-                            <li><a href="/profile">Profil</a></li>
-                            <li><a href="/subjects">Przedmioty</a></li>
-                            <li><a href="/courses">Kurs</a></li>
+                            <li><a href="/profile">@Messages("view.menu.profile")</a></li>
+                            <li><a href="/subjects">@Messages("view.menu.subjects")</a></li>
+                            <li><a href="/courses">@Messages("view.menu.courses")</a></li>
                         }
                     </ul>
                 </div>
@@ -51,18 +51,18 @@
         </nav>
         <div class="container">
             <br><br>
-            <h3>Nowy przedmiot</h3>
+            <h3>@Messages("view.subject.new")</h3>
             @helper.form(helper.CSRF(routes.SubjectController.save())) {
                 <div class="form-group">
-                    <label>Nazwa przedmiotu</label>
+                    <label>@Messages("view.subject.name")</label>
                     <input type="text" id="name" name="name" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label>Rok studiów</label>
+                    <label>@Messages("view.subject.year")</label>
                     <input type="text" id="yearOfStudy" name="yearOfStudy" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label>Kierunek</label>
+                    <label>@Messages("view.subject.field")</label>
                     <input type="text" id="fieldId" name="field.id" hidden>
                     <select id="fieldName" class="form-control"  name="field.name" onchange="change();">
                         @for(f <- fieldList) {
@@ -71,18 +71,18 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Liczba zajęć</label>
+                    <label>@Messages("view.subject.quantity")</label>
                     <input type="text" id="quantity" name="quantity" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label>Minimalna liczba obecności</label>
+                    <label>@Messages("view.subject.minQuantity")</label>
                     <input type="text" id="minQuantity" name="minQuantity" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label>Opis</label>
+                    <label>@Messages("view.subject.description")</label>
                     <input type="text" id="description" name="description" class="form-control">
                 </div>
-                <td><button type="submit" class="btn btn-success">Zatwierdź</button></td>
+                <td><button type="submit" class="btn btn-success">@Messages("view.subject.apply")</button></td>
             }
         </div>
     </body>

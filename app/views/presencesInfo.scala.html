@@ -1,7 +1,7 @@
 @(datesList: List[dto.course.CourseDateView])
 <html>
     <head>
-        <title>Szczegóły obecności</title>
+        <title>@Messages("view.presence.info.title")</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/bootstrap.min.css")">
         <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/menu.css")">
@@ -19,26 +19,26 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    @if("".equals(Http.Context.current().session().get("username")) ||
-                            Http.Context.current().session().get("username") == null) {
-                        <a class="navbar-brand" href="/login" action="login">Zaloguj</a>
+                    @if("".equals(Http.Context.current().session().get("username"))
+                            || Http.Context.current().session().get("username") == null) {
+                        <a class="navbar-brand" href="@routes.LoginController.logIn()">@Messages("view.menu.login")</a>
                     } else {
-                        <a class="navbar-brand" href="/login/logOut" action="logout">Wyloguj</a>
+                        <a class="navbar-brand" href="/login/logOut" action="logout">@Messages("view.menu.logout")</a>
                     }
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav navbar-right">
                         @if("STUDENT".equalsIgnoreCase(Http.Context.current().session().get("userType")) ||
                                 "TEACHER".equalsIgnoreCase(Http.Context.current().session().get("userType"))) {
-                            <li><a href="/profile">Profil</a></li>
-                            <li><a href="/presences">Obecności</a></li>
-                            <li><a href="/courses">Przedmioty</a></li>
-                            <li><a href="/grades">Oceny</a></li>
+                            <li><a href="/profile">@Messages("view.menu.profile")</a></li>
+                            <li><a href="/presences">@Messages("view.menu.presences")</a></li>
+                            <li><a href="/courses">@Messages("view.menu.subjects")</a></li>
+                            <li><a href="/grades">@Messages("view.menu.grades")</a></li>
                         }
                         @if("ADMIN".equalsIgnoreCase(Http.Context.current().session().get("userType"))) {
-                            <li><a href="/profile">Profil</a></li>
-                            <li><a href="/subjects">Przedmioty</a></li>
-                            <li><a href="/courses">Kurs</a></li>
+                            <li><a href="/profile">@Messages("view.menu.profile")</a></li>
+                            <li><a href="/subjects">@Messages("view.menu.subjects")</a></li>
+                            <li><a href="/courses">@Messages("view.menu.courses")</a></li>
                         }
                     </ul>
                 </div>
@@ -48,17 +48,17 @@
             <br><br>
             <hr>
             <div class="input-group input-group-lg add-on">
-                <div class="input-group"> <span class="input-group-addon">Filtr</span>
+                <div class="input-group"> <span class="input-group-addon">@Messages("view.filter")</span>
                     <input id="filter" type="text" class="form-control" >
                 </div>
             </div>
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Dzień</th>
-                        <th>Czas rozpoczęcia</th>
-                        <th>Czas zakończenia</th>
-                        <th>Obecność</th>
+                        <th>@Messages("view.presence.day")</th>
+                        <th>@Messages("view.presence.time.start")</th>
+                        <th>@Messages("view.presence.time.end")</th>
+                        <th>@Messages("view.presence")</th>
                     </tr>
                 </thead>
                 <tbody id="paginationTable" class="searchable">
@@ -71,35 +71,35 @@
                                 <form role="form">
                                     @if(dates.status == "Obecny") {
                                         <label class="radio-inline">
-                                            <input checked disabled type="radio" name="optionRadio">Obecny
+                                            <input checked disabled type="radio" name="optionRadio">@Messages("view.presence.present")
                                         </label>
                                         <label class="radio-inline">
-                                            <input disabled type="radio" name="optionRadio">Nieobecny
+                                            <input disabled type="radio" name="optionRadio">@Messages("view.presence.absence")
                                         </label>
                                         <label class="radio-inline">
-                                            <input disabled type="radio" name="optionRadio">Spóźniony
+                                            <input disabled type="radio" name="optionRadio">@Messages("view.presence.late")
                                         </label>
                                     }
                                     @if(dates.status == "Nieobecny") {
                                         <label class="radio-inline">
-                                            <input disabled type="radio" name="optionRadio">Obecny
+                                            <input disabled type="radio" name="optionRadio">@Messages("view.presence.present")
                                         </label>
                                         <label class="radio-inline">
-                                            <input checked disabled type="radio" name="optionRadio">Nieobecny
+                                            <input checked disabled type="radio" name="optionRadio">@Messages("view.presence.absence")
                                         </label>
                                         <label class="radio-inline">
-                                            <input disabled type="radio" name="optionRadio">Spóźniony
+                                            <input disabled type="radio" name="optionRadio">@Messages("view.presence.late")
                                         </label>
                                     }
                                     @if(dates.status == "Spozniony") {
                                         <label class="radio-inline">
-                                            <input disabled type="radio" name="optionRadio">Obecny
+                                            <input disabled type="radio" name="optionRadio">@Messages("view.presence.present")
                                         </label>
                                         <label class="radio-inline">
-                                            <input disabled type="radio" name="optionRadio">Nieobecny
+                                            <input disabled type="radio" name="optionRadio">@Messages("view.presence.absence")
                                         </label>
                                         <label class="radio-inline">
-                                            <input checked disabled type="radio" name="optionRadio">Spóźniony
+                                            <input checked disabled type="radio" name="optionRadio">@Messages("view.presence.late")
                                         </label>
                                     }
                                 </form>

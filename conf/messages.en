@@ -1,6 +1,3 @@
-firstmessage=First message
-secondmessage=Second message
-
 view.index.title=Presence Control System
 view.index.subtitle=Check presences every day in easy way
 view.index.register=Register
@@ -22,11 +19,8 @@ view.menu.grades=Grades
 view.menu.stats=Stats
 view.menu.courses=Courses
 
-view.contact.info=Contact us, we answer in 24h
-view.contact.send=Send
-
 view.profile.overview=Overview
-view.profile.notifications=Notifications
+view.profile.data=Personal data
 view.profile.password=Password
 view.profile.password.confirme=Confirme password
 view.profile.firstname=First Name
@@ -47,6 +41,7 @@ view.subject.add.title=Add subject
 view.subject.add=Add new subject
 view.subject.new=New subject
 view.subject.name=Subject name
+view.subject.teacher.name=Teacher name
 view.subject.year=Year of study
 view.subject.field=Field
 view.subject.quantity=Quantity of subject classes
@@ -54,13 +49,6 @@ view.subject.minQuantity=Critical presences level
 view.subject.description=Description
 view.subject.apply=Apply
 view.subject.delete=Delete
-
-view.stats.title=Stats
-view.stats.presences=Presences
-view.stats.grades=Grades
-view.stats.presencesStats=Presences stats
-view.stats.grades.finalStats=Final grades stats
-view.stats.grades.allStats=All grades stats
 
 view.student=Student
 view.admin=Admin
@@ -71,6 +59,7 @@ view.register.title=Register
 view.login.title=Login
 view.login=Login
 
+view.presence.info.title=Presence details
 view.presence.title=Check presences
 view.presence=Presence
 view.presence.absence=Absence
@@ -85,6 +74,8 @@ view.presence.show=Show presences
 view.save.title=Saves
 view.save.save=Save
 
+view.course.add=Add new course
+view.course.date.add=Add course date
 view.course.title=Courses
 view.course.date.title=Course dates
 view.course.time.start=Start ime
@@ -103,6 +94,7 @@ register.token.expiry=Token expired
 login.incorrectEmail=User with passed email not exists!
 login.incorrectUserType=User with passed email and type not exists!
 login.userNotActive=User not active!
+course.new=New course
 course.added=New course added!
 course.deleted=Course deleted!
 course.courseDateAdded=New course date added correctly
