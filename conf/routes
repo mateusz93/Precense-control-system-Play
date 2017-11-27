@@ -3,28 +3,30 @@
 # ~~~~
 
 # An example controller showing a sample home page
-GET     /                           controllers.HomeController.index
+GET     /                                       controllers.HomeController.index
+GET     /ENLanguage                             controllers.HomeController.ENLanguage
+GET     /PLLanguage                             controllers.HomeController.PLLanguage
 
 # PresenceController mapping
-GET     /presences                  controllers.PresenceController.index
-POST    /presences/courseDates/:id  controllers.PresenceController.courseDates(id: Integer)
-POST    /presences/check/:id        controllers.PresenceController.check(id: Integer)
-POST    /presences/cancel/:id       controllers.PresenceController.cancel(id: Integer)
-POST    /presences/update/:id       controllers.PresenceController.update(id: Integer)
+GET     /presences                              controllers.PresenceController.index
+POST    /presences/courseDates/:id              controllers.PresenceController.courseDates(id: Integer)
+POST    /presences/check/:id                    controllers.PresenceController.check(id: Integer)
+POST    /presences/cancel/:id                   controllers.PresenceController.cancel(id: Integer)
+POST    /presences/update/:id                   controllers.PresenceController.update(id: Integer)
 
 # CourseController mapping
-POST    /save                       controllers.CourseController.save
-GET     /courses                    controllers.CourseController.index
-GET     /courses/info/:id           controllers.CourseController.info(id: Integer)
-POST    /courses/addCourseDate/:id  controllers.CourseController.addCourseDate(id: Integer)
-GET     /courses/newCourse          controllers.CourseController.newCourse
-POST    /courses/deleteCourse/:id   controllers.CourseController.deleteCourse(id: Integer)
+POST    /save                                   controllers.CourseController.save
+GET     /courses                                controllers.CourseController.index
+GET     /courses/info/:id                       controllers.CourseController.info(id: Integer)
+POST    /courses/addCourseDate/:id              controllers.CourseController.addCourseDate(id: Integer)
+GET     /courses/newCourse                      controllers.CourseController.newCourse
+POST    /courses/deleteCourse/:id               controllers.CourseController.deleteCourse(id: Integer)
 
 # SubjectController mapping
-GET     /subjects                   controllers.SubjectController.course
-GET     /subjects/new               controllers.SubjectController.newSubject
-POST    /subjects/delete/:id        controllers.SubjectController.delete(id: Integer)
-POST    /subjects/save              controllers.SubjectController.save
+GET     /subjects                               controllers.SubjectController.course
+GET     /subjects/new                           controllers.SubjectController.newSubject
+POST    /subjects/delete/:id                    controllers.SubjectController.delete(id: Integer)
+POST    /subjects/save                          controllers.SubjectController.save
 
 # ProfileController mapping
 GET     /profile                                controllers.ProfileController.profile
@@ -42,4 +44,4 @@ GET     /register/registrationConfirm/:token    controllers.RegisterController.c
 POST    /register/signUp                        controllers.RegisterController.registerSubmit
 
 # Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+GET     /assets/*file                           controllers.Assets.versioned(path="/public", file: Asset)

@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>System zarządzania przedmiotami</title>
+        <title>@Messages("view.index.title")</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/bootstrap.min.css")">
         <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/main.css")">
@@ -19,24 +19,24 @@
                     </button>
                     @if("".equals(Http.Context.current().session().get("username"))
                             || Http.Context.current().session().get("username") == null) {
-                        <a class="navbar-brand" href="@routes.LoginController.logIn()">Zaloguj</a>
+                        <a class="navbar-brand" href="@routes.LoginController.logIn()">@Messages("view.menu.login")</a>
                     } else {
-                        <a class="navbar-brand" href="/login/logOut" action="logout">Wyloguj</a>
+                        <a class="navbar-brand" href="/login/logOut" action="logout">@Messages("view.menu.logout")</a>
                     }
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav navbar-right">
                     @if("STUDENT".equalsIgnoreCase(Http.Context.current().session().get("userType")) ||
                         "TEACHER".equalsIgnoreCase(Http.Context.current().session().get("userType"))) {
-                        <li><a href="/profile">Profil</a></li>
-                        <li><a href="/presences">Obecności</a></li>
-                        <li><a href="/courses">Przedmioty</a></li>
-                        <li><a href="/grades">Oceny</a></li>
+                        <li><a href="/profile">@Messages("view.menu.profile")</a></li>
+                        <li><a href="/presences">@Messages("view.menu.presences")</a></li>
+                        <li><a href="/courses">@Messages("view.menu.subjects")</a></li>
+                        <li><a href="/grades">@Messages("view.menu.grades")</a></li>
                     }
                     @if("ADMIN".equalsIgnoreCase(Http.Context.current().session().get("userType"))) {
-                        <li><a href="/profile">Profil</a></li>
-                        <li><a href="/subjects">Przedmioty</a></li>
-                        <li><a href="/courses">Kurs</a></li>
+                        <li><a href="/profile">@Messages("view.menu.profile")</a></li>
+                        <li><a href="/subjects">@Messages("view.menu.subjects")</a></li>
+                        <li><a href="/courses">@Messages("view.menu.courses")</a></li>
                     }
                     </ul>
                 </div>
@@ -44,12 +44,12 @@
         </nav>
 
         <div class="jumbotron text-center">
-            <h5>Język :
-                <a href="?lang=pl">Polski</a> |
-                <a href="?lang=en">Angielski</a></h5>
-            <h1>System zarządzania przedmiotami</h1>
+            <h5>@Messages("view.language") :
+                <a href="ENLanguage">@Messages("view.language.english")</a> |
+                <a href="PLLanguage">@Messages("view.language.polish")</a></h5>
+            <h1>@Messages("view.index.title")</h1>
             <br>
-            <p>Sprawdzaj obecność codziennie w łatwy sposób</p>
+            <p>@Messages("view.index.subtitle")</p>
         </div>
 
         <div id="googleMap" style="height:400px;width:100%;"></div>

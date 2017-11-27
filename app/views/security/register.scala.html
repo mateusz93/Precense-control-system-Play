@@ -2,7 +2,7 @@
 
 <html>
     <head>
-        <title>Rejestracja</title>
+        <title>@Messages("view.register.title")</title>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <meta charset="ISO-8859-1">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,7 +19,7 @@
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="/">Strona główna</a>
+                    <a class="navbar-brand" href="/">@Messages("view.page.main")</a>
                 </div>
             </div>
         </nav>
@@ -48,10 +48,10 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-6">
-                                    <a href="#" id="login-form-link">Logowanie</a>
+                                    <a href="#" id="login-form-link">@Messages("view.login.title")</a>
                                 </div>
                                 <div class="col-xs-6">
-                                    <a href="#" class="active" id="register-form-link">Rejestracja</a>
+                                    <a href="#" class="active" id="register-form-link">@Messages("view.register.title")</a>
                                 </div>
                             </div>
                             <hr>
@@ -64,15 +64,15 @@
                                         <form id="login-form" action="@routes.LoginController.loginSubmit" method="post" role="form" style="display: none;">
                                             <div class="form-group">
                                                 <select class="form-control" name="type" value="@formLogin("type").getValue().getOrElse("")">
-                                                    <option value="STUDENT">Student</option>
-                                                    <option value="TEACHER">Nauczyciel</option>
+                                                    <option value="STUDENT">@Messages("view.student")</option>
+                                                    <option value="TEACHER">@Messages("view.teacher")</option>
                                                 </select>
                                             </div>
                                             <div class="form-group">
-                                                <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email" value="@formLogin("email").getValue().getOrElse("")">
+                                                <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="@Messages("view.profile.email")" value="@formLogin("email").getValue().getOrElse("")">
                                             </div>
                                             <div class="form-group">
-                                                <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Hasło">
+                                                <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="@Messages("view.profile.password")">
                                             </div>
                                             <div class="form-group">
                                                 <div class="g-recaptcha" data-sitekey="6LfTixkUAAAAAAnoLauOxDDtGY5kV37xoRpNy6ew"></div>
@@ -80,7 +80,7 @@
                                             <div class="form-group">
                                                 <div class="row">
                                                     <div class="col-sm-6 col-sm-offset-3">
-                                                        <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Zaloguj">
+                                                        <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="@Messages("view.login")">
                                                     </div>
                                                 </div>
                                             </div>
@@ -90,25 +90,25 @@
                                         <form id="register-form" action="@routes.RegisterController.registerSubmit" method="post" role="form" style="display: block;">
                                             <div class="form-group">
                                                 <select class="form-control" name="type" value="@formRegister("type").getValue().getOrElse("")">
-                                                    <option value="STUDENT">Student</option>
-                                                    <option value="TEACHER">Nauczyciel</option>
-                                                    <option value="ADMIN">Admin</option>
+                                                    <option value="STUDENT">@Messages("view.student")</option>
+                                                    <option value="TEACHER">@Messages("view.teacher")</option>
+                                                    <option value="ADMIN">@Messages("view.admin")</option>
                                                 </select>
                                             </div>
                                             <div class="form-group">
-                                                <input type="text" name="firstName" id="firstName" tabindex="1" class="form-control" placeholder="Imię" value="@formRegister("firstName").getValue().getOrElse("")">
+                                                <input type="text" name="firstName" id="firstName" tabindex="1" class="form-control" placeholder="@Messages("view.profile.firstname")" value="@formRegister("firstName").getValue().getOrElse("")">
                                             </div>
                                             <div class="form-group">
-                                                <input type="text" name="lastName" id="lastName" tabindex="1" class="form-control" placeholder="Nazwisko" value="@formRegister("lastName").getValue().getOrElse("")">
+                                                <input type="text" name="lastName" id="lastName" tabindex="1" class="form-control" placeholder="@Messages("view.profile.lastname")" value="@formRegister("lastName").getValue().getOrElse("")">
                                             </div>
                                             <div class="form-group">
-                                                <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email" value="@formRegister("newEmail").getValue().getOrElse("")">
+                                                <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="@Messages("view.profile.email")" value="@formRegister("newEmail").getValue().getOrElse("")">
                                             </div>
                                             <div class="form-group">
-                                                <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Hasło" value="@formRegister("password").getValue().getOrElse("")">
+                                                <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="@Messages("view.profile.password")" value="@formRegister("password").getValue().getOrElse("")">
                                             </div>
                                             <div class="form-group">
-                                                <input type="password" name="confirmPassword" id="confirmPassword" tabindex="2" class="form-control" placeholder="Powtórz hasło" value="@formRegister("confirmPassword").getValue().getOrElse("")">
+                                                <input type="password" name="confirmPassword" id="confirmPassword" tabindex="2" class="form-control" placeholder="@Messages("view.profile.password.repeatNew")" value="@formRegister("confirmPassword").getValue().getOrElse("")">
                                             </div>
                                             <div class="form-group">
                                                 <div class="g-recaptcha" data-sitekey="6LfTixkUAAAAAAnoLauOxDDtGY5kV37xoRpNy6ew"></div>
@@ -116,7 +116,7 @@
                                             <div class="form-group">
                                                 <div class="row">
                                                     <div class="col-sm-6 col-sm-offset-3">
-                                                        <input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="Zarejestruj">
+                                                        <input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="@Messages("view.index.register")">
                                                     </div>
                                                 </div>
                                             </div>

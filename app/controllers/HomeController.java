@@ -20,4 +20,13 @@ public class HomeController extends Controller {
         return ok(index.render());
     }
 
+    public Result ENLanguage() {
+        ctx().changeLang("en");
+        return ok(index.render());
+    }
+
+    public Result PLLanguage() {
+        ctx().changeLang("pl");
+        return ok(index.render());
+    }
 }
