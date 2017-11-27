@@ -1,5 +1,6 @@
 package dto.user;
 
+import dto.BaseView;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,7 +11,7 @@ import play.data.validation.Constraints;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProfileGeneralView extends ProfilePhotoView {
+public class ProfileGeneralView extends BaseView {
 
     @Constraints.Required
     public String firstName;

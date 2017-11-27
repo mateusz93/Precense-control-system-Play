@@ -1,5 +1,4 @@
-@import dto.user.{ProfileGeneralView, ProfilePasswordView}
-@(formGeneral: Form[ProfileGeneralView], formPassword: Form[ProfilePasswordView])
+@(formGeneral: Form[dto.user.ProfileGeneralView], formPassword: Form[dto.user.ProfilePasswordView])
 
 <!DOCTYPE HTML>
 <html>
@@ -49,20 +48,29 @@
            </div>
        </nav>
       <div class="container">
-         <br>
+          @for(message <- formGeneral.allErrors()) {
+              @if(!"".equals(message.message()) && message.message() != null) {
+                  <div class="alert alert-success alert-dismissable">
+                      <a class="panel-close close" data-dismiss="alert">×</a>
+                      <i class="fa fa-coffee"></i>
+                      @message.message()
+                  </div>
+              }
+          }
+          @for(message <- formPassword.allErrors()) {
+              @if(!"".equals(message.message()) && message.message() != null) {
+                  <div class="alert alert-success alert-dismissable">
+                      <a class="panel-close close" data-dismiss="alert">×</a>
+                      <i class="fa fa-coffee"></i>
+                      @message.message()
+                  </div>
+              }
+          }
          <hr>
          <div class="row">
             <!-- left column -->
-            <div class="col-md-3">
+            <div class="col-md-1">
                <div class="text-center">
-                  <img src="@formGeneral("photoPath").getValue().getOrElse("public/resources/images/default.png")" />
-                   @import helper._
-                   @form(CSRF(routes.ProfileController.upload())) {
-                       <form method="POST" enctype="multipart/form-data" action="@routes.ProfileController.upload">
-                           <input class="form-control" type="file" name="file" />
-                           <input type="submit" value="Upload" />
-                       </form>
-                   }
                </div>
             </div>
             <!-- edit form column -->

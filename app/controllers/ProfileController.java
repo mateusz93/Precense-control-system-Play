@@ -35,19 +35,15 @@ public class ProfileController extends BaseController {
     public Result general() {
         val generalView = formFactory.form(ProfileGeneralView.class).bindFromRequest();
         val form = profileService.update(generalView.get());
-        return ok(profile.render(form, formFactory.form(ProfilePasswordView.class)));
+        return ok(profile.render(wrapErrors(form), formFactory.form(ProfilePasswordView.class)));
     }
 
     @Security.Authenticated
     public Result password() {
         val passwordView = formFactory.form(ProfilePasswordView.class).bindFromRequest();
-        return profileService.updatePassword(passwordView);
+        val passwordForm = profileService.updatePassword(passwordView);
+        val generalForm = profileService.prepareGeneralProfileView();
+        return ok(profile.render(generalForm, wrapErrors(passwordForm)));
     }
 
-    @Security.Authenticated
-    public Result upload() {
-//        MultipartFile file;
-//        return profileService.uploadFile(file);
-        return null;
-    }
 }

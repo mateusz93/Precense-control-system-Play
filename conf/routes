@@ -30,7 +30,6 @@ POST    /subjects/save              controllers.SubjectController.save
 GET     /profile                                controllers.ProfileController.profile
 POST    /profile/password                       controllers.ProfileController.password
 POST    /profile/general                        controllers.ProfileController.general
-POST    /profile/upload                         controllers.ProfileController.upload
 
 # LoginController mapping
 GET     /login                                  controllers.LoginController.logIn

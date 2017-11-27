@@ -26,7 +26,24 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6 col-md-offset-3">
-                    @*<jsp:include page="../alert/allAlerts.jsp"/>*@
+                    @for(message <- formLogin.allErrors()) {
+                        @if(!"".equals(message.message()) && message.message() != null) {
+                            <div class="alert alert-success alert-dismissable">
+                                <a class="panel-close close" data-dismiss="alert">×</a>
+                                <i class="fa fa-coffee"></i>
+                                @message.message()
+                            </div>
+                        }
+                    }
+                    @for(message <- formRegister.allErrors()) {
+                        @if(!"".equals(message.message()) && message.message() != null) {
+                            <div class="alert alert-success alert-dismissable">
+                                <a class="panel-close close" data-dismiss="alert">×</a>
+                                <i class="fa fa-coffee"></i>
+                                @message.message()
+                            </div>
+                        }
+                    }
                     <div class="panel panel-loginSubmit">
                         <div class="panel-heading">
                             <div class="row">

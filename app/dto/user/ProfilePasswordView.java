@@ -1,14 +1,14 @@
 package dto.user;
 
+import dto.BaseView;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import play.data.validation.Constraints;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProfilePasswordView extends ProfilePhotoView {
+public class ProfilePasswordView extends BaseView {
 
     public String password;
 

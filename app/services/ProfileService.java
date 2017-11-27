@@ -12,14 +12,11 @@ import play.data.Form;
 import play.data.FormFactory;
 import play.db.ebean.Transactional;
 import play.mvc.Http;
-import play.mvc.Result;
 import utils.Encryptor;
 import utils.PasswordValidator;
-import views.html.user.profile;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import java.io.File;
 
 import static play.mvc.Results.ok;
 
@@ -46,6 +43,10 @@ public class ProfileService {
 
         if (CollectionUtils.isEmpty(form.getMessages())) {
             saveUser(form);
+            form.getMessages().add(Message.builder()
+                    .text(messages.at("profile.updated"))
+                    .type(MessageType.INFO.name())
+                    .build());
         }
         return formFactory.form(ProfileGeneralView.class).fill(form);
     }
@@ -71,38 +72,9 @@ public class ProfileService {
                 && StringUtils.isNotBlank(form.getAgainNewPassword());
     }
 
-//    public Result uploadFile(MultipartFile file) {
-//        try {
-//            uploadPicture(file);
-//        } catch (ValidationException e) {
-//            mvc.addObject("message", messageSource.getMessage(e.getMessage(), null, locale));
-//            mvc.addObject("messageType", MessageType.SUCCESS.name());
-//            return mvc;
-//        }
-//        mvc.addObject("message", messageSource.getMessage("profile.upload.success", null, locale));
-//        mvc.addObject("messageType", MessageType.SUCCESS.name());
-//        return mvc;
-//    }
-//
-//    private void uploadPicture(MultipartFile file) throws ValidationException {
-//        if (file.isEmpty()) {
-//            throw new FileEmptyException("profile.upload.empty");
-//        }
-//        try {
-//            BufferedOutputStream stream = new BufferedOutputStream(
-//                    new FileOutputStream(new File("public/resources/images/" + user.getLogin())));
-//            FileCopyUtils.copy(file.getInputStream(), stream);
-//            stream.close();
-//        } catch (IOException e) {
-//            throw new UploadFileException("profile.upload.fail");
-//        }
-//    }
-
-    public Result updatePassword(Form<ProfilePasswordView> passwordView) {
-        val username = Http.Context.current().session().get("username");
-        val user = User.findByLogin(username);
+    public Form<ProfilePasswordView> updatePassword(Form<ProfilePasswordView> passwordView) {
         updatePassword(passwordView.get());
-        return ok(profile.render(prepareGeneralData(user), formFactory.form(ProfilePasswordView.class)));
+        return passwordView;
     }
 
     private void updatePassword(ProfilePasswordView dto) {
@@ -140,15 +112,6 @@ public class ProfileService {
         return prepareGeneralData(user);
     }
 
-    private String getImagePath(User user) {
-        File f = new File("public/resources/images/" + user.getLogin());
-        if (f.exists() && !f.isDirectory()) {
-            return "public/resources/images/" + user.getLogin();
-        } else {
-            return "public/resources/images/default.png";
-        }
-    }
-
     private Form<ProfileGeneralView> prepareGeneralData(User user) {
         val dto = ProfileGeneralView.builder()
                 .city(user.getCity())
@@ -161,7 +124,6 @@ public class ProfileService {
                 .type(user.getType())
                 .ID(user.getId())
                 .build();
-        dto.setPhotoPath(getImagePath(user));
         return formFactory.form(ProfileGeneralView.class).fill(dto);
     }
 
