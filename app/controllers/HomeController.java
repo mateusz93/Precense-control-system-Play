@@ -22,11 +22,11 @@ public class HomeController extends Controller {
 
     public Result ENLanguage() {
         ctx().changeLang("en");
-        return ok(index.render());
+        return redirect("/");
     }
 
     public Result PLLanguage() {
         ctx().changeLang("pl");
-        return ok(index.render());
+        return redirect("/");
     }
 }
