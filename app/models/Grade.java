@@ -1,10 +1,12 @@
 package models;
 
+import io.ebean.Finder;
 import io.ebean.Model;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
 @Data
@@ -28,7 +30,7 @@ public class Grade extends Model {
     private User user;
 
     @Column(name = "value")
-    private int value;
+    public int value;
 
     @Column(name = "isFinalGrade")
     private boolean isFinalGrade;
@@ -36,4 +38,13 @@ public class Grade extends Model {
     @Column(name = "time")
     private Timestamp time;
 
+    public static Finder<Integer, Grade> find = new Finder<>(Grade.class);
+
+    public static List<Grade> findByTeacherCourse(TeacherCourse teacherCourse) {
+        return find.query()
+                .where()
+                .eq("teacherCourseID", teacherCourse.getId())
+                .findList();
+
+    }
 }

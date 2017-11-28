@@ -18,7 +18,7 @@ public class Field extends Model {
     @Column(name = "name")
     private String name;
 
-    public static Finder<Long,Field> find = new Finder<>(Field.class);
+    public static Finder<Integer, Field> find = new Finder<>(Field.class);
 
     public static List<Field> findAll() {
         return find.query().findList();

@@ -9,6 +9,8 @@ view.language=Język
 view.language.polish=Polski
 view.language.english=Angielski
 view.changes.save=Zapisz zmiany
+view.yes=Tak
+view.no=Nie
 
 view.menu.login=Zaloguj
 view.menu.logout=Wyloguj
@@ -82,6 +84,15 @@ view.course.time.start=Czas rozpoczęcia
 view.course.time.end=Czas zakończenia
 view.course.cancel=Odwołaj
 view.course.dates.show=Wyświetl terminy
+
+view.grade=Ocena
+view.grade.show=Pokaż oceny
+view.grade.final=Ocena końcowa
+view.grade.add=Dodaj ocenę
+view.grade.previous=Poprzednia ocena
+view.grade.date=Data wystawienia
+view.grade.isFinal=Czy końcowa
+view.grade.save=Zapisz ocenę
 
 error=Wystąpił nieznany błąd
 emptyField=Pole nie moze byc puste!

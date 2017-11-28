@@ -3,9 +3,9 @@ package models;
 import enums.Role;
 import io.ebean.Finder;
 import io.ebean.Model;
-
 import lombok.Builder;
 import lombok.Data;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
@@ -69,6 +69,13 @@ public class User extends Model {
     }
 
     public static final Finder<Long, User> find = new Finder<>(User.class);
+
+    public static User findOne(long id) {
+        return find.query()
+                .where()
+                .eq("ID", id)
+                .findOne();
+    }
 
     public static User findByLogin(String login) {
         return find.query()

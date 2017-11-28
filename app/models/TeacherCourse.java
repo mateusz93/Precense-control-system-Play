@@ -30,7 +30,13 @@ public class TeacherCourse extends Model {
     @Column(name = "description")
     private String description;
 
-    public static Finder<Long,TeacherCourse> find = new Finder<Long, TeacherCourse>(TeacherCourse.class);
+    public static Finder<Integer, TeacherCourse> find = new Finder<>(TeacherCourse.class);
+
+    public static TeacherCourse findOne(int id) {
+        return find.query().where()
+                .eq("ID", id)
+                .findUnique();
+    }
 
     public static TeacherCourse findBySubjectAndStudentGroup(Subject subject, String group) {
         return find.query().where()

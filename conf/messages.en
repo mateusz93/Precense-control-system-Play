@@ -9,6 +9,8 @@ view.language=Language
 view.language.polish=Polish
 view.language.english=English
 view.changes.save=Save changes
+view.yes=Yes
+view.no=No
 
 view.menu.login=Login
 view.menu.logout=Logout
@@ -82,6 +84,15 @@ view.course.time.start=Start ime
 view.course.time.end=Finish time
 view.course.cancel=Cancel
 view.course.dates.show=Show dates
+
+view.grade=Grade
+view.grade.show=Show grades
+view.grade.final=Final grade
+view.grade.add=Add grade
+view.grade.previous=Previous grade
+view.grade.date=Date
+view.grade.isFinal=Is final
+view.grade.save=Save grade
 
 error=Unknown error occurred
 emptyField=Filed can not be empty!

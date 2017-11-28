@@ -28,6 +28,13 @@ GET     /subjects/new                           controllers.SubjectController.ne
 POST    /subjects/delete/:id                    controllers.SubjectController.delete(id: Integer)
 POST    /subjects/save                          controllers.SubjectController.save
 
+# GradeController mapping
+GET     /grades                                 controllers.GradeController.course
+GET     /grade/:courseId                        controllers.GradeController.grades(courseId: Integer)
+GET     /grade/info/:courseId                   controllers.GradeController.gradesInfo(courseId: Integer)
+POST    /grade/new/:courseId/:studentId         controllers.GradeController.newGrade(courseId: Integer, studentId: Integer)
+POST    /grade/save/:courseId/:studentId        controllers.GradeController.saveGrade(courseId: Integer, studentId: Integer)
+
 # ProfileController mapping
 GET     /profile                                controllers.ProfileController.profile
 POST    /profile/password                       controllers.ProfileController.password

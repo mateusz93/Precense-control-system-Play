@@ -11,6 +11,8 @@ import javax.inject.Singleton;
 @Singleton
 abstract class BaseController extends Controller {
 
+    public static final String USERNAME = "username";
+
     Form wrapErrors(Form form) {
         BaseView view = (BaseView) form.value().get();
         for(Message message : view.getMessages()) {
