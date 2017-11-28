@@ -9,10 +9,10 @@ import models.Subject;
 import models.TeacherCourse;
 import models.User;
 import play.mvc.Result;
-import views.html.addCourseDate;
-import views.html.adminCoursesList;
-import views.html.studentCoursesList;
-import views.html.teacherCoursesList;
+import views.html.course.addCourseDate;
+import views.html.course.adminCoursesList;
+import views.html.course.studentCoursesList;
+import views.html.course.teacherCoursesList;
 
 import java.util.ArrayList;
 import java.util.List;

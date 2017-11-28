@@ -12,7 +12,6 @@ import views.html.user.profile;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-
 @Singleton
 public class ProfileController extends BaseController {
 

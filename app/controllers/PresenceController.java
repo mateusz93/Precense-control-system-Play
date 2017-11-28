@@ -12,10 +12,11 @@ import models.User;
 import play.mvc.Result;
 import play.mvc.Security;
 import services.CourseService;
-import views.html.checkPresence;
-import views.html.studentPresences;
-import views.html.teacherCourseDates;
-import views.html.teacherCoursesList;
+import services.PresenceService;
+import views.html.presence.checkPresence;
+import views.html.presence.studentPresences;
+import views.html.course.teacherCourseDates;
+import views.html.course.teacherCoursesList;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -24,14 +25,15 @@ import java.util.List;
 
 @Singleton
 public class PresenceController extends BaseController {
-    /**
-     * An action that renders an HTML page with a welcome message.
-     * The configuration in the <code>routes</code> file means that
-     * this method will be called when the application receives a
-     * <code>GET</code> request with a path of <code>/</code>.
-     */
+
+    private final CourseService courseService;
+    private final PresenceService presenceService;
+
     @Inject
-    CourseService courseService;
+    public PresenceController(CourseService courseService, PresenceService presenceService) {
+        this.courseService = courseService;
+        this.presenceService = presenceService;
+    }
 
     @Security.Authenticated
     public Result index() {

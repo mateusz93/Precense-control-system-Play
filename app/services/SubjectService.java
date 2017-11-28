@@ -6,8 +6,8 @@ import models.Field;
 import models.Subject;
 import play.data.FormFactory;
 import play.mvc.Result;
-import views.html.addSubject;
-import views.html.subjectList;
+import views.html.subject.addSubject;
+import views.html.subject.subjectList;
 
 import javax.inject.Inject;
 import java.util.ArrayList;

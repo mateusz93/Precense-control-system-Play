@@ -7,8 +7,10 @@ import play.mvc.Security;
 import services.SubjectService;
 import play.data.FormFactory;
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
-public class SubjectController {
+@Singleton
+public class SubjectController extends BaseController {
 
     private final FormFactory formFactory;
     private final SubjectService subjectService;

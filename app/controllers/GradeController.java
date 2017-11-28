@@ -13,7 +13,7 @@ import views.html.grade.studentGrades;
 import views.html.grade.studentGradesDetails;
 import views.html.grade.teacherAddGrade;
 import views.html.grade.teacherGrades;
-import views.html.teacherCoursesList;
+import views.html.course.teacherCoursesList;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
