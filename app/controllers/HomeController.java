@@ -1,6 +1,7 @@
 package controllers;
 
 import play.mvc.Result;
+import utils.FirstPdf;
 import views.html.index;
 
 import javax.inject.Singleton;
@@ -9,6 +10,7 @@ import javax.inject.Singleton;
 public class HomeController extends BaseController {
 
     public Result index() {
+        FirstPdf.generatePdf();
         return ok(index.render());
     }
 
