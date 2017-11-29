@@ -15,10 +15,9 @@ POST    /presences/cancel/:id                   controllers.PresenceController.c
 POST    /presences/update/:id                   controllers.PresenceController.update(id: Integer)
 
 # CourseController mapping
-POST    /save                                   controllers.CourseController.save
+POST    /courses/save                           controllers.CourseController.save
 GET     /courses                                controllers.CourseController.index
 GET     /courses/info/:id                       controllers.CourseController.info(id: Integer)
-POST    /courses/addCourseDate/:id              controllers.CourseController.addCourseDate(id: Integer)
 GET     /courses/newCourse                      controllers.CourseController.newCourse
 POST    /courses/deleteCourse/:id               controllers.CourseController.deleteCourse(id: Integer)
 

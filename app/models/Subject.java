@@ -37,7 +37,15 @@ public class Subject extends Model {
 
     public static Finder<Long,Subject> find = new Finder<Long, Subject>(Subject.class);
 
+    public static void delete(long id) {
+        find.deleteById(id);
+    }
+
     public static List<Subject> findAll() {
         return find.query().findList();
+    }
+
+    public static Subject findByName(String name) {
+        return find.query().where().eq("name",name).findUnique();
     }
 }

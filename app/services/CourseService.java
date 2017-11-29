@@ -1,6 +1,7 @@
 package services;
 
 import dto.course.StudentCourseView;
+import dto.course.TeacherCourseAdminView;
 import dto.course.TeacherCourseView;
 import enums.Role;
 import enums.UserType;
@@ -16,6 +17,7 @@ import views.html.course.teacherCoursesList;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static play.mvc.Results.ok;
 
@@ -38,21 +40,34 @@ public class CourseService {
         return courseViews;
     }
 
+    private List<TeacherCourseAdminView> mapTeacherCoursesForAdmin(List<TeacherCourse> courses) {
+        List<TeacherCourseAdminView> courseViews = new ArrayList<>();
+        for (TeacherCourse c : courses) {
+            TeacherCourseAdminView courseView = new TeacherCourseAdminView();
+            courseView.setId(c.getId());
+            courseView.setSubject(c.getSubject());
+            courseView.setStudentGroup(c.getStudentGroup());
+            courseView.setTeacher(c.getTeacher());
+            courseView.setDescription(c.getDescription());
+            courseViews.add(courseView);
+        }
+        return courseViews;
+    }
+
     public Result prepareView(User user) {
         if (UserType.STUDENT.name().equals(user.getType())) {
             return prepareStudentView(user);
         } else if (UserType.TEACHER.name().equals(user.getType())) {
             return prepareTeacherView(user);
         }
-        else /*if (UserType.ADMIN.name().equals(user.getType()))*/ {
+        else {
             return prepareAdminView();
         }
-
     }
 
     private Result prepareAdminView() {
         List<TeacherCourse> coursesList = TeacherCourse.findAll();
-        return ok(adminCoursesList.render(mapTeacherCourses(coursesList)));
+        return ok(adminCoursesList.render(mapTeacherCoursesForAdmin(coursesList)));
     }
 
     private Result prepareTeacherView(User user) {
@@ -89,5 +104,16 @@ public class CourseService {
         List<Subject> subjects = Subject.findAll();
         List<User> teachers = User.findByType(Role.TEACHER);
         return ok(addCourseDate.render(subjects,teachers));
+    }
+
+    public void saveNewCourse(Map<String,String> values) {
+        User teacher = User.findByLogin(values.get("teacherLogin"));
+        Subject subject = Subject.findByName(values.get("subjectName"));
+        TeacherCourse teacherCourse = new TeacherCourse();
+        teacherCourse.setDescription(values.get("description"));
+        teacherCourse.setStudentGroup(values.get("studentGroup"));
+        teacherCourse.setSubject(subject);
+        teacherCourse.setTeacher(teacher);
+        teacherCourse.save();
     }
 }

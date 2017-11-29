@@ -21,6 +21,7 @@ view.menu.grades=Oceny
 view.menu.stats=Statystyki
 view.menu.courses=Kurs
 
+view.profile.city=Miasto
 view.profile.overview=Ogólne
 view.profile.data=Dane osobiste
 view.profile.password=Hasło

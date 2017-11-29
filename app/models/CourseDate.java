@@ -1,5 +1,6 @@
 package models;
 
+import io.ebean.Finder;
 import io.ebean.Model;
 import lombok.Data;
 
@@ -29,4 +30,9 @@ public class CourseDate extends Model {
     @Column(name = "date")
     private Date date;
 
+    public static Finder<Integer, CourseDate> find = new Finder<>(CourseDate.class);
+
+    public static void delete(int id) {
+        find.deleteById(id);
+    }
 }

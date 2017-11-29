@@ -54,4 +54,8 @@ public class TeacherCourse extends Model {
     public static List<TeacherCourse> findAll() {
         return find.query().findList();
     }
+
+    public static void delete(int id) {
+        find.deleteById(id);
+    }
 }

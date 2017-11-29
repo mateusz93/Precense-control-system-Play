@@ -1,5 +1,5 @@
-@import dto.course.TeacherCourseView
-@(coursesList: List[TeacherCourseView])
+@import dto.course.TeacherCourseAdminView
+@(coursesList: List[TeacherCourseAdminView])
 <html>
     <head>
         <title>@Messages("view.course.title")</title>
@@ -61,20 +61,21 @@
                 <thead>
                     <tr>
                         <th>@Messages("view.subject.name")</th>
-                        @*<th>Nauczyciel</th>
-                        <th>Grupa</th>
-                        <th>Opis</th>*@
+                        <th>@Messages("view.teacher")</th>
+                        <th>@Messages("view.profile.group")</th>
+                        <th>@Messages("view.subject.description")</th>
                     </tr>
                 </thead>
                 <tbody id="paginationTable" class="searchable">
                     @for(course <- coursesList) {
                         <tr>
-                            <td>@course.subjectName</td>
-                            @*<td>@course.teacher.firstName @course.teacher.lastName</td>*@
-                            @*<td>@course.studentGroup</td>*@
-                            @*<td>@course.description</td>*@
-                            @helper.form(helper.CSRF(routes.CourseController.deleteCourse(course.ID))) {
-                                <td><button value="@course.ID" type="submit" class="btn btn-info">@Messages("view.subject.delete")</button></td>
+                            @*without invoke @course getting deeply nested fields dont work - bug? *@
+                            <td><span hidden>@course</span>@course.subject.name</td>
+                            <td>@course.teacher.firstName @course.teacher.lastName</td>
+                            <td>@course.studentGroup</td>
+                            <td>@course.description</td>
+                            @helper.form(helper.CSRF(routes.CourseController.deleteCourse(course.id))) {
+                                <td><button value="@course.id" type="submit" class="btn btn-info">@Messages("view.subject.delete")</button></td>
                             }
                         </tr>
                     }

@@ -31,13 +31,14 @@ public class SubjectController extends BaseController {
     }
 
     public Result delete(Integer id) {
-        return play.mvc.Results.TODO;
+        Subject.delete(id);
+        return subjectService.prepareView();
     }
 
     public Result save() {
         Form<Subject> subjectForm = formFactory.form(Subject.class);
         Subject subject = subjectForm.bindFromRequest().get();
         subject.save();
-        return play.mvc.Results.TODO;
+        return subjectService.prepareView();
     }
 }

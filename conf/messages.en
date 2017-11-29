@@ -21,6 +21,7 @@ view.menu.grades=Grades
 view.menu.stats=Stats
 view.menu.courses=Courses
 
+view.profile.city=City
 view.profile.overview=Overview
 view.profile.data=Personal data
 view.profile.password=Password
