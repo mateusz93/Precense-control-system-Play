@@ -26,15 +26,18 @@ public class SubjectController extends BaseController {
         return subjectService.prepareView();
     }
 
+    @Security.Authenticated
     public Result newSubject() {
         return subjectService.prepareAddNewSubjectView();
     }
 
+    @Security.Authenticated
     public Result delete(Integer id) {
         Subject.delete(id);
         return subjectService.prepareView();
     }
 
+    @Security.Authenticated
     public Result save() {
         Form<Subject> subjectForm = formFactory.form(Subject.class);
         Subject subject = subjectForm.bindFromRequest().get();
