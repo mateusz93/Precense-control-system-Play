@@ -9,24 +9,29 @@ import play.mvc.Http;
 import play.mvc.Result;
 import play.mvc.Security;
 import services.GradeService;
+import services.PdfService;
+import views.html.course.teacherCoursesList;
 import views.html.grade.studentGrades;
 import views.html.grade.studentGradesDetails;
 import views.html.grade.teacherAddGrade;
 import views.html.grade.teacherGrades;
-import views.html.course.teacherCoursesList;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.io.File;
+import java.time.LocalDate;
 
 @Singleton
 public class GradeController extends BaseController {
 
     private final GradeService service;
+    private final PdfService pdfService;
     private final FormFactory formFactory;
 
     @Inject
-    public GradeController(GradeService service, FormFactory formFactory) {
+    public GradeController(GradeService service, PdfService pdfService, FormFactory formFactory) {
         this.service = service;
+        this.pdfService = pdfService;
         this.formFactory = formFactory;
     }
 
@@ -41,6 +46,13 @@ public class GradeController extends BaseController {
             val dto = service.prepareTeacherView(user);
             return ok(teacherCoursesList.render(dto));
         }
+    }
+    @Security.Authenticated
+    public Result downloadPdf() {
+        val username = Http.Context.current().session().get(USERNAME);
+        val user = User.findByLogin(username);
+        pdfService.generateGradesPdf(user);
+        return ok(new File("grades.pdf"), "grades_" + LocalDate.now() + ".pdf");
     }
 
     @Security.Authenticated

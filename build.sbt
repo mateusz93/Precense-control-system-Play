@@ -31,7 +31,8 @@ libraryDependencies += "org.apache.commons" % "commons-lang3" % "3.6"
 
 libraryDependencies += "commons-fileupload" % "commons-fileupload" % "1.3.3"
 
-libraryDependencies += "com.itextpdf" % "itextpdf" % "5.0.6"
+libraryDependencies += "org.apache.pdfbox" % "pdfbox" % "2.0.8"
+libraryDependencies += "org.apache.pdfbox" % "fontbox" % "2.0.8"
 
 // Make verbose tests
 testOptions in Test := Seq(Tests.Argument(TestFrameworks.JUnit, "-a", "-v"))

@@ -31,6 +31,7 @@ POST    /subjects/save                          controllers.SubjectController.sa
 GET     /grades                                 controllers.GradeController.course
 GET     /grade/:courseId                        controllers.GradeController.grades(courseId: Integer)
 GET     /grade/info/:courseId                   controllers.GradeController.gradesInfo(courseId: Integer)
+GET     /grade/download/pdf                     controllers.GradeController.downloadPdf
 POST    /grade/new/:courseId/:studentId         controllers.GradeController.newGrade(courseId: Integer, studentId: Integer)
 POST    /grade/save/:courseId/:studentId        controllers.GradeController.saveGrade(courseId: Integer, studentId: Integer)
 

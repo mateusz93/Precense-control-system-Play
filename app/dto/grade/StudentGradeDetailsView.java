@@ -15,7 +15,6 @@ import models.Grade;
 public class StudentGradeDetailsView extends BaseView {
 
     public String time;
-    public Grade previousGrade;
     public int value;
     public boolean finalGrade;
 }

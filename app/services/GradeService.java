@@ -76,7 +76,6 @@ public class GradeService {
             studentGradeDetailsView.setFinalGrade(grade.isFinalGrade());
             studentGradeDetailsView.setTime(grade.getTime().toString());
             studentGradeDetailsView.setValue(grade.getValue());
-            studentGradeDetailsView.setPreviousGrade(grade.getPreviousGrade());
 
             StudentGradeDetailsViews.add(studentGradeDetailsView);
         }

@@ -122,3 +122,12 @@ grade.add=Grade added
 recaptcha.incorrect=You missed the Captcha
 
 error.required=Field {0} is required
+pdf.download=Download PDF
+pdf.gradeList=Grades List
+pdf.firstAndLastname=First and lastname
+pdf.index=Index
+pdf.group=Group
+pdf.yearOfStudy=Year of study
+pdf.subjectName=Subject name
+pdf.grades=Grades
+pdf.finalGrade=Final grade

@@ -61,7 +61,6 @@
                 <thead>
                     <tr>
                         <th>@Messages("view.grade")</th>
-                        <th>@Messages("view.grade.previous")</th>
                         <th>@Messages("view.grade.final")?</th>
                         <th>@Messages("view.grade.date")</th>
                     </tr>
@@ -70,7 +69,6 @@
                     @for(grade <- form) {
                         <tr>
                             <td>@grade.value</td>
-                            <td>@grade.previousGrade.value</td>
                             @if(grade.finalGrade == true) {
                                 <td>@Messages("view.yes")</td>
                             }

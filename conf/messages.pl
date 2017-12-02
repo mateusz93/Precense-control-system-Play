@@ -122,3 +122,12 @@ grade.add=Ocena dodana
 recaptcha.incorrect=Uzupełnij captcha
 
 error.required=Pole '{0}' jest wymagane
+pdf.download=Pobierz PDF
+pdf.gradeList=Wykaz ocen
+pdf.firstAndLastname=Imie i nazwisko
+pdf.index=Indeks
+pdf.group=Grupa
+pdf.yearOfStudy=Rok studiow
+pdf.subjectName=Nazwa przedmiotu
+pdf.grades=Oceny
+pdf.finalGrade=Ocena koncowa

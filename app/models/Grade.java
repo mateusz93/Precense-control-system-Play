@@ -22,10 +22,6 @@ public class Grade extends Model {
     private TeacherCourse teacherCourse;
 
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "previousGradeID")
-    private Grade previousGrade;
-
-    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "studentID")
     private User user;
 
