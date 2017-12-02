@@ -22,13 +22,11 @@ create table field (
 create table grade (
   id                            integer auto_increment not null,
   teachercourseid               integer,
-  previousgradeid               integer,
   studentid                     bigint,
   value                         integer not null,
   isfinalgrade                  tinyint(1) default 0 not null,
   time                          datetime(6),
   constraint uq_grade_teachercourseid unique (teachercourseid),
-  constraint uq_grade_previousgradeid unique (previousgradeid),
   constraint uq_grade_studentid unique (studentid),
   constraint pk_grade primary key (id)
 );
@@ -108,8 +106,6 @@ alter table course_date add constraint fk_course_date_teachercourseid foreign ke
 
 alter table grade add constraint fk_grade_teachercourseid foreign key (teachercourseid) references teacher_course (id) on delete restrict on update restrict;
 
-alter table grade add constraint fk_grade_previousgradeid foreign key (previousgradeid) references grade (id) on delete restrict on update restrict;
-
 alter table grade add constraint fk_grade_studentid foreign key (studentid) references user (id) on delete restrict on update restrict;
 
 alter table student_course add constraint fk_student_course_teachercourseid foreign key (teachercourseid) references teacher_course (id) on delete restrict on update restrict;
@@ -136,8 +132,6 @@ alter table user add constraint fk_user_fieldid foreign key (fieldid) references
 alter table course_date drop foreign key fk_course_date_teachercourseid;
 
 alter table grade drop foreign key fk_grade_teachercourseid;
-
-alter table grade drop foreign key fk_grade_previousgradeid;
 
 alter table grade drop foreign key fk_grade_studentid;
 
