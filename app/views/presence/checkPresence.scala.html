@@ -64,7 +64,7 @@
                     </tr>
                 </thead>
                 <tbody id="paginationTable" class="searchable">
-                @helper.form(helper.CSRF(routes.PresenceController.update(courseDateId))) {
+                @helper.form(helper.CSRF(routes.PresenceController.update(studentWrapper,courseDateId))) {
                     @for(student <- studentWrapper.students) {
                         <tr>
                             <input type="hidden" name="ID" value="student.ID"/>

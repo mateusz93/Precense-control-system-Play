@@ -36,3 +36,5 @@ libraryDependencies += "org.apache.pdfbox" % "fontbox" % "2.0.8"
 
 // Make verbose tests
 testOptions in Test := Seq(Tests.Argument(TestFrameworks.JUnit, "-a", "-v"))
+
+routesImport += "dto.presence.CheckPresenceViewWrapper"

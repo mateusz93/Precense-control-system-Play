@@ -10,7 +10,7 @@ import play.mvc.Result;
 import play.mvc.Security;
 import services.GradeService;
 import services.PdfService;
-import views.html.course.teacherCoursesList;
+import views.html.grade.teacherCoursesList;
 import views.html.grade.studentGrades;
 import views.html.grade.studentGradesDetails;
 import views.html.grade.teacherAddGrade;

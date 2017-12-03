@@ -1,7 +1,7 @@
-@(coursesList: List[dto.course.TeacherCourseView])
+@(datesList: List[dto.course.CourseDateView])
 <html>
     <head>
-        <title>Kursy</title>
+        <title><spring:message code='view.course.date.title'/></title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/bootstrap.min.css")">
         <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/menu.css")">
@@ -55,17 +55,19 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>@Messages("view.name")</th>
-                        <th>@Messages("view.subject.quantity")</th>
+                        <th>@Messages("view.presence.day")</th>
+                        <th>@Messages("view.presence.time.start")</th>
+                        <th>@Messages("view.presence.time.end")</th>
                     </tr>
                 </thead>
                 <tbody id="paginationTable" class="searchable">
-                    @for(course <- coursesList) {
+                    @for(date <- datesList) {
                         <tr>
-                            <td>@course.subjectName</td>
-                            <td>@course.coursesQuantity</td>
-                            @helper.form(helper.CSRF(routes.CourseController.info(course.ID))) {
-                                <td><button value="${course.ID}" type="submit" class="btn btn-info">@Messages("view.course.dates.show")</button></td>
+                            <td class="col-md-2">@date.date</td>
+                            <td class="col-md-2">@date.startTime</td>
+                            <td class="col-md-2">@date.finishTime</td>
+                            @helper.form(helper.CSRF(routes.PresenceController.check(date.id))) {
+                                <td class="col-md-1"><button name="deleteID" value="@date.id" type="submit" class="btn btn-info">@Messages("view.presence.title")</button></td>
                             }
                         </tr>
                     }

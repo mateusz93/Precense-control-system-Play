@@ -1,5 +1,6 @@
 package models;
 
+import dto.course.CourseDateView;
 import io.ebean.Finder;
 import io.ebean.Model;
 import lombok.Data;
@@ -7,6 +8,7 @@ import lombok.Data;
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Time;
+import java.util.List;
 
 @Entity
 @Data
@@ -34,5 +36,25 @@ public class CourseDate extends Model {
 
     public static void delete(int id) {
         find.deleteById(id);
+    }
+
+    public static CourseDate findOne(int courseDateId) {
+        return find.query().where()
+                .eq("ID", courseDateId)
+                .findUnique();
+    }
+
+    public static List<CourseDate> findByTeacherCourse(TeacherCourse teacherCourse) {
+        return find.query().where()
+                .eq("teacherCourse", teacherCourse)
+                .findList();
+    }
+
+    public CourseDateView getView() {
+        CourseDateView courseDateView = new CourseDateView();
+        courseDateView.setDate(date);
+        courseDateView.setStartTime(startTime);
+        courseDateView.setFinishTime(finishTime);
+        return courseDateView;
     }
 }

@@ -57,7 +57,7 @@
                     <tr>
                         <th>@Messages("view.presence.day")</th>
                         <th>@Messages("view.presence.time.start")</th>
-                        <th>@Messages("view.presence.time.end")</th>>
+                        <th>@Messages("view.presence.time.end")</th>
                     </tr>
                 </thead>
                 <tbody id="paginationTable" class="searchable">
@@ -68,9 +68,6 @@
                             <td>@date.finishTime</td>_
                             @helper.form(helper.CSRF(routes.PresenceController.check(date.courseDateID))) {
                                     <td><button value="${date.courseDateID}" type="submit" class="btn btn-info">@Messages("view.presence.title")</button></td>
-                            }
-                            @helper.form(helper.CSRF(routes.PresenceController.cancel(date.courseDateID))) {
-                                <td><button value="${dates.courseDateID}" type="submit" class="btn btn-info">@Messages("view.course.cancel")</button></td>
                             }
                         </tr>
                     }

@@ -11,8 +11,7 @@ GET     /PLLanguage                             controllers.HomeController.PLLan
 GET     /presences                              controllers.PresenceController.index
 POST    /presences/courseDates/:id              controllers.PresenceController.courseDates(id: Integer)
 POST    /presences/check/:id                    controllers.PresenceController.check(id: Integer)
-POST    /presences/cancel/:id                   controllers.PresenceController.cancel(id: Integer)
-POST    /presences/update/:id                   controllers.PresenceController.update(id: Integer)
+POST    /presences/update/:id                   controllers.PresenceController.update(checkPresenceView:CheckPresenceViewWrapper, id:Integer)
 
 # CourseController mapping
 POST    /courses/save                           controllers.CourseController.save

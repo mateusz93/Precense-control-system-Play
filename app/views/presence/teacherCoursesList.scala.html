@@ -1,7 +1,7 @@
 @(coursesList: List[dto.course.TeacherCourseView])
 <html>
     <head>
-        <title>Kursy</title>
+        <title>@Messages("view.course.title")</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/bootstrap.min.css")">
         <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/menu.css")">
@@ -48,7 +48,7 @@
             <br><br>
             <hr>
             <div class="input-group input-group-lg add-on">
-                <div class="input-group"> <span class="input-group-addon">Filter</span>
+                <div class="input-group"> <span class="input-group-addon">@Messages("view.filter")</span>
                     <input id="filter" type="text" class="form-control" >
                 </div>
             </div>
@@ -64,7 +64,7 @@
                         <tr>
                             <td>@course.subjectName</td>
                             <td>@course.coursesQuantity</td>
-                            @helper.form(helper.CSRF(routes.CourseController.info(course.ID))) {
+                            @helper.form(helper.CSRF(routes.PresenceController.courseDates(course.ID))) {
                                 <td><button value="${course.ID}" type="submit" class="btn btn-info">@Messages("view.course.dates.show")</button></td>
                             }
                         </tr>

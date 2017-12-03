@@ -33,7 +33,7 @@ public class CourseController extends BaseController {
     @Security.Authenticated
     public Result info(Integer teacherCourseId) {
         User user = User.findByLogin(request().attrs().get(Security.USERNAME));
-        return play.mvc.Results.TODO;//service.prepareViewByCourseId(teacherCourseId, user);
+        return service.prepareViewByCourseId(teacherCourseId, user);
     }
 
     @Security.Authenticated

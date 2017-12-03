@@ -5,19 +5,14 @@ import dto.course.TeacherCourseAdminView;
 import dto.course.TeacherCourseView;
 import enums.Role;
 import enums.UserType;
-import models.StudentCourse;
-import models.Subject;
-import models.TeacherCourse;
-import models.User;
+import models.*;
 import play.mvc.Result;
-import views.html.course.addCourseDate;
-import views.html.course.adminCoursesList;
-import views.html.course.studentCoursesList;
-import views.html.course.teacherCoursesList;
+import views.html.course.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static play.mvc.Results.ok;
 
@@ -55,9 +50,9 @@ public class CourseService {
     }
 
     public Result prepareView(User user) {
-        if (UserType.STUDENT.name().equals(user.getType())) {
+        if (UserType.STUDENT.name().equalsIgnoreCase(user.getType())) {
             return prepareStudentView(user);
-        } else if (UserType.TEACHER.name().equals(user.getType())) {
+        } else if (UserType.TEACHER.name().equalsIgnoreCase(user.getType())) {
             return prepareTeacherView(user);
         }
         else {
@@ -115,5 +110,15 @@ public class CourseService {
         teacherCourse.setSubject(subject);
         teacherCourse.setTeacher(teacher);
         teacherCourse.save();
+    }
+
+    public Result prepareViewByCourseId(Integer teacherCourseId, User user) {
+        TeacherCourse teacherCourse = TeacherCourse.findOne(teacherCourseId);
+        List<CourseDate> courseDates = CourseDate.findByTeacherCourse(teacherCourse);
+        if("Student".equalsIgnoreCase(user.getType())) {
+            return ok(studentCourseDates.render(courseDates.stream().map(CourseDate::getView).collect(Collectors.toList())));
+        } else {
+            return ok(teacherCourseDates.render(courseDates.stream().map(CourseDate::getView).collect(Collectors.toList())));
+        }
     }
 }

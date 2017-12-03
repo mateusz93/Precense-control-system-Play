@@ -15,18 +15,11 @@ import java.util.List;
 @AllArgsConstructor
 public class CourseDateView extends BaseView {
 
+    public int id;
     public String status;
     public Date date;
     public Time startTime;
     public Time finishTime;
     public Integer courseDateID;
     public String isEdited;
-    public String dateId;
-
-    //mock data
-    public static List<CourseDateView> findAll() {
-        List<CourseDateView> list = new ArrayList<>();
-        list.add(new CourseDateView("status",new Date(), new Time(new Date().getTime()), new Time(new Date().getTime()), 1, "no","0"));
-        return list;
-    }
 }

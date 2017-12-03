@@ -31,4 +31,10 @@ public class StudentCourse extends Model {
                 .eq("student", student)
                 .findList();
     }
+
+    public static List<StudentCourse> findByTeacherCourse(TeacherCourse teacherCourse) {
+        return find.query().where()
+                .eq("teacherCourse", teacherCourse)
+                .findList();
+    }
 }
