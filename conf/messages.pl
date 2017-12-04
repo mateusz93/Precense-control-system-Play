@@ -69,6 +69,7 @@ view.presence.absence=Nieobecny
 view.presence.present=Obecny
 view.presence.late=Spóźniony
 view.presence.day=Dzień
+view.presence.date=Data
 view.presence.time.start=Czas rozpoczęcia
 view.presence.time.end=Czas zakończenia
 view.presence.details=Szczegły obecności

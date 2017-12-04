@@ -47,7 +47,7 @@
             <br><br>
             <hr>
             <div class="input-group input-group-lg add-on">
-                <div class="input-group"> <span class="input-group-addon">Filter</span>
+                <div class="input-group"> <span class="input-group-addon">@Messages("view.filter")</span>
                     <input id="filter" type="text" class="form-control" >
                 </div>
             </div>
@@ -62,9 +62,9 @@
                 <tbody id="paginationTable" class="searchable">
                     @for(date <- datesList) {
                         <tr>
-                            <td class="col-md-2"><c:out value="${date.date}" /></td>
-                            <td class="col-md-2"><c:out value="${date.startTime}" /></td>
-                            <td class="col-md-2"><c:out value="${date.finishTime}" /></td>
+                            <td class="col-md-2">@date.date</td>
+                            <td class="col-md-2">@date.startTime</td>
+                            <td class="col-md-2">@date.finishTime</td>
                         </tr>
                     }
                 </tbody>

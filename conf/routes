@@ -19,6 +19,8 @@ GET     /courses                                controllers.CourseController.ind
 GET     /courses/info/:id                       controllers.CourseController.info(id: Integer)
 GET     /courses/newCourse                      controllers.CourseController.newCourse
 POST    /courses/deleteCourse/:id               controllers.CourseController.deleteCourse(id: Integer)
+GET     /courses/addCourseDate/:id              controllers.CourseController.newCourseDate(id: Integer)
+POST    /courses/saveCourseDate                 controllers.CourseController.saveCourseDate
 
 # SubjectController mapping
 GET     /subjects                               controllers.SubjectController.course

@@ -1,6 +1,7 @@
 package controllers;
 
-import models.CourseDate;
+import dto.course.CourseDateView;
+import lombok.val;
 import models.TeacherCourse;
 import models.User;
 import play.data.Form;
@@ -8,6 +9,7 @@ import play.data.FormFactory;
 import play.mvc.Result;
 import play.mvc.Security;
 import services.CourseService;
+import views.html.course.addCourseDate;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -46,6 +48,24 @@ public class CourseController extends BaseController {
     public Result deleteCourse(Integer id) {
         TeacherCourse.delete(id);
         return index();
+    }
+
+    @Security.Authenticated
+    public Result saveCourseDate() {
+        User user = User.findByLogin(request().attrs().get(Security.USERNAME));
+        val dto = formFactory.form(CourseDateView.class).bindFromRequest().data();
+        service.addCourseDateByCourseId(dto);
+        return service.prepareView(user);
+    }
+
+    @Security.Authenticated
+    public Result newCourseDate(int teacherCourseId) {
+        User user = User.findByLogin(request().attrs().get(Security.USERNAME));
+        val dto = CourseDateView
+                .builder()
+                .courseDateID(teacherCourseId)
+                .build();
+        return ok(addCourseDate.render(dto));
     }
 
     @Security.Authenticated

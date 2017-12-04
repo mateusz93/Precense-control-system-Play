@@ -23,7 +23,7 @@ public class PresenceController extends BaseController {
     @Security.Authenticated
     public Result index() {
         User user = User.findByLogin(request().attrs().get(Security.USERNAME));
-        if("Student".equalsIgnoreCase(user.getType())) {
+        if("Student".equalsIgnoreCase(user.getType()) || "Teacher".equalsIgnoreCase(user.getType())) {
             return presenceService.prepareStudentView(user);
         } else {
             return presenceService.prepareTeacherView(user);

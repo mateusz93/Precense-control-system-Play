@@ -1,19 +1,25 @@
-@import java.util
-@(form: util.List[dto.grade.StudentGradeDetailsView])
-
-<!DOCTYPE HTML>
+@(subjects: List[models.Subject], users: List[models.User])
 
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>@Messages("view.menu.grades")</title>
+        <title>@Messages("view.course.date.add")</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/bootstrap.min.css")">
         <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/menu.css")">
         <script src="@routes.Assets.versioned("javascripts/jquery.1.11.3.min.js")" type="text/javascript"></script>
         <script src="@routes.Assets.versioned("javascripts/bootstrap.min.js")" type="text/javascript"></script>
-        <script src="@routes.Assets.versioned("javascripts/pagination.js")" type="text/javascript"></script>
-        <script src="@routes.Assets.versioned("javascripts/filter.js")" type="text/javascript"></script>
+        <script>
+                function change(){
+                    debugger;
+                    var subjectNameSelect = document.getElementById("subjectName");
+                    var subjectIdInput = document.getElementById("subjectId");
+                    subjectIdInput.value = subjectNameSelect.options[subjectNameSelect.selectedIndex].id;
+                    var teacherNameSelect = document.getElementById("teacherName");
+                    var teacherIdInput = document.getElementById("teacherId");
+                    teacherIdInput.value = teacherNameSelect.options[teacherNameSelect.selectedIndex].id;
+                }
+                window.onload = change;
+        </script>
     </head>
     <body>
         <nav class="navbar navbar-default navbar-fixed-top">
@@ -28,7 +34,7 @@
                             || Http.Context.current().session().get("username") == null) {
                         <a class="navbar-brand" href="@routes.LoginController.logIn()">@Messages("view.menu.login")</a>
                     } else {
-                        <a class="navbar-brand" href="/login/logOut">@Messages("view.menu.logout")</a>
+                        <a class="navbar-brand" href="/login/logOut" action="logout">@Messages("view.menu.logout")</a>
                     }
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
@@ -50,39 +56,37 @@
             </div>
         </nav>
         <div class="container">
-            <br>
-            <hr>
-            <div class="input-group input-group-lg add-on">
-                <div class="input-group"> <span class="input-group-addon">@Messages("view.filter")</span>
-                    <input id="filter" type="text" class="form-control">
-                </div>
-            </div>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>@Messages("view.grade")</th>
-                        <th>@Messages("view.grade.final")?</th>
-                        <th>@Messages("view.grade.date")</th>
-                    </tr>
-                </thead>
-                <tbody id="paginationTable" class="searchable">
-                    @for(grade <- form) {
-                        <tr>
-                            <td>@grade.value</td>
-                            @if(grade.finalGrade == true) {
-                                <td>@Messages("view.yes")</td>
-                            }
-                            @if(grade.finalGrade == false) {
-                                <td>@Messages("view.no")</td>
-                            }
-                            <td>@grade.time</td>
-                        </tr>
+            <br><br>
+            <h3>@Messages("course.new")</h3>
+            @helper.form(helper.CSRF(routes.CourseController.save())) {
+                <div class="form-group">
+                    <label>@Messages("view.subject.name")</label>
+                    <input type="text" id="subjectId" name="subject.id" hidden>
+                    <select class="form-control" name="subjectName" onchange="change();">
+                    @for(s <- subjects) {
+                        <option id="@s.id" type="text" name="subjectName" value="@s.name">@s.name</option>
                     }
-                </tbody>
-            </table>
-        </div>
-        <div class="col-md-12 text-center">
-            <ul class="pagination" id="pager"></ul>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>@Messages("view.teacher")</label>
+                    <input type="text" id="teacherId" name="teacher.id" hidden>
+                    <select class="form-control" name="teacherLogin" onchange="change();">
+                    @for(t <- users) {
+                        <option id="@t.id" type="text" name="teacherLogin" value="@t.login">@t.firstName @t.lastName</option>
+                    }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>@Messages("view.profile.group")</label>
+                    <input type="text" id="studentGroup" name="studentGroup" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>@Messages("view.subject.description")</label>
+                    <input type="text" id="description" name="description" class="form-control">
+                </div>
+                <td><button type="submit" class="btn btn-success">@Messages("view.subject.apply")</button></td>
+            }
         </div>
     </body>
 </html>

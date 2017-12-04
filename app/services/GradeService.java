@@ -11,6 +11,8 @@ import models.Grade;
 import models.StudentCourse;
 import models.TeacherCourse;
 import models.User;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import play.db.ebean.Transactional;
 
 import javax.inject.Inject;
@@ -18,6 +20,7 @@ import javax.inject.Singleton;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Transactional
@@ -36,7 +39,7 @@ public class GradeService {
         List<StudentCourse> studentCourses = StudentCourse.findByStudent(user);
         for (StudentCourse studentCourse : studentCourses) {
             StudentGradeView studentGradeView = new StudentGradeView();
-            studentGradeView.setCourseId(studentCourse.getTeacherCourse().getSubject().getId());
+            studentGradeView.setCourseId(studentCourse.getTeacherCourse().getId());
             studentGradeView.setName(studentCourse.getTeacherCourse().getSubject().getName());
             studentGradeView.setTeacherName(studentCourse.getTeacherCourse().getTeacher().getFullName());
 
@@ -85,10 +88,31 @@ public class GradeService {
     public List<TeacherGradesView>  prepareTeacherGrades(int courseId) {
         List<TeacherGradesView> gradesViews = new ArrayList<>();
         TeacherCourse teacherCourse = TeacherCourse.findOne(courseId);
-        List<Grade> grades = Grade.findByTeacherCourse(teacherCourse);
-        for (Grade grade : grades) {
-            prepareGradeView(courseId, gradesViews, grade);
+        List<StudentCourse> studentCourses = StudentCourse.findByTeacherCourse(teacherCourse);
+        for (StudentCourse studentCourse : studentCourses) {
+            List<Grade> grades = Grade.findByStudent(studentCourse.getStudent());
+            String gradesAsString = grades.stream()
+                    .filter(it -> !it.isFinalGrade())
+                    .map(it -> String.valueOf(it.getValue()))
+                    .collect(Collectors.joining(", "));
+            List<String> finalGrades = grades.stream()
+                    .filter(Grade::isFinalGrade)
+                    .map(it -> String.valueOf(it.getValue()))
+                    .collect(Collectors.toList());
+            String finalGrade = StringUtils.EMPTY;
+            if (CollectionUtils.isNotEmpty(finalGrades)) {
+                finalGrade = finalGrades.get(0);
+            }
+            gradesViews.add(TeacherGradesView.builder()
+                    .courseId(studentCourse.getTeacherCourse().getId())
+                    .firstName(studentCourse.getStudent().getFirstName())
+                    .lastName(studentCourse.getStudent().getLastName())
+                    .grades(gradesAsString)
+                    .finalGrade(finalGrade)
+                    .studentId((int) studentCourse.getStudent().getId())
+                    .build());
         }
+
         return gradesViews;
     }
 

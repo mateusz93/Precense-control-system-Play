@@ -69,6 +69,7 @@ view.presence.absence=Absence
 view.presence.present=Present
 view.presence.late=Late
 view.presence.day=Day
+view.presence.date=Date
 view.presence.time.start=Start time
 view.presence.time.end=Finish time
 view.presence.details=Presences details

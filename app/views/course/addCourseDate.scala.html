@@ -1,27 +1,17 @@
-@import models.Subject
-@import models.User
-@(subjects: List[Subject], users: List[User])
+@(form: dto.course.CourseDateView)
+
+<!DOCTYPE html>
 
 <html>
     <head>
-        <title>@Messages("view.course.date.add")</title>
+        <title>@Messages("view.course.date.title")</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/bootstrap.min.css")">
         <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/menu.css")">
         <script src="@routes.Assets.versioned("javascripts/jquery.1.11.3.min.js")" type="text/javascript"></script>
         <script src="@routes.Assets.versioned("javascripts/bootstrap.min.js")" type="text/javascript"></script>
-        <script>
-                function change(){
-                    debugger;
-                    var subjectNameSelect = document.getElementById("subjectName");
-                    var subjectIdInput = document.getElementById("subjectId");
-                    subjectIdInput.value = subjectNameSelect.options[subjectNameSelect.selectedIndex].id;
-                    var teacherNameSelect = document.getElementById("teacherName");
-                    var teacherIdInput = document.getElementById("teacherId");
-                    teacherIdInput.value = teacherNameSelect.options[teacherNameSelect.selectedIndex].id;
-                }
-                window.onload = change;
-        </script>
+        <script src="@routes.Assets.versioned("javascripts/pagination.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.versioned("javascripts/filter.js")" type="text/javascript"></script>
     </head>
     <body>
         <nav class="navbar navbar-default navbar-fixed-top">
@@ -38,7 +28,7 @@
                     } else {
                         <a class="navbar-brand" href="/login/logOut" action="logout">@Messages("view.menu.logout")</a>
                     }
-                </div>
+                    </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav navbar-right">
                         @if("STUDENT".equalsIgnoreCase(Http.Context.current().session().get("userType")) ||
@@ -59,35 +49,22 @@
         </nav>
         <div class="container">
             <br><br>
-            <h3>@Messages("course.new")</h3>
-            @helper.form(helper.CSRF(routes.CourseController.save())) {
+            <h3>@Messages("view.course.date.title")</h3>
+            @helper.form(helper.CSRF(routes.CourseController.saveCourseDate)) {
                 <div class="form-group">
-                    <label>@Messages("view.subject.name")</label>
-                    <input type="text" id="subjectId" name="subject.id" hidden>
-                    <select class="form-control" name="subjectName" onchange="change();">
-                        @for(s <- subjects) {
-                            <option id="@s.id" type="text" name="subjectName" value="@s.name">@s.name</option>
-                        }
-                    </select>
+                    <label>@Messages("view.presence.date")</label>
+                    <input type="text" placeholder="Format: YYYY-MM-DD" name="date" value="@form.date" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label>@Messages("view.teacher")</label>
-                    <input type="text" id="teacherId" name="teacher.id" hidden>
-                    <select class="form-control" name="teacherLogin" onchange="change();">
-                        @for(t <- users) {
-                            <option id="@t.id" type="text" name="teacherLogin" value="@t.login">@t.firstName @t.lastName</option>
-                        }
-                    </select>
+                    <label>@Messages("view.presence.time.start")</label>
+                    <input type="text" placeholder="Format: GG:MM:SS" name="startTime" value="@form.startTime" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label>@Messages("view.profile.group")</label>
-                    <input type="text" id="studentGroup" name="studentGroup" class="form-control">
+                    <label>@Messages("view.presence.time.end")</label>
+                    <input type="text" placeholder="Format: GG:MM:SS" name="finishTime" value="@form.finishTime" class="form-control">
                 </div>
-                <div class="form-group">
-                    <label>@Messages("view.subject.description")</label>
-                    <input type="text" id="description" name="description" class="form-control">
-                </div>
-                <td><button type="submit" class="btn btn-success">@Messages("view.subject.apply")</button></td>
+                <input type="hidden" name="courseDateID" value="@form.courseDateID" class="form-control">
+                <td><button type="submit"  class="btn btn-success">@Messages("view.subject.apply")</button></td>
             }
         </div>
     </body>

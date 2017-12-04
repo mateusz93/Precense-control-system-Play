@@ -67,7 +67,7 @@
                             <td>@date.startTime</td>
                             <td>@date.finishTime</td>_
                             @helper.form(helper.CSRF(routes.PresenceController.check(date.courseDateID))) {
-                                    <td><button value="${date.courseDateID}" type="submit" class="btn btn-info">@Messages("view.presence.title")</button></td>
+                                <td><button type="submit" class="btn btn-info">@Messages("view.presence.title")</button></td>
                             }
                         </tr>
                     }

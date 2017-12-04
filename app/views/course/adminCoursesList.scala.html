@@ -77,6 +77,12 @@
                             @helper.form(helper.CSRF(routes.CourseController.deleteCourse(course.id))) {
                                 <td><button value="@course.id" type="submit" class="btn btn-info">@Messages("view.subject.delete")</button></td>
                             }
+                            @helper.form(helper.CSRF(routes.CourseController.newCourseDate(course.id))) {
+                                <td><button value="@course.id" type="submit" class="btn btn-info">@Messages("view.course.date.add")</button></td>
+                            }
+                            @helper.form(helper.CSRF(routes.PresenceController.courseDates(course.id))) {
+                                <td><button value="@course.id" type="submit" class="btn btn-info">@Messages("view.course.dates.show")</button></td>
+                            }
                         </tr>
                     }
                 </tbody>

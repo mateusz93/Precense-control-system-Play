@@ -129,7 +129,10 @@ public class PdfService {
                     .collect(Collectors.toList());
             if (CollectionUtils.isNotEmpty(finalGrades)) {
                 dto.setFinalGrade(finalGrades.get(0));
+            } else {
+                dto.setFinalGrade("");
             }
+            data.add(dto);
         });
         return data;
     }

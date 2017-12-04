@@ -17,11 +17,11 @@ public class Grade extends Model {
     @Column(name = "ID")
     private int id;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "teacherCourseID")
     private TeacherCourse teacherCourse;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "studentID")
     private User user;
 
@@ -35,6 +35,14 @@ public class Grade extends Model {
     private Timestamp time;
 
     public static Finder<Integer, Grade> find = new Finder<>(Grade.class);
+
+    public static List<Grade> findByStudent(User user) {
+        return find.query()
+                .where()
+                .eq("studentID", user.getId())
+                .findList();
+
+    }
 
     public static List<Grade> findByTeacherCourse(TeacherCourse teacherCourse) {
         return find.query()

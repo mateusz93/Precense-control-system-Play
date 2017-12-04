@@ -65,7 +65,7 @@
                             <td>@course.subjectName</td>
                             <td>@course.coursesQuantity</td>
                             @helper.form(helper.CSRF(routes.GradeController.grades(course.ID))) {
-                                <td><button value="${course.ID}" type="submit" class="btn btn-info">@Messages("view.grade.show")</button></td>
+                                <td><button value="@course.ID" type="submit" class="btn btn-info">@Messages("view.grade.show")</button></td>
                             }
                         </tr>
                    }

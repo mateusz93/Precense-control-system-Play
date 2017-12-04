@@ -2,12 +2,14 @@ package dto.grade;
 
 import dto.BaseView;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
  * @author Mateusz Wieczorek
  */
+@Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

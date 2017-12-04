@@ -9,7 +9,6 @@ create table course_date (
   starttime                     time,
   finishtime                    time,
   date                          date,
-  constraint uq_course_date_teachercourseid unique (teachercourseid),
   constraint pk_course_date primary key (id)
 );
 
@@ -26,8 +25,6 @@ create table grade (
   value                         integer not null,
   isfinalgrade                  tinyint(1) default 0 not null,
   time                          datetime(6),
-  constraint uq_grade_teachercourseid unique (teachercourseid),
-  constraint uq_grade_studentid unique (studentid),
   constraint pk_grade primary key (id)
 );
 
@@ -36,7 +33,6 @@ create table student_course (
   teachercourseid               integer,
   studentid                     bigint,
   constraint uq_student_course_teachercourseid unique (teachercourseid),
-  constraint uq_student_course_studentid unique (studentid),
   constraint pk_student_course primary key (id)
 );
 
@@ -58,7 +54,6 @@ create table subject (
   yearofstudy                   integer not null,
   quantity                      integer not null,
   minquantity                   integer not null,
-  constraint uq_subject_fieldid unique (fieldid),
   constraint pk_subject primary key (id)
 );
 
@@ -103,20 +98,25 @@ create table user (
 );
 
 alter table course_date add constraint fk_course_date_teachercourseid foreign key (teachercourseid) references teacher_course (id) on delete restrict on update restrict;
+create index ix_course_date_teachercourseid on course_date (teachercourseid);
 
 alter table grade add constraint fk_grade_teachercourseid foreign key (teachercourseid) references teacher_course (id) on delete restrict on update restrict;
+create index ix_grade_teachercourseid on grade (teachercourseid);
 
 alter table grade add constraint fk_grade_studentid foreign key (studentid) references user (id) on delete restrict on update restrict;
+create index ix_grade_studentid on grade (studentid);
 
 alter table student_course add constraint fk_student_course_teachercourseid foreign key (teachercourseid) references teacher_course (id) on delete restrict on update restrict;
 
 alter table student_course add constraint fk_student_course_studentid foreign key (studentid) references user (id) on delete restrict on update restrict;
+create index ix_student_course_studentid on student_course (studentid);
 
 alter table student_presence add constraint fk_student_presence_studentid foreign key (studentid) references user (id) on delete restrict on update restrict;
 
 alter table student_presence add constraint fk_student_presence_coursedateid foreign key (coursedateid) references course_date (id) on delete restrict on update restrict;
 
 alter table subject add constraint fk_subject_fieldid foreign key (fieldid) references field (id) on delete restrict on update restrict;
+create index ix_subject_fieldid on subject (fieldid);
 
 alter table teacher_course add constraint fk_teacher_course_subjectid foreign key (subjectid) references subject (id) on delete restrict on update restrict;
 
@@ -130,20 +130,25 @@ alter table user add constraint fk_user_fieldid foreign key (fieldid) references
 # --- !Downs
 
 alter table course_date drop foreign key fk_course_date_teachercourseid;
+drop index ix_course_date_teachercourseid on course_date;
 
 alter table grade drop foreign key fk_grade_teachercourseid;
+drop index ix_grade_teachercourseid on grade;
 
 alter table grade drop foreign key fk_grade_studentid;
+drop index ix_grade_studentid on grade;
 
 alter table student_course drop foreign key fk_student_course_teachercourseid;
 
 alter table student_course drop foreign key fk_student_course_studentid;
+drop index ix_student_course_studentid on student_course;
 
 alter table student_presence drop foreign key fk_student_presence_studentid;
 
 alter table student_presence drop foreign key fk_student_presence_coursedateid;
 
 alter table subject drop foreign key fk_subject_fieldid;
+drop index ix_subject_fieldid on subject;
 
 alter table teacher_course drop foreign key fk_teacher_course_subjectid;
 

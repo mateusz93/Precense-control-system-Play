@@ -1,6 +1,5 @@
 package services;
 
-import dto.course.CourseDateView;
 import dto.course.TeacherCourseView;
 import dto.presence.CheckPresenceView;
 import dto.presence.CheckPresenceViewWrapper;
@@ -11,9 +10,9 @@ import play.db.ebean.Transactional;
 import play.mvc.Result;
 import views.html.course.studentCourseDates;
 import views.html.course.teacherCourseDates;
-import views.html.presence.teacherCoursesList;
 import views.html.presence.checkPresence;
 import views.html.presence.studentPresences;
+import views.html.presence.teacherCoursesList;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -129,9 +128,13 @@ public class PresenceService {
         TeacherCourse teacherCourse = TeacherCourse.findOne(id);
         List<CourseDate> courseDates = CourseDate.findByTeacherCourse(teacherCourse);
         if("Student".equalsIgnoreCase(user.getType())) {
-            return ok(studentCourseDates.render(courseDates.stream().map(CourseDate::getView).collect(Collectors.toList())));
+            return ok(studentCourseDates.render(courseDates.stream()
+                    .map(CourseDate::getView)
+                    .collect(Collectors.toList())));
         } else {
-            return ok(teacherCourseDates.render(courseDates.stream().map(CourseDate::getView).collect(Collectors.toList())));
+            return ok(teacherCourseDates.render(courseDates.stream()
+                    .map(CourseDate::getView)
+                    .collect(Collectors.toList())));
         }
     }
 }

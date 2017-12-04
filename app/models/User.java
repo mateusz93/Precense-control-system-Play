@@ -80,35 +80,42 @@ public class User extends Model {
     public static User findByLogin(String login) {
         return find.query()
                 .where()
-                .like("username", login)
+                .ilike("username", login)
                 .findOne();
     }
 
     public static User findByEmail(String email) {
         return find.query()
                 .where()
-                .like("email", email)
+                .ilike("email", email)
                 .findOne();
     }
 
     public static User findByFirstName(String firstName) {
         return find.query()
                 .where()
-                .like("firstName", firstName)
+                .ilike("firstName", firstName)
                 .findOne();
     }
 
     public static User findByLastName(String lastName) {
         return find.query()
                 .where()
-                .like("lastName", lastName)
+                .ilike("lastName", lastName)
                 .findOne();
     }
 
     public static List<User> findByType(Role type) {
         return find.query()
                 .where()
-                .like("type", type.name())
+                .ilike("type", type.name())
+                .findList();
+    }
+
+    public static List<User> findByGroup(String group) {
+        return find.query()
+                .where()
+                .ilike("group", group)
                 .findList();
     }
 }

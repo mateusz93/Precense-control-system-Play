@@ -10,11 +10,7 @@ import play.mvc.Result;
 import play.mvc.Security;
 import services.GradeService;
 import services.PdfService;
-import views.html.grade.teacherCoursesList;
-import views.html.grade.studentGrades;
-import views.html.grade.studentGradesDetails;
-import views.html.grade.teacherAddGrade;
-import views.html.grade.teacherGrades;
+import views.html.grade.*;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -85,7 +81,7 @@ public class GradeController extends BaseController {
             val dto = service.newCourseByCourseIdAndStudentId(courseId, studentId);
             return ok(teacherAddGrade.render(dto));
         }
-            }
+    }
 
     @Security.Authenticated
     public Result saveGrade(int courseId, int studentId) {

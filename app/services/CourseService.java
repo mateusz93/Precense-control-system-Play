@@ -9,6 +9,8 @@ import models.*;
 import play.mvc.Result;
 import views.html.course.*;
 
+import java.sql.Date;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -98,7 +100,7 @@ public class CourseService {
     public Result prepareNewCourseView() {
         List<Subject> subjects = Subject.findAll();
         List<User> teachers = User.findByType(Role.TEACHER);
-        return ok(addCourseDate.render(subjects,teachers));
+        return ok(addCourse.render(subjects,teachers));
     }
 
     public void saveNewCourse(Map<String,String> values) {
@@ -110,15 +112,36 @@ public class CourseService {
         teacherCourse.setSubject(subject);
         teacherCourse.setTeacher(teacher);
         teacherCourse.save();
+        for (User user : User.findByGroup(teacherCourse.getStudentGroup())) {
+            StudentCourse.builder()
+                    .student(user)
+                    .teacherCourse(teacherCourse)
+                    .build()
+                    .save();
+        }
     }
 
     public Result prepareViewByCourseId(Integer teacherCourseId, User user) {
         TeacherCourse teacherCourse = TeacherCourse.findOne(teacherCourseId);
         List<CourseDate> courseDates = CourseDate.findByTeacherCourse(teacherCourse);
         if("Student".equalsIgnoreCase(user.getType())) {
-            return ok(studentCourseDates.render(courseDates.stream().map(CourseDate::getView).collect(Collectors.toList())));
+            return ok(studentCourseDates.render(courseDates.stream()
+                    .map(CourseDate::getView)
+                    .collect(Collectors.toList())));
         } else {
-            return ok(teacherCourseDates.render(courseDates.stream().map(CourseDate::getView).collect(Collectors.toList())));
+            return ok(teacherCourseDates.render(courseDates.stream()
+                    .map(CourseDate::getView)
+                    .collect(Collectors.toList())));
         }
+    }
+
+    public void addCourseDateByCourseId(Map<String, String> form) {
+        TeacherCourse teacherCourse = TeacherCourse.findOne(Integer.valueOf(form.get("courseDateID")));
+        CourseDate courseDate = new CourseDate();
+        courseDate.setTeacherCourse(teacherCourse);
+        courseDate.setStartTime(Time.valueOf(form.get("startTime")));
+        courseDate.setFinishTime(Time.valueOf(form.get("finishTime")));
+        courseDate.setDate(Date.valueOf(form.get("date")));
+        courseDate.save();
     }
 }
