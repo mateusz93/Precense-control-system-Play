@@ -31,7 +31,7 @@
                         @if("STUDENT".equalsIgnoreCase(Http.Context.current().session().get("userType")) ||
                                 "TEACHER".equalsIgnoreCase(Http.Context.current().session().get("userType"))) {
                             <li><a href="/profile">@Messages("view.menu.profile")</a></li>
-                            <li><a href="/presences">@Messages("view.menu.presences")</a></li>
+                            @*<li><a href="/presences">@Messages("view.menu.presences")</a></li>*@
                             <li><a href="/courses">@Messages("view.menu.subjects")</a></li>
                             <li><a href="/grades">@Messages("view.menu.grades")</a></li>
                         }
@@ -66,11 +66,6 @@
                             <td>@date.date</td>
                             <td>@date.startTime</td>
                             <td>@date.finishTime</td>_
-                            @if(!"ADMIN".equalsIgnoreCase(Http.Context.current().session().get("userType"))) {
-                                @helper.form(helper.CSRF(routes.PresenceController.check(date.courseDateID))) {
-                                    <td><button type="submit" class="btn btn-info">@Messages("view.presence.title")</button></td>
-                                }
-                            }
                         </tr>
                     }
                 </tbody>
