@@ -36,6 +36,12 @@ create table student_course (
   constraint pk_student_course primary key (id)
 );
 
+create table student_group (
+  id                            integer auto_increment not null,
+  name                          varchar(255),
+  constraint pk_student_group primary key (id)
+);
+
 create table student_presence (
   id                            integer auto_increment not null,
   status                        varchar(255),
@@ -63,8 +69,6 @@ create table teacher_course (
   studentgroup                  varchar(255),
   teacherid                     bigint,
   description                   varchar(255),
-  constraint uq_teacher_course_subjectid unique (subjectid),
-  constraint uq_teacher_course_teacherid unique (teacherid),
   constraint pk_teacher_course primary key (id)
 );
 
@@ -87,13 +91,12 @@ create table user (
   lastlogin                     datetime(6),
   status                        varchar(255),
   fieldid                       integer,
-  `group`                       varchar(255),
+  groupid                       integer,
   yearofstudy                   integer not null,
   email                         varchar(255),
   phone                         varchar(255),
   street                        varchar(255),
   city                          varchar(255),
-  constraint uq_user_fieldid unique (fieldid),
   constraint pk_user primary key (id)
 );
 
@@ -119,12 +122,18 @@ alter table subject add constraint fk_subject_fieldid foreign key (fieldid) refe
 create index ix_subject_fieldid on subject (fieldid);
 
 alter table teacher_course add constraint fk_teacher_course_subjectid foreign key (subjectid) references subject (id) on delete restrict on update restrict;
+create index ix_teacher_course_subjectid on teacher_course (subjectid);
 
 alter table teacher_course add constraint fk_teacher_course_teacherid foreign key (teacherid) references user (id) on delete restrict on update restrict;
+create index ix_teacher_course_teacherid on teacher_course (teacherid);
 
 alter table token add constraint fk_token_userid foreign key (userid) references user (id) on delete restrict on update restrict;
 
 alter table user add constraint fk_user_fieldid foreign key (fieldid) references field (id) on delete restrict on update restrict;
+create index ix_user_fieldid on user (fieldid);
+
+alter table user add constraint fk_user_groupid foreign key (groupid) references student_group (id) on delete restrict on update restrict;
+create index ix_user_groupid on user (groupid);
 
 
 # --- !Downs
@@ -151,12 +160,18 @@ alter table subject drop foreign key fk_subject_fieldid;
 drop index ix_subject_fieldid on subject;
 
 alter table teacher_course drop foreign key fk_teacher_course_subjectid;
+drop index ix_teacher_course_subjectid on teacher_course;
 
 alter table teacher_course drop foreign key fk_teacher_course_teacherid;
+drop index ix_teacher_course_teacherid on teacher_course;
 
 alter table token drop foreign key fk_token_userid;
 
 alter table user drop foreign key fk_user_fieldid;
+drop index ix_user_fieldid on user;
+
+alter table user drop foreign key fk_user_groupid;
+drop index ix_user_groupid on user;
 
 drop table if exists course_date;
 
@@ -165,6 +180,8 @@ drop table if exists field;
 drop table if exists grade;
 
 drop table if exists student_course;
+
+drop table if exists student_group;
 
 drop table if exists student_presence;
 

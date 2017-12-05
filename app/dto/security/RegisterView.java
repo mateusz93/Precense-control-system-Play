@@ -31,4 +31,7 @@ public class RegisterView extends BaseView {
 
     @Constraints.Required
     public String type;
+
+    @Constraints.Required
+    public String groupName;
 }

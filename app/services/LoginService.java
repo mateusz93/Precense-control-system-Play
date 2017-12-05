@@ -1,5 +1,6 @@
 package services;
 
+import controllers.BaseController;
 import dto.Message;
 import dto.security.LoginView;
 import dto.security.RegisterView;
@@ -8,6 +9,7 @@ import enums.UserStatus;
 import exceptions.ValidationException;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
+import models.StudentGroup;
 import models.User;
 import org.apache.commons.collections4.CollectionUtils;
 import play.data.Form;
@@ -92,20 +94,20 @@ public class LoginService {
                 Http.Context.current().session().put("userType", user.getType());
                 return redirect("/");
             }
-            return badRequest(login.render(form, formFactory.form(RegisterView.class)));
+            return badRequest(login.render(BaseController.wrapCustomErrors(form), formFactory.form(RegisterView.class), StudentGroup.findAll()));
         } catch (ValidationException e) {
             dto.getMessages().add(Message.builder()
                     .text(messages.at(e.getMessage()))
                     .type(MessageType.WARNING.name())
                     .build());
-            return badRequest(login.render(form, formFactory.form(RegisterView.class)));
+            return badRequest(login.render(BaseController.wrapCustomErrors(form), formFactory.form(RegisterView.class), StudentGroup.findAll()));
         } catch (IOException e) {
             log.error("Problem with captcha. ", e);
             dto.getMessages().add(Message.builder()
                     .text(messages.at("error"))
                     .type(MessageType.WARNING.name())
                     .build());
-            return badRequest(login.render(form, formFactory.form(RegisterView.class)));
+            return badRequest(login.render(BaseController.wrapCustomErrors(form), formFactory.form(RegisterView.class), StudentGroup.findAll()));
         }
     }
 }

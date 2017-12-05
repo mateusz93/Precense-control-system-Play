@@ -7,6 +7,7 @@ import enums.Role;
 import enums.UserStatus;
 import enums.UserType;
 import lombok.val;
+import models.StudentGroup;
 import models.Token;
 import models.User;
 import org.apache.commons.collections4.CollectionUtils;
@@ -144,7 +145,7 @@ public class RegisterService {
         Token token = Token.findByToken(tokenAsString);
         validateToken(token, wrappedDto.get());
 
-        return ok(register.render(wrappedDto, null));
+        return ok(register.render(wrappedDto, null, StudentGroup.findAll()));
     }
 
     private void validateToken(Token token, RegisterView dto) {

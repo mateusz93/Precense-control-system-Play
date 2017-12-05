@@ -17,8 +17,14 @@ INSERT INTO `play`.`field` (`name`) VALUES ('Medycyna');
 INSERT INTO `play`.`field` (`name`) VALUES ('Fizjoterapia');
 INSERT INTO `play`.`field` (`name`) VALUES ('Chemia');
 
-INSERT INTO `play`.`user` (`fieldID`, `username`, `firstName`, `lastName`, `type`, `password`, `yearOfStudy`, `group`, `email`, `Status`)
-  VALUES ((select id from `play`.`field` where name='Informatyka'), 'mateuszek', 'Mateusz', 'Wieczorek', 'Student', '92d7ddd2a010c59511dc2905b7e14f64', 1, 'I_2013', 'mati@edu.p.lodz.pl', 'ACTIVE');
+INSERT INTO `play`.`student_group` (`name`) VALUES ('I_2017');
+INSERT INTO `play`.`student_group` (`name`) VALUES ('SPD_2016');
+INSERT INTO `play`.`student_group` (`name`) VALUES ('IO_2017');
+INSERT INTO `play`.`student_group` (`name`) VALUES ('BD_2017');
+INSERT INTO `play`.`student_group` (`name`) VALUES ('ES_2017');
+
+INSERT INTO `play`.`user` (`fieldID`, `username`, `firstName`, `lastName`, `type`, `password`, `yearOfStudy`, `groupID`, `email`, `Status`)
+  VALUES ((select id from `play`.`field` where name='Informatyka'), 'mateuszek', 'Mateusz', 'Wieczorek', 'Student', '92d7ddd2a010c59511dc2905b7e14f64', 1, (select id from `play`.`student_group` where name='I_2017'), 'mati@edu.p.lodz.pl', 'ACTIVE');
 INSERT INTO `play`.`user` (`username`, `firstName`, `lastName`, `type`, `password`, `yearOfStudy`, `email`, `Status`)
   VALUES ('grzegorzmaslowski', 'Grzegorz', 'Maslowski', 'Teacher', '92d7ddd2a010c59511dc2905b7e14f64', 0, 'grzegorz@edu.p.lodz.pl', 'ACTIVE');
 INSERT INTO `play`.`user` (`username`, `firstName`, `lastName`, `type`, `password`, `yearOfStudy`, `email`, `Status`)

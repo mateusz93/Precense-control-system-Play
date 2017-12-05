@@ -84,7 +84,7 @@ public class PdfService {
         contentStream.newLine();
         contentStream.showText(messages.at("pdf.index") + ": " + user.getId());
         contentStream.newLine();
-        contentStream.showText(messages.at("pdf.group") + ": " + user.getGroup());
+        contentStream.showText(messages.at("pdf.group") + ": " + (user.getStudentGroup() != null ? user.getStudentGroup().getName() : ""));
         contentStream.newLine();
         contentStream.showText(messages.at("pdf.yearOfStudy") + ": " + user.getYearOfStudy());
         //contentStream.endText();
@@ -136,18 +136,6 @@ public class PdfService {
         });
         return data;
     }
-
-//    private List<PdfDto> getFakeUserGrades(User user) {
-//        List<PdfDto> data = Lists.newArrayList();
-//        for (int i = 0; i < 20; i++) {
-//            PdfDto dto = new PdfDto();
-//            dto.setSubjectName("Podstawy programowania");
-//            dto.setGrades("4,3,2,3,6,4,3,4,5,3,4,5,3");
-//            dto.setFinalGrade("5");
-//            data.add(dto);
-//        }
-//        return data;
-//    }
 
     @Data
     private class PdfDto {

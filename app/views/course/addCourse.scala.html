@@ -1,4 +1,4 @@
-@(subjects: List[models.Subject], users: List[models.User])
+@(subjects: List[models.Subject], users: List[models.User], groups: List[StudentGroup])
 
 <html>
     <head>
@@ -17,6 +17,9 @@
                     var teacherNameSelect = document.getElementById("teacherName");
                     var teacherIdInput = document.getElementById("teacherId");
                     teacherIdInput.value = teacherNameSelect.options[teacherNameSelect.selectedIndex].id;
+                    var groupNameSelect = document.getElementById("groupName");
+                    var groupIdInput = document.getElementById("groupId");
+                    groupIdInput.value = groupNameSelect.options[groupNameSelect.selectedIndex].id;
                 }
                 window.onload = change;
         </script>
@@ -79,7 +82,12 @@
                 </div>
                 <div class="form-group">
                     <label>@Messages("view.profile.group")</label>
-                    <input type="text" id="studentGroup" name="studentGroup" class="form-control">
+                    <input type="text" id="groupId" name="group.id" hidden>
+                    <select class="form-control" name="groupName" onchange="change();">
+                    @for(t <- groups) {
+                        <option id="@t.id" type="text" name="groupName" value="@t.name">@t.name</option>
+                    }
+                    </select>
                 </div>
                 <div class="form-group">
                     <label>@Messages("view.subject.description")</label>

@@ -17,11 +17,11 @@ public class Grade extends Model {
     @Column(name = "ID")
     private int id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "teacherCourseID")
     private TeacherCourse teacherCourse;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "studentID")
     private User user;
 

@@ -3,8 +3,8 @@ package controllers;
 import dto.security.LoginView;
 import dto.security.RegisterView;
 import lombok.val;
+import models.StudentGroup;
 import play.data.FormFactory;
-import play.mvc.Http;
 import play.mvc.Result;
 import services.RegisterService;
 import views.html.security.register;
@@ -25,20 +25,21 @@ public class RegisterController extends BaseController {
     }
 
     public Result register() {
-        return ok(register.render(formFactory.form(RegisterView.class), formFactory.form(LoginView.class)));
+        return ok(register.render(formFactory.form(RegisterView.class),
+                formFactory.form(LoginView.class),
+                StudentGroup.findAll()));
     }
 
     public Result registerSubmit() {
         val registerView = formFactory.form(RegisterView.class).bindFromRequest();
         val loginView = formFactory.form(LoginView.class).bindFromRequest();
 
-        if (loginView.hasErrors()){
-            wrapErrors(loginView);
-            return badRequest(register.render(registerView, loginView));
+        if (registerView.hasErrors()){
+            return badRequest(register.render(wrapCustomErrors(registerView), loginView, StudentGroup.findAll()));
         }
         else {
             service.registerUser(registerView.bindFromRequest());
-            return ok(register.render(registerView, loginView));
+            return ok(register.render(registerView, loginView, StudentGroup.findAll()));
         }
     }
 

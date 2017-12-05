@@ -5,6 +5,7 @@ import dto.user.ProfileGeneralView;
 import dto.user.ProfilePasswordView;
 import enums.MessageType;
 import lombok.val;
+import models.StudentGroup;
 import models.User;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.CollectionUtils;
@@ -53,7 +54,7 @@ public class ProfileService {
 
     private User saveUser(ProfileGeneralView form) {
         User user = User.findByEmail(form.getEmail());
-        user.setGroup(form.getGroup());
+        user.setStudentGroup(StudentGroup.findByName(form.getGroup()));
         user.setPhone(form.getPhone());
         user.setCity(form.getCity());
         user.setStreet(form.getStreet());
@@ -118,7 +119,7 @@ public class ProfileService {
                 .email(user.getEmail())
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())
-                .group(user.getGroup())
+                .group(user.getStudentGroup() != null ? user.getStudentGroup().getName() : "")
                 .phone(user.getPhone())
                 .street(user.getStreet())
                 .type(user.getType())
@@ -126,6 +127,5 @@ public class ProfileService {
                 .build();
         return formFactory.form(ProfileGeneralView.class).fill(dto);
     }
-
 
 }

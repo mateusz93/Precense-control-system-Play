@@ -66,8 +66,10 @@
                             <td class="col-md-2">@date.date</td>
                             <td class="col-md-2">@date.startTime</td>
                             <td class="col-md-2">@date.finishTime</td>
-                            @helper.form(helper.CSRF(routes.PresenceController.check(date.id))) {
-                                <td class="col-md-1"><button name="deleteID" value="@date.id" type="submit" class="btn btn-info">@Messages("view.presence.title")</button></td>
+                            @if(!"ADMIN".equalsIgnoreCase(Http.Context.current().session().get("userType"))) {
+                                @helper.form(helper.CSRF(routes.PresenceController.check(date.id))) {
+                                    <td class="col-md-1"><button name="deleteID" value="@date.id" type="submit" class="btn btn-info">@Messages("view.presence.title")</button></td>
+                                }
                             }
                         </tr>
                     }

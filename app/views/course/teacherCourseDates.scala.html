@@ -66,8 +66,10 @@
                             <td>@date.date</td>
                             <td>@date.startTime</td>
                             <td>@date.finishTime</td>_
-                            @helper.form(helper.CSRF(routes.PresenceController.check(date.courseDateID))) {
-                                <td><button type="submit" class="btn btn-info">@Messages("view.presence.title")</button></td>
+                            @if(!"ADMIN".equalsIgnoreCase(Http.Context.current().session().get("userType"))) {
+                                @helper.form(helper.CSRF(routes.PresenceController.check(date.courseDateID))) {
+                                    <td><button type="submit" class="btn btn-info">@Messages("view.presence.title")</button></td>
+                                }
                             }
                         </tr>
                     }

@@ -19,7 +19,7 @@ public class CourseDate extends Model {
     @Column(name = "ID")
     private int id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "teacherCourseID")
     private TeacherCourse teacherCourse;
 

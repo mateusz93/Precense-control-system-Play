@@ -152,7 +152,7 @@ public class GradeService {
         grade.setTime(new Timestamp(System.currentTimeMillis()));
         grade.setValue(Integer.valueOf(teacherAddGradeView.getValue()));
         grade.setUser(user1);
-        if ("YES".equalsIgnoreCase(teacherAddGradeView.getIsFinal())) {
+        if ("YES".equalsIgnoreCase(teacherAddGradeView.getIsFinal()) || "TAK".equalsIgnoreCase(teacherAddGradeView.getIsFinal())) {
             grade.setFinalGrade(true);
         } else {
             grade.setFinalGrade(false);

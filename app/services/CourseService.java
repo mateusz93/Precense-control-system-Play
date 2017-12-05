@@ -100,7 +100,8 @@ public class CourseService {
     public Result prepareNewCourseView() {
         List<Subject> subjects = Subject.findAll();
         List<User> teachers = User.findByType(Role.TEACHER);
-        return ok(addCourse.render(subjects,teachers));
+        List<StudentGroup> studentGroups = StudentGroup.findAll();
+        return ok(addCourse.render(subjects, teachers, studentGroups));
     }
 
     public void saveNewCourse(Map<String,String> values) {
@@ -108,11 +109,11 @@ public class CourseService {
         Subject subject = Subject.findByName(values.get("subjectName"));
         TeacherCourse teacherCourse = new TeacherCourse();
         teacherCourse.setDescription(values.get("description"));
-        teacherCourse.setStudentGroup(values.get("studentGroup"));
+        teacherCourse.setStudentGroup(values.get("groupName"));
         teacherCourse.setSubject(subject);
         teacherCourse.setTeacher(teacher);
         teacherCourse.save();
-        for (User user : User.findByGroup(teacherCourse.getStudentGroup())) {
+        for (User user : User.findByGroup(StudentGroup.findByName(teacherCourse.getStudentGroup()).getId())) {
             StudentCourse.builder()
                     .student(user)
                     .teacherCourse(teacherCourse)

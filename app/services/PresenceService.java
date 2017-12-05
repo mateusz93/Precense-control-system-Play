@@ -50,7 +50,7 @@ public class PresenceService {
         List<StudentCourse> studentCourses = StudentCourse.findByStudent(user);
         for (StudentCourse studentCourse : studentCourses) {
             Subject subject = studentCourse.getTeacherCourse().getSubject();
-            TeacherCourse teacherCourse = TeacherCourse.findBySubjectAndStudentGroup(subject, user.getGroup());
+            TeacherCourse teacherCourse = TeacherCourse.findBySubjectAndStudentGroup(subject, user.getStudentGroup() != null ? user.getStudentGroup().getName() : "");
             StudentPresencesView studentPresencesView = getStudentPresencesView(subject, teacherCourse);
             studentPresencesViews.add(studentPresencesView);
         }

@@ -34,7 +34,7 @@ public class ProfileController extends BaseController {
     public Result general() {
         val generalView = formFactory.form(ProfileGeneralView.class).bindFromRequest();
         val form = profileService.update(generalView.get());
-        return ok(profile.render(wrapErrors(form), formFactory.form(ProfilePasswordView.class)));
+        return ok(profile.render(wrapCustomErrors(form), formFactory.form(ProfilePasswordView.class)));
     }
 
     @Security.Authenticated
@@ -42,7 +42,7 @@ public class ProfileController extends BaseController {
         val passwordView = formFactory.form(ProfilePasswordView.class).bindFromRequest();
         val passwordForm = profileService.updatePassword(passwordView);
         val generalForm = profileService.prepareGeneralProfileView();
-        return ok(profile.render(generalForm, wrapErrors(passwordForm)));
+        return ok(profile.render(generalForm, wrapCustomErrors(passwordForm)));
     }
 
 }

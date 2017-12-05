@@ -1,4 +1,4 @@
-@(formRegister: Form[dto.security.RegisterView], formLogin: Form[dto.security.LoginView])
+@(formRegister: Form[dto.security.RegisterView], formLogin: Form[dto.security.LoginView], groups: List[StudentGroup])
 
 <html>
     <head>
@@ -104,6 +104,16 @@
                                             <div class="form-group">
                                                 <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="@Messages("view.profile.email")" value="@formRegister("newEmail").getValue().getOrElse("")">
                                             </div>
+
+                                            <div class="form-group">
+                                                <select class="form-control" name="groupName">
+                                                    @for(t <- groups) {
+                                                        <option id="@t.id" name="groupName" value="@t.name">@t.name</option>
+                                                    }
+                                                </select>
+                                            </div>
+
+
                                             <div class="form-group">
                                                 <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="@Messages("view.profile.password")" value="@formRegister("password").getValue().getOrElse("")">
                                             </div>

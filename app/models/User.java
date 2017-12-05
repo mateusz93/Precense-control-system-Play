@@ -41,12 +41,13 @@ public class User extends Model {
     @Column(name = "status")
     public String status;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "fieldID")
     public Field field;
 
-    @Column(name = "`group`")
-    public String group;
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "groupID")
+    public StudentGroup studentGroup;
 
     @Column(name = "yearOfStudy")
     public int yearOfStudy;
@@ -112,10 +113,10 @@ public class User extends Model {
                 .findList();
     }
 
-    public static List<User> findByGroup(String group) {
+    public static List<User> findByGroup(long groupId) {
         return find.query()
                 .where()
-                .ilike("group", group)
+                .eq("groupID", groupId)
                 .findList();
     }
 }
