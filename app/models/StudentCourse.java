@@ -18,11 +18,11 @@ public class StudentCourse extends Model {
     @Column(name = "ID")
     private int id;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "teacherCourseID")
     private TeacherCourse teacherCourse;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "studentID")
     private User student;
 

@@ -16,14 +16,14 @@ public class TeacherCourse extends Model {
     @Column(name = "ID")
     private int id;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "subjectID")
     private Subject subject;
 
     @Column(name = "studentGroup")
     private String studentGroup;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "teacherID")
     private User teacher;
 

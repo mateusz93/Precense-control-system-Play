@@ -1,6 +1,7 @@
 package services;
 
 import dto.Message;
+import dto.security.LoginView;
 import dto.security.RegisterView;
 import enums.MessageType;
 import enums.Role;
@@ -76,6 +77,7 @@ public class RegisterService {
                 .email(form.getEmail())
                 .firstName(form.getFirstName())
                 .lastName(form.getLastName())
+                .studentGroup(StudentGroup.findByName(form.getGroupName()))
                 .type(UserType.STUDENT.toString().equalsIgnoreCase(form.getType()) ? Role.STUDENT.name() : Role.TEACHER.name())
                 .login(username)
                 .password(Encryptor.encryption(form.getPassword()))
@@ -145,7 +147,7 @@ public class RegisterService {
         Token token = Token.findByToken(tokenAsString);
         validateToken(token, wrappedDto.get());
 
-        return ok(register.render(wrappedDto, null, StudentGroup.findAll()));
+        return ok(register.render(wrappedDto, formFactory.form(LoginView.class), StudentGroup.findAll()));
     }
 
     private void validateToken(Token token, RegisterView dto) {

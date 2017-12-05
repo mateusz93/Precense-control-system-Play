@@ -41,11 +41,11 @@ public class User extends Model {
     @Column(name = "status")
     public String status;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "fieldID")
     public Field field;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "groupID")
     public StudentGroup studentGroup;
 

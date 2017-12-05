@@ -22,7 +22,7 @@ public class Subject extends Model {
     @Column(name = "description")
     public String description;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "fieldID")
     public Field field;
 

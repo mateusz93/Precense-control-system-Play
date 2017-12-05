@@ -18,11 +18,11 @@ public class StudentPresence extends Model {
     @Column(name = "status")
     private String status;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "studentID")
     private User student;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "courseDateID")
     private CourseDate courseDate;
 

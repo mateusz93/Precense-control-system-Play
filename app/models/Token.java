@@ -23,7 +23,7 @@ public class Token extends Model {
     @Column(name = "token")
     private String token;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "userID")
     private User user;
 
