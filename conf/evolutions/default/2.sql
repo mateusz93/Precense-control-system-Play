@@ -30,24 +30,16 @@ INSERT INTO `play`.`user` (`username`, `firstName`, `lastName`, `type`, `passwor
 INSERT INTO `play`.`user` (`username`, `firstName`, `lastName`, `type`, `password`, `yearOfStudy`, `email`, `Status`)
   VALUES ('igordudek', 'Igor', 'Dudek', 'Admin', '92d7ddd2a010c59511dc2905b7e14f64', 0, 'igor@edu.p.lodz.pl', 'ACTIVE');
 
-INSERT INTO `play`.`subject` (`name`, `description`, `fieldid`, `yearOfStudy`, `quantity`, `minQuantity`)
-  VALUES ('Podstawy programowania', 'Nauka od podstaw jezyka C++', (select id from `play`.`field` where name='Informatyka'), 1, 15, 13);
-INSERT INTO `play`.`subject` (`name`, `description`, `fieldid`, `yearOfStudy`, `quantity`, `minQuantity`)
-  VALUES ('Chemia ogólna', 'Nauczenie studenta ogólnej wiedzy z zakresu chemii', (select id from `play`.`field` where name='Chemia'), 1, 15, 13);
-INSERT INTO `play`.`subject` (`name`, `description`, `fieldid`, `yearOfStudy`, `quantity`, `minQuantity`)
-  VALUES ('Geometria wykreślna', 'Zrozumienie istoty odwzorowań metodą rzutowania elementów przestrzeni trójwymiarowej na płaszczyznę rysunku.',
-        (select id from `play`.`field` where name='Budownictwo'), 1, 15, 13);
 commit;
--- haslo do userow: 1qaz@WSX
 
---student
---mati@edu.p.lodz.pl
---1qaz@WSX
+-- student
+-- mati@edu.p.lodz.pl
+-- 1qaz@WSX
 
---teacher
---grzegorz@edu.p.lodz.pl
---1qaz@WSX
+-- teacher
+-- grzegorz@edu.p.lodz.pl
+-- 1qaz@WSX
 
---admin
---igor@edu.p.lodz.pl
---1qaz@WSX
+-- admin
+-- igor@edu.p.lodz.pl
+-- 1qaz@WSX

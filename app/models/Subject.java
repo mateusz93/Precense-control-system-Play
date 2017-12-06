@@ -26,6 +26,9 @@ public class Subject extends Model {
     @JoinColumn(name = "fieldID")
     public Field field;
 
+    @OneToMany(mappedBy = "subject", cascade = CascadeType.REMOVE)
+    private List<TeacherCourse> teacherCourses;
+
     @Column(name = "yearOfStudy")
     public int yearOfStudy;
 

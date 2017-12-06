@@ -22,7 +22,7 @@ public class StudentPresence extends Model {
     @JoinColumn(name = "studentID")
     private User student;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "courseDateID")
     private CourseDate courseDate;
 

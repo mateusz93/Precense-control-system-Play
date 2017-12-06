@@ -27,6 +27,15 @@ public class TeacherCourse extends Model {
     @JoinColumn(name = "teacherID")
     private User teacher;
 
+    @OneToMany(mappedBy = "teacherCourse", cascade = CascadeType.REMOVE)
+    private List<CourseDate> courseDates;
+
+    @OneToMany(mappedBy = "teacherCourse", cascade = CascadeType.REMOVE)
+    private List<StudentCourse> studentCourses;
+
+    @OneToMany(mappedBy = "teacherCourse", cascade = CascadeType.REMOVE)
+    private List<Grade> grades;
+
     @Column(name = "description")
     private String description;
 

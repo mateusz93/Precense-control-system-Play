@@ -41,7 +41,8 @@ public class GradeService {
             StudentGradeView studentGradeView = new StudentGradeView();
             studentGradeView.setCourseId(studentCourse.getTeacherCourse().getId());
             studentGradeView.setName(studentCourse.getTeacherCourse().getSubject().getName());
-            studentGradeView.setTeacherName(studentCourse.getTeacherCourse().getTeacher().getFullName());
+            studentGradeView.setTeacherName(studentCourse.getTeacherCourse().getTeacher().getFirstName() + " " +
+                                                    studentCourse.getTeacherCourse().getTeacher().getLastName());
 
             studentGradeViews.add(studentGradeView);
         }
@@ -145,19 +146,26 @@ public class GradeService {
 
     public void updateCourseGrades(int courseId, int studentId, TeacherAddGradeView teacherAddGradeView) {
         TeacherCourse teacherCourse = TeacherCourse.findOne(courseId);
-        User user1 = User.findOne(studentId);
-
+        User student = User.findOne(studentId);
         Grade grade = new Grade();
-        grade.setTeacherCourse(teacherCourse);
-        grade.setTime(new Timestamp(System.currentTimeMillis()));
-        grade.setValue(Integer.valueOf(teacherAddGradeView.getValue()));
-        grade.setUser(user1);
         if ("YES".equalsIgnoreCase(teacherAddGradeView.getIsFinal()) || "TAK".equalsIgnoreCase(teacherAddGradeView.getIsFinal())) {
-            grade.setFinalGrade(true);
+            if (Grade.findByStudent(student).stream().anyMatch(Grade::isFinalGrade)) {
+                grade = Grade.findByStudent(student).stream().filter(Grade::isFinalGrade).findFirst().get();
+            } else {
+                grade.setFinalGrade(true);
+                grade.setTeacherCourse(teacherCourse);
+                grade.setTime(new Timestamp(System.currentTimeMillis()));
+                grade.setValue(Integer.valueOf(teacherAddGradeView.getValue()));
+                grade.setUser(student);
+            }
+            grade.setValue(Integer.valueOf(teacherAddGradeView.getValue()));
         } else {
             grade.setFinalGrade(false);
+            grade.setTeacherCourse(teacherCourse);
+            grade.setTime(new Timestamp(System.currentTimeMillis()));
+            grade.setValue(Integer.valueOf(teacherAddGradeView.getValue()));
+            grade.setUser(student);
         }
-
         grade.save();
         prepareTeacherGrades(courseId);
     }
