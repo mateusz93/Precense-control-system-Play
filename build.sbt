@@ -7,7 +7,7 @@ lazy val myProject = (project in file(".")).enablePlugins(PlayJava, PlayEbean)
 
 scalaVersion := "2.12.2"
 
-libraryDependencies += jdbc
+//libraryDependencies += jdbc
 
 libraryDependencies += guice
 
@@ -33,8 +33,3 @@ libraryDependencies += "commons-fileupload" % "commons-fileupload" % "1.3.3"
 
 libraryDependencies += "org.apache.pdfbox" % "pdfbox" % "2.0.8"
 libraryDependencies += "org.apache.pdfbox" % "fontbox" % "2.0.8"
-
-// Make verbose tests
-testOptions in Test := Seq(Tests.Argument(TestFrameworks.JUnit, "-a", "-v"))
-
-routesImport += "dto.presence.CheckPresenceViewWrapper"
