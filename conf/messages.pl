@@ -105,6 +105,7 @@ register.emailUsed=Podany email jest już używany!
 register.token.incorrect=Token niepoprawny
 register.token.expiry=Token wygasł
 login.incorrectEmail=Użytkownik o podanym emailu nie istnieje!
+register.incorrectEmail=Użytkownik o podanych emailu już istnieje!
 login.incorrectUserType=Użytkownik o podanym emailu i typie nie istnieje!
 login.userNotActive=Użytkownik nie jest aktywowany!
 course.new=Nowy kurs

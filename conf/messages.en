@@ -105,6 +105,7 @@ register.emailUsed=Email is just use by other user!
 register.token.incorrect=Token incorrect
 register.token.expiry=Token expired
 login.incorrectEmail=User with passed email not exists!
+register.incorrectEmail=User with passed email already exists!
 login.incorrectUserType=User with passed email and type not exists!
 login.userNotActive=User not active!
 course.new=New course

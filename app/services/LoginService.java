@@ -78,6 +78,19 @@ public class LoginService {
         }
     }
 
+    public void registerValidation(RegisterView form){
+        val messages = Http.Context.current().messages();
+
+        User user = User.findByEmail(form.getEmail());
+        if (user != null) {
+            form.getMessages().add(Message.builder()
+                    .text(messages.at("register.incorrectEmail"))
+                    .type(MessageType.WARNING.name())
+                    .build());
+            return;
+        }
+    }
+
     public void logout() {
         Http.Context.current().session().clear();
     }
