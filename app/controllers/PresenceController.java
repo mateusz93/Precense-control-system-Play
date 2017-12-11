@@ -21,29 +21,9 @@ public class PresenceController extends BaseController {
     }
 
     @Security.Authenticated
-    public Result index() {
-        User user = User.findByLogin(request().attrs().get(Security.USERNAME));
-        if("Student".equalsIgnoreCase(user.getType()) || "Teacher".equalsIgnoreCase(user.getType())) {
-            return presenceService.prepareStudentView(user);
-        } else {
-            return presenceService.prepareTeacherView(user);
-        }
-    }
-
-    @Security.Authenticated
     public Result courseDates(Integer id) {
         User user = User.findByLogin(request().attrs().get(Security.USERNAME));
         return presenceService.prepareCourseDates(id,user);
-    }
-
-    @Security.Authenticated
-    public Result check(Integer id) {
-        return presenceService.preparePresencesList(id);
-    }
-
-    @Security.Authenticated
-    public Result update(CheckPresenceViewWrapper checkPresenceViewWrapper, Integer id) {
-        return presenceService.updateCourseDate(new CheckPresenceView(), id);
     }
 
 }

@@ -45,7 +45,6 @@
                         @if("STUDENT".equalsIgnoreCase(Http.Context.current().session().get("userType")) ||
                                 "TEACHER".equalsIgnoreCase(Http.Context.current().session().get("userType"))) {
                             <li><a href="/profile">@Messages("view.menu.profile")</a></li>
-                            @*<li><a href="/presences">@Messages("view.menu.presences")</a></li>*@
                             <li><a href="/courses">@Messages("view.menu.subjects")</a></li>
                             <li><a href="/grades">@Messages("view.menu.grades")</a></li>
                         }

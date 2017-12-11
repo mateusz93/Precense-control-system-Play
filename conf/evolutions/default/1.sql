@@ -41,15 +41,6 @@ create table student_group (
   constraint pk_student_group primary key (id)
 );
 
-create table student_presence (
-  id                            integer auto_increment not null,
-  status                        varchar(255),
-  studentid                     bigint,
-  coursedateid                  integer,
-  constraint uq_student_presence_studentid unique (studentid),
-  constraint pk_student_presence primary key (id)
-);
-
 create table subject (
   id                            integer auto_increment not null,
   name                          varchar(255),
@@ -113,11 +104,6 @@ create index ix_student_course_teachercourseid on student_course (teachercoursei
 alter table student_course add constraint fk_student_course_studentid foreign key (studentid) references user (id) on delete restrict on update restrict;
 create index ix_student_course_studentid on student_course (studentid);
 
-alter table student_presence add constraint fk_student_presence_studentid foreign key (studentid) references user (id) on delete restrict on update restrict;
-
-alter table student_presence add constraint fk_student_presence_coursedateid foreign key (coursedateid) references course_date (id) on delete restrict on update restrict;
-create index ix_student_presence_coursedateid on student_presence (coursedateid);
-
 alter table subject add constraint fk_subject_fieldid foreign key (fieldid) references field (id) on delete restrict on update restrict;
 create index ix_subject_fieldid on subject (fieldid);
 
@@ -153,11 +139,6 @@ drop index ix_student_course_teachercourseid on student_course;
 alter table student_course drop foreign key fk_student_course_studentid;
 drop index ix_student_course_studentid on student_course;
 
-alter table student_presence drop foreign key fk_student_presence_studentid;
-
-alter table student_presence drop foreign key fk_student_presence_coursedateid;
-drop index ix_student_presence_coursedateid on student_presence;
-
 alter table subject drop foreign key fk_subject_fieldid;
 drop index ix_subject_fieldid on subject;
 
@@ -184,8 +165,6 @@ drop table if exists grade;
 drop table if exists student_course;
 
 drop table if exists student_group;
-
-drop table if exists student_presence;
 
 drop table if exists subject;
 

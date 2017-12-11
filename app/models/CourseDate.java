@@ -32,9 +32,6 @@ public class CourseDate extends Model {
     @Column(name = "date")
     private Date date;
 
-    @OneToMany(mappedBy = "courseDate", cascade = CascadeType.REMOVE)
-    private List<StudentPresence> studentPresences;
-
     public static Finder<Integer, CourseDate> find = new Finder<>(CourseDate.class);
 
     public static void delete(int id) {
