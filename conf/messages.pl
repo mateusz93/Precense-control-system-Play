@@ -1,4 +1,4 @@
-view.index.title=System zarządzania przedmiotami
+view.index.title=System zarządzania ocenami
 view.index.subtitle=Sprawdzaj obecność codziennie w łatwy sposób
 view.index.register=Zarejestruj
 view.index.register.now=Zarejestruj teraz
